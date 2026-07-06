@@ -16,7 +16,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-white dark:bg-brand-primary/80 dark:bg-brand-primary/90 border-b border-brand-light-slate dark:border-slate-800">
+    <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/90 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo and Brand Name */}
@@ -71,7 +71,7 @@ export default function Navbar() {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-brand-primary dark:bg-brand-primary border-b dark:border-slate-800 border-brand-light-slate dark:border-slate-800 shadow-lg absolute w-full">
+        <div className="md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-lg absolute w-full">
           <div className="px-4 pt-2 pb-6 space-y-1">
             {navLinks.map((link) => (
               <Link

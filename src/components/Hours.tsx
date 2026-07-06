@@ -29,29 +29,29 @@ export default function Hours() {
           
           {/* Hours Card */}
           <div className="flex-1 w-full max-w-lg">
-            <div className="bg-brand-primary rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden text-white">
+            <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-3xl p-8 md:p-10 shadow-xl relative overflow-hidden text-brand-text dark:text-white">
               <div className="absolute top-0 right-0 p-8 opacity-10">
                 <Clock className="w-32 h-32" />
               </div>
               
               <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/20">
+                <div className="flex items-center gap-3 mb-8 pb-6 border-b border-slate-200 dark:border-slate-700">
                   <CalendarDays className="w-8 h-8 text-brand-accent" />
                   <h3 className="text-2xl font-bold">Business Hours</h3>
                 </div>
                 
                 <ul className="space-y-6">
                   <li className="flex justify-between items-center group">
-                    <span className="text-lg font-medium text-slate-300 group-hover:text-white transition-colors">Sunday – Thursday</span>
+                    <span className="text-lg font-medium text-slate-600 dark:text-slate-300 group-hover:text-brand-primary dark:group-hover:text-white transition-colors">Sunday – Thursday</span>
                     <span className="text-lg font-bold text-brand-accent">10:00 AM – 5:00 PM</span>
                   </li>
                   <li className="flex justify-between items-center group">
-                    <span className="text-lg font-medium text-slate-300 group-hover:text-white transition-colors">Friday</span>
+                    <span className="text-lg font-medium text-slate-600 dark:text-slate-300 group-hover:text-brand-primary dark:group-hover:text-white transition-colors">Friday</span>
                     <span className="text-lg font-bold text-brand-accent">10:00 AM – 2:00 PM</span>
                   </li>
                   <li className="flex justify-between items-center group pt-2">
-                    <span className="text-lg font-medium text-slate-400 group-hover:text-white transition-colors">Saturday</span>
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-white dark:bg-brand-primary/10 text-slate-300">Closed</span>
+                    <span className="text-lg font-medium text-slate-500 dark:text-slate-400 group-hover:text-brand-primary dark:group-hover:text-white transition-colors">Saturday</span>
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-brand-light-slate dark:bg-slate-800 text-slate-600 dark:text-slate-300">Closed</span>
                   </li>
                 </ul>
               </div>

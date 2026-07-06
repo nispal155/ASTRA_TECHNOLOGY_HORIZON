@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -28,14 +28,53 @@ export default function Footer() {
             <p className="text-slate-400 max-w-sm mb-6 leading-relaxed">
               Turning ideas into intelligent technology. Innovation with precision. We engineer digital solutions that empower businesses to scale.
             </p>
+            <div className="space-y-3 text-slate-400 text-sm">
+              <p>
+                <a href="mailto:contact@nispalbhattarai.com.np" className="hover:text-white transition-colors flex items-center gap-3 w-fit">
+                  <Mail className="w-5 h-5 text-brand-accent" />
+                  contact@nispalbhattarai.com.np
+                </a>
+              </p>
+              <p>
+                <a href="tel:+9779852048719" className="hover:text-white transition-colors flex items-center gap-3 w-fit">
+                  <Phone className="w-5 h-5 text-brand-accent" />
+                  +977 9852048719
+                </a>
+              </p>
+              <div className="flex items-start gap-3 w-fit">
+                <MapPin className="w-5 h-5 text-brand-accent shrink-0 mt-0.5" />
+                <span>
+                  Itahari-4, Sunsari<br />
+                  Koshi Province, Nepal
+                </span>
+              </div>
+            </div>
           </div>
 
           <div>
             <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
             <ul className="space-y-3">
               <li>
+                <Link href="/" className="text-slate-400 hover:text-brand-accent transition-colors flex items-center gap-1 group">
+                  Home
+                  <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                </Link>
+              </li>
+              <li>
                 <Link href="#services" className="text-slate-400 hover:text-brand-accent transition-colors flex items-center gap-1 group">
                   Services
+                  <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                </Link>
+              </li>
+              <li>
+                <Link href="#about" className="text-slate-400 hover:text-brand-accent transition-colors flex items-center gap-1 group">
+                  About
+                  <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                </Link>
+              </li>
+              <li>
+                <Link href="#careers" className="text-slate-400 hover:text-brand-accent transition-colors flex items-center gap-1 group">
+                  Careers
                   <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
                 </Link>
               </li>
@@ -69,9 +108,14 @@ export default function Footer() {
         </div>
         
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-slate-500 text-sm">
-            &copy; {currentYear} Astra Technology Horizon. All rights reserved.
-          </p>
+          <div className="flex flex-col gap-1">
+            <p className="text-slate-500 text-sm">
+              &copy; {currentYear} Astra Technology Horizon. All rights reserved.
+            </p>
+            <p className="text-slate-500 text-sm font-medium">
+              Developed by Astra Technology Horizon
+            </p>
+          </div>
           <p className="text-slate-500 text-sm">
             Located in Itahari-4, Nepal
           </p>

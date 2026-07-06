@@ -1,8 +1,44 @@
 "use client";
 
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
+
+const Hero3D = dynamic(() => import('./Hero3D'), { 
+  ssr: false,
+  loading: () => <div className="w-full h-full animate-pulse bg-white/5 rounded-full blur-3xl"></div>
+});
+
+const MagneticButton = ({ children, className, href }: any) => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  
+  const handleMouse = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const { clientX, clientY } = e;
+    const { height, width, left, top } = e.currentTarget.getBoundingClientRect();
+    const middleX = clientX - (left + width / 2);
+    const middleY = clientY - (top + height / 2);
+    setPosition({ x: middleX * 0.2, y: middleY * 0.2 });
+  };
+  
+  const reset = () => {
+    setPosition({ x: 0, y: 0 });
+  };
+  
+  return (
+    <motion.a
+      href={href}
+      className={className}
+      animate={{ x: position.x, y: position.y }}
+      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+      onMouseMove={handleMouse}
+      onMouseLeave={reset}
+    >
+      {children}
+    </motion.a>
+  );
+};
 
 export default function Hero() {
   const containerVariants = {
@@ -17,62 +53,87 @@ export default function Hero() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as const } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
   };
 
   return (
-    <section className="relative overflow-hidden bg-brand-primary text-white">
-      {/* Background elegant pattern / gradient */}
-      <div className="absolute inset-0 z-0">
+    <section className="relative overflow-hidden bg-brand-primary text-white min-h-screen flex items-center">
+      {/* VengeanceUI Style Aurora / Spotlight Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-slate-700/30 via-brand-primary to-brand-primary"></div>
         <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-brand-primary to-transparent"></div>
+        
+        {/* Animated Orbs */}
+        <motion.div
+          animate={{
+            x: [0, 50, 0, -50, 0],
+            y: [0, 30, 60, 30, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[10%] right-[20%] w-[400px] h-[400px] bg-brand-accent/20 rounded-full blur-[120px]"
+        />
+        <motion.div
+          animate={{
+            x: [0, -60, 0, 60, 0],
+            y: [0, -40, -80, -40, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[20%] left-[10%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px]"
+        />
       </div>
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-32 md:pt-36 md:pb-40">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
         <motion.div 
           className="max-w-3xl"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-brand-primary/10 border border-white/20 text-sm font-medium text-brand-light-slate mb-8">
-            <span className="flex h-2 w-2 rounded-full bg-brand-accent animate-pulse"></span>
+          {/* AnimMasterLib Style Shiny Pill */}
+          <motion.div variants={itemVariants} className="relative overflow-hidden inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-slate-200 mb-8 backdrop-blur-md group cursor-default">
+            <span className="flex h-2 w-2 rounded-full bg-brand-accent animate-pulse shadow-[0_0_8px_rgba(245,158,11,0.8)]"></span>
             Itahari's Premier Technical Partner
+            
+            <motion.div
+              animate={{ x: ["-100%", "250%"] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
+              className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"
+            />
           </motion.div>
           
-          <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-8 leading-tight">
-            Turning ideas into <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-amber-300">intelligent technology.</span>
+          <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-8 leading-tight relative z-20">
+            Turning ideas into <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-amber-200">intelligent technology.</span>
           </motion.h1>
           
-          <motion.p variants={itemVariants} className="text-xl md:text-2xl text-slate-300 mb-10 max-w-2xl font-light leading-relaxed">
+          <motion.p variants={itemVariants} className="text-xl md:text-2xl text-slate-300 mb-10 max-w-2xl font-light leading-relaxed relative z-20">
             Innovation with precision. We engineer digital solutions that empower businesses to scale, operate efficiently, and lead in a connected world.
           </motion.p>
           
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4">
-            <Link
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 relative z-20">
+            <MagneticButton
               href="#contact"
-              className="inline-flex items-center justify-center gap-2 bg-brand-accent hover:bg-amber-500 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-lg hover:shadow-amber-500/20 group"
+              className="inline-flex items-center justify-center gap-2 bg-brand-accent hover:bg-amber-500 text-white px-8 py-4 rounded-full text-lg font-semibold transition-colors shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] group"
             >
               Start Your Project
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </Link>
+            </MagneticButton>
             
-            <Link
+            <MagneticButton
               href="#services"
-              className="inline-flex items-center justify-center gap-2 bg-white dark:bg-brand-primary/10 hover:bg-white dark:bg-brand-primary/20 text-white border border-white/20 px-8 py-4 rounded-full text-lg font-semibold transition-all backdrop-blur-sm"
+              className="inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-white border border-white/10 px-8 py-4 rounded-full text-lg font-semibold transition-colors backdrop-blur-sm group"
             >
               Explore Services
-              <ChevronRight className="w-5 h-5" />
-            </Link>
+              <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+            </MagneticButton>
           </motion.div>
         </motion.div>
-      </div>
-      
-      {/* Decorative element */}
-      <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none transform translate-x-1/4 translate-y-1/4">
-        <svg width="400" height="400" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#ffffff" d="M45.7,-76.4C58.9,-69.3,69,-55.4,76.6,-40.5C84.2,-25.6,89.4,-9.7,87.3,5.5C85.2,20.6,75.9,35,65.3,47.8C54.7,60.6,42.8,71.8,28.6,78.5C14.4,85.2,-2,87.4,-17.7,84.1C-33.3,80.7,-48.2,71.7,-59.8,59.3C-71.4,46.8,-79.8,30.9,-83.4,13.8C-87,-3.3,-85.9,-21.6,-78.6,-37.2C-71.3,-52.8,-57.8,-65.7,-42.6,-71.8C-27.4,-77.9,-13.7,-77.2,1.3,-79C16.2,-80.8,32.4,-83.4,45.7,-76.4Z" transform="translate(100 100)" />
-        </svg>
+        
+        {/* 3D Interactive Element */}
+        <div className="relative h-[400px] lg:h-[600px] w-full hidden md:block">
+          <Hero3D />
+        </div>
       </div>
     </section>
   );
