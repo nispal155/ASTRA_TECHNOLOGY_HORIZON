@@ -85,6 +85,12 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="#faq" className="text-slate-400 hover:text-brand-accent transition-colors flex items-center gap-1 group">
+                  FAQ
+                  <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                </Link>
+              </li>
+              <li>
                 <Link href="#contact" className="text-slate-400 hover:text-brand-accent transition-colors flex items-center gap-1 group">
                   Contact Us
                   <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />

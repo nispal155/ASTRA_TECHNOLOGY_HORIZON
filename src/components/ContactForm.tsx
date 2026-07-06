@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { Mail, Phone, Send, CheckCircle2, ChevronDown } from 'lucide-react';
+import { Mail, Phone, Send, CheckCircle2, ChevronDown, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ContactForm() {
@@ -112,6 +112,19 @@ export default function ContactForm() {
                       <p className="font-semibold text-lg group-hover/item:text-brand-accent transition-colors break-all">contact@astratechnologyhorizon.com</p>
                     </div>
                   </a>
+
+                  <div className="flex items-center gap-4 group/item">
+                    <div className="bg-brand-primary/5 dark:bg-brand-primary/30 p-3 rounded-full group-hover/item:bg-brand-accent transition-colors relative flex-shrink-0">
+                      <div className="absolute inset-0 rounded-full bg-brand-accent/20 scale-0 group-hover/item:scale-150 transition-transform duration-300 ease-out opacity-0 group-hover/item:opacity-100" />
+                      <MapPin className="w-6 h-6 text-brand-accent group-hover/item:text-white transition-colors relative z-10" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-slate-400 mb-1">Visit Us</p>
+                      <p className="font-semibold text-lg group-hover/item:text-brand-accent transition-colors">
+                        Kathmandu, Nepal
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
               
