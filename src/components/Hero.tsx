@@ -5,40 +5,15 @@ import Link from 'next/link';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
 import dynamic from 'next/dynamic';
+import TextReveal from './TextReveal';
+import WebGLBackground from './WebGLBackground';
 
 const Hero3D = dynamic(() => import('./Hero3D'), { 
   ssr: false,
   loading: () => <div className="w-full h-full animate-pulse bg-white/5 rounded-full blur-3xl"></div>
 });
 
-const MagneticButton = ({ children, className, href }: any) => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  
-  const handleMouse = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const { clientX, clientY } = e;
-    const { height, width, left, top } = e.currentTarget.getBoundingClientRect();
-    const middleX = clientX - (left + width / 2);
-    const middleY = clientY - (top + height / 2);
-    setPosition({ x: middleX * 0.2, y: middleY * 0.2 });
-  };
-  
-  const reset = () => {
-    setPosition({ x: 0, y: 0 });
-  };
-  
-  return (
-    <motion.a
-      href={href}
-      className={className}
-      animate={{ x: position.x, y: position.y }}
-      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-      onMouseMove={handleMouse}
-      onMouseLeave={reset}
-    >
-      {children}
-    </motion.a>
-  );
-};
+import Magnetic from './Magnetic';
 
 export default function Hero() {
   const containerVariants: Variants = {
@@ -82,6 +57,9 @@ export default function Hero() {
           transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
           className="absolute bottom-[20%] left-[10%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px]"
         />
+        
+        {/* NEW WebGL Interactive Background */}
+        <WebGLBackground />
       </div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
@@ -103,30 +81,37 @@ export default function Hero() {
             />
           </motion.div>
           
-          <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-8 leading-tight relative z-20">
-            Turning ideas into <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-amber-200">intelligent technology.</span>
-          </motion.h1>
+          <div className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-8 leading-tight relative z-20">
+            <TextReveal delay={0.2}>Turning ideas into</TextReveal>
+            <TextReveal delay={0.5} className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-amber-200">
+              intelligent technology.
+            </TextReveal>
+          </div>
           
           <motion.p variants={itemVariants} className="text-xl md:text-2xl text-slate-300 mb-10 max-w-2xl font-light leading-relaxed relative z-20">
             Innovation with precision. We engineer digital solutions that empower businesses to scale, operate efficiently, and lead in a connected world.
           </motion.p>
           
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 relative z-20">
-            <MagneticButton
-              href="#contact"
-              className="inline-flex items-center justify-center gap-2 bg-brand-accent hover:bg-amber-500 text-white px-8 py-4 rounded-full text-lg font-semibold transition-colors shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] group"
-            >
-              Start Your Project
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </MagneticButton>
+            <Magnetic>
+              <Link
+                href="#contact"
+                className="inline-flex items-center justify-center gap-2 bg-brand-accent hover:bg-amber-500 text-white px-8 py-4 rounded-full text-lg font-semibold transition-colors shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] group block"
+              >
+                Start Your Project
+                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Magnetic>
             
-            <MagneticButton
-              href="#services"
-              className="inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-white border border-white/10 px-8 py-4 rounded-full text-lg font-semibold transition-colors backdrop-blur-sm group"
-            >
-              Explore Services
-              <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </MagneticButton>
+            <Magnetic>
+              <Link
+                href="#services"
+                className="inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-white border border-white/10 px-8 py-4 rounded-full text-lg font-semibold transition-colors backdrop-blur-sm group block"
+              >
+                Explore Services
+                <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Magnetic>
           </motion.div>
         </motion.div>
         

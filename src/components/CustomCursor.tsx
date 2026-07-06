@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useCursor } from './CursorContext';
 
 export default function CustomCursor() {
   const [isMounted, setIsMounted] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const { cursorType } = useCursor();
   
   // Mouse position values
   const cursorX = useMotionValue(-100);
@@ -25,8 +27,8 @@ export default function CustomCursor() {
     }
     
     const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX - 16); // Center the cursor (32px / 2)
-      cursorY.set(e.clientY - 16);
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
     };
 
     const handleMouseOver = (e: MouseEvent) => {
@@ -58,24 +60,72 @@ export default function CustomCursor() {
   // Don't render on server or touch devices
   if (!isMounted) return null;
   if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
-    return null;
+    return null; 
   }
 
+  // Define variants based on cursor type
+  const variants = {
+    default: {
+      height: 32,
+      width: 32,
+      x: "-50%",
+      y: "-50%",
+      scale: isHovering ? 1.5 : 1,
+      backgroundColor: isHovering ? "rgba(245, 158, 11, 0.1)" : "rgba(245, 158, 11, 0.4)",
+      borderColor: "rgba(245, 158, 11, 1)",
+    },
+    view: {
+      height: 96,
+      width: 96,
+      x: "-50%",
+      y: "-50%",
+      scale: 1,
+      backgroundColor: "rgba(245, 158, 11, 0.9)",
+      borderColor: "rgba(245, 158, 11, 1)",
+    },
+    text: {
+      height: 64,
+      width: 64,
+      x: "-50%",
+      y: "-50%",
+      scale: 1,
+      backgroundColor: "transparent",
+      borderColor: "rgba(255, 255, 255, 0.5)",
+    },
+    hidden: {
+      opacity: 0
+    }
+  };
+
   return (
-    <>
-      <motion.div
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border-2 border-brand-accent pointer-events-none z-[9999] mix-blend-difference hidden md:block"
-        style={{
-          x: cursorXSpring,
-          y: cursorYSpring,
-        }}
-        animate={{
-          scale: isHovering ? 2.5 : 1,
-          backgroundColor: isHovering ? 'rgba(245, 158, 11, 0.2)' : 'transparent',
-          borderWidth: isHovering ? '1px' : '2px',
-        }}
-        transition={{ duration: 0.2 }}
-      />
-    </>
+    <motion.div
+      className="fixed top-0 left-0 pointer-events-none z-[9999] border-2 rounded-full flex items-center justify-center backdrop-blur-[2px]"
+      style={{
+        x: cursorXSpring,
+        y: cursorYSpring,
+      }}
+      animate={cursorType as keyof typeof variants}
+      variants={variants as any}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+    >
+      {/* Inner dot for precision (only in default state) */}
+      {cursorType === "default" && (
+        <motion.div 
+          className="w-1.5 h-1.5 bg-brand-accent rounded-full"
+          animate={{ scale: isHovering ? 0 : 1 }}
+        />
+      )}
+      
+      {/* Label for view state */}
+      {cursorType === "view" && (
+        <motion.span 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-white text-sm font-semibold tracking-wide"
+        >
+          View
+        </motion.span>
+      )}
+    </motion.div>
   );
 }

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
+import Magnetic from './Magnetic';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -83,14 +84,16 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <Link
-              href="#contact"
-              className={`bg-brand-accent hover:bg-amber-500 text-white rounded-full font-medium transition-all shadow-sm hover:shadow-md ${
-                isScrolled ? 'px-4 py-1.5 text-sm' : 'px-6 py-2.5'
-              }`}
-            >
-              Get a Quote
-            </Link>
+            <Magnetic>
+              <Link
+                href="#contact"
+                className={`bg-brand-accent hover:bg-amber-500 text-white rounded-full font-medium transition-all shadow-sm hover:shadow-md block ${
+                  isScrolled ? 'px-4 py-1.5 text-sm' : 'px-6 py-2.5'
+                }`}
+              >
+                Get a Quote
+              </Link>
+            </Magnetic>
           </nav>
 
           {/* Mobile menu button */}

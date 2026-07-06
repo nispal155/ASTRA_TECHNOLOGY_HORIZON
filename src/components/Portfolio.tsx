@@ -4,6 +4,8 @@ import { useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
+import TextReveal from './TextReveal';
+import { useCursor } from './CursorContext';
 
 const projects = [
   {
@@ -30,19 +32,7 @@ const projects = [
 ];
 
 const ProjectCard = ({ project }: { project: any }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  // Smooth mouse follow for the "View Project" cursor
-  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 15 });
-  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 15 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    x.set(e.clientX - rect.left);
-    y.set(e.clientY - rect.top);
-  };
+  const { setCursorType } = useCursor();
 
   return (
     <motion.div 
@@ -51,9 +41,8 @@ const ProjectCard = ({ project }: { project: any }) => {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
       className="group relative w-full h-[400px] rounded-3xl overflow-hidden cursor-none bg-slate-900"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setCursorType('view')}
+      onMouseLeave={() => setCursorType('default')}
     >
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full">
@@ -65,22 +54,6 @@ const ProjectCard = ({ project }: { project: any }) => {
           className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100"
         />
       </div>
-
-      {/* Custom Hover Cursor (View Project) */}
-      <motion.div
-        className="absolute z-30 pointer-events-none flex items-center justify-center w-24 h-24 rounded-full bg-brand-accent/90 text-white backdrop-blur-md shadow-2xl"
-        style={{
-          x: mouseXSpring,
-          y: mouseYSpring,
-          translateX: "-50%",
-          translateY: "-50%",
-          opacity: isHovered ? 1 : 0,
-          scale: isHovered ? 1 : 0.5,
-        }}
-        transition={{ duration: 0.2 }}
-      >
-        <span className="text-sm font-semibold tracking-wide">View</span>
-      </motion.div>
 
       {/* Content */}
       <div className="absolute inset-0 z-20 flex flex-col justify-end p-8">
@@ -111,10 +84,15 @@ export default function Portfolio() {
         
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="max-w-2xl">
-            <h2 className="text-brand-accent font-semibold tracking-wider uppercase mb-3">Featured Work</h2>
-            <h3 className="text-3xl md:text-5xl font-bold text-brand-text dark:text-white">
-              Transforming complex problems into <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-accent">elegant solutions.</span>
-            </h3>
+            <TextReveal className="text-brand-accent font-semibold tracking-wider uppercase mb-3">
+              Featured Work
+            </TextReveal>
+            <div className="text-3xl md:text-5xl font-bold text-brand-text dark:text-white">
+              <TextReveal>Transforming complex problems into</TextReveal>
+              <TextReveal delay={0.3} className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-accent">
+                elegant solutions.
+              </TextReveal>
+            </div>
           </div>
           
           <button className="hidden md:flex items-center gap-2 group text-brand-text dark:text-white font-medium hover:text-brand-accent transition-colors">
