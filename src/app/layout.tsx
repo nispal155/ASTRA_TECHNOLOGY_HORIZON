@@ -4,6 +4,7 @@ import Script from "next/script";
 import CustomCursor from "@/components/CustomCursor";
 import { CursorProvider } from "@/components/CursorContext";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,29 +18,30 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://astratechnologyhorizon.com'),
-  title: "Astra Technology Horizon",
-  description: "Turning ideas into intelligent technology. Innovation with precision. Itahari's premier technical partner.",
+  title: "Astra Technology Horizon | Premier IT Solutions",
+  description: "Astra Technology Horizon delivers cutting-edge software engineering, IT consulting, and digital transformation services in Itahari, Nepal.",
+  keywords: ["IT Company Nepal", "Software Development", "Web Design", "Astra Technology", "Itahari IT"],
+  authors: [{ name: "Astra Technology Horizon" }],
   openGraph: {
-    title: "Astra Technology Horizon",
-    description: "Turning ideas into intelligent technology. Innovation with precision. Itahari's premier technical partner.",
+    type: "website",
+    locale: "en_US",
     url: "https://astratechnologyhorizon.com",
     siteName: "Astra Technology Horizon",
+    title: "Astra Technology Horizon | Premier IT Solutions",
+    description: "Delivering cutting-edge software engineering and IT consulting services in Nepal.",
     images: [
       {
-        url: "/Company-Logo.jpg",
-        width: 800,
-        height: 600,
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Astra Technology Horizon",
       },
     ],
-    locale: "en_US",
-    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Astra Technology Horizon",
-    description: "Turning ideas into intelligent technology.",
-    images: ["/Company-Logo.jpg"],
+    description: "Premier IT Solutions and Software Development",
   },
 };
 
@@ -48,34 +50,45 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Astra Technology Horizon",
-    "image": "https://astratechnologyhorizon.com/Company-Logo.jpg",
-    "description": "Premier IT consulting and software engineering firm based in Itahari, Nepal.",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Itahari-4",
-      "addressLocality": "Sunsari",
-      "addressRegion": "Koshi Province",
-      "addressCountry": "NP"
-    },
-    "telephone": "+977-9852048719"
-  };
-
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}>
       <head>
-        <Script
-          id="json-ld"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        {/* Placeholder for Google Analytics */}
+        {/* Font Awesome strictly for the WhatsApp Icon if needed */}
+        <Script src="https://kit.fontawesome.com/yourcode.js" crossOrigin="anonymous" strategy="lazyOnload" />
+        
+        {/* Structured Data for SEO */}
+        <Script id="schema-org" type="application/ld+json" strategy="afterInteractive">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "ITCompany",
+              "name": "Astra Technology Horizon",
+              "url": "https://astratechnologyhorizon.com",
+              "logo": "https://astratechnologyhorizon.com/logo.png",
+              "description": "Premier IT consulting and software engineering firm based in Itahari, Nepal.",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Itahari",
+                "addressLocality": "Sunsari",
+                "addressRegion": "Koshi",
+                "postalCode": "56705",
+                "addressCountry": "NP"
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+977-9852048719",
+                "contactType": "customer service",
+                "email": "contact@nispalbhattarai.com.np"
+              },
+              "sameAs": [
+                "https://www.linkedin.com/company/astra-technology-horizon",
+                "https://www.facebook.com/astratechnologyhorizon"
+              ]
+            }
+          `}
+        </Script>
+
+        {/* Google Analytics */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
@@ -91,6 +104,7 @@ export default function RootLayout({
           <CustomCursor />
           {children}
           <WhatsAppButton />
+          <ScrollToTop />
         </CursorProvider>
       </body>
     </html>
