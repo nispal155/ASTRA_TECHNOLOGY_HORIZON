@@ -27,10 +27,11 @@ We have heavily invested in the UI/UX of this platform, engineering a world-clas
 - **Hero Section:** High-impact introduction with 3D particles and magnetic CTA buttons.
 - **About / Process:** Parallax scrolling statistics and company mission.
 - **Services:** Interactive grid detailing software engineering, IT consulting, etc.
-- **Portfolio:** Showcase of past projects featuring the context-aware "View" cursor.
-- **Testimonials & Tech Stack:** Social proof and scrolling marquees of technologies used.
-- **Contact:** Fully functional contact form, Google Maps integration, and business hours.
-- **FAQ:** Expandable accordion for frequently asked questions.
+- **Portfolio & Projects Page:** A dedicated `/projects` page showcasing past projects featuring the context-aware "View" cursor.
+- **Careers & Internships:** A dedicated `/careers` page with live job listings and a tailored application form.
+- **Contact:** Fully functional contact form via Web3Forms, Google Maps integration, and business hours.
+- **FAQ:** Expandable accordion with "Expand All" functionality for frequently asked questions.
+- **AI Chatbot:** An animated floating AI Assistant designed to answer inquiries instantly.
 
 ### 4. Accessibility & User Convenience
 - **Floating Scroll-to-Top Arrow:** Automatically appears when scrolling down, allowing users to smoothly jump back to the top of the page.
@@ -55,8 +56,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## 📬 Contact Information
 
 **Astra Technology Horizon**  
-Itahari, Sunsari, Koshi Province, Nepal
+Itahari-4, Sunsari, Nepal
 
-- **Owner:** Nispal Bhattarai
 - **Phone / WhatsApp:** +977-9852048719
-- **Email:** contact@nispalbhattarai.com.np
+- **Email:** contact@astratechnologyhorizon.com

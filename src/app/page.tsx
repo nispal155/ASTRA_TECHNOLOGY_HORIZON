@@ -17,27 +17,27 @@ import ContactForm from '@/components/ContactForm';
 import Footer from '@/components/Footer';
 
 export default function Home() {
-  return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
-      <main className="flex-grow">
-        <Hero />
-        <TechStack />
-        <Marquee />
-        <About />
-        <Services />
-        <Process />
-        <Portfolio />
-        {/* <Projects /> Optional: old projects section if needed, but Portfolio is the new one */}
-        <Stats />
-        <Testimonials />
-        <Careers />
-        <Map />
-        <Hours />
-        <FAQ />
-        <ContactForm />
-      </main>
-      <Footer />
-    </div>
-  );
+ return (
+ <div className="flex flex-col min-h-screen">
+ <Navbar />
+ <main className="flex-grow">
+ <Hero />
+ <TechStack />
+ <Marquee />
+ <About />
+ <Services />
+ <Process />
+ <Portfolio />
+ {/* <Projects /> Optional: old projects section if needed, but Portfolio is the new one */}
+ <Stats />
+ <Testimonials />
+ <Careers />
+ <Map />
+ <Hours />
+ <FAQ />
+ <ContactForm />
+ </main>
+ <Footer />
+ </div>
+ );
 }
