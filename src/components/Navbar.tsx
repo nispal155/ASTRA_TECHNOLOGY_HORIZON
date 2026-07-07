@@ -24,7 +24,6 @@ export default function Navbar() {
  const navLinks = [
     { name: 'Services', href: '/#services' },
     { name: 'About', href: '/#about' },
-    { name: 'Portfolio', href: '/projects' },
     { name: 'Careers', href: '/careers' },
     { name: 'Contact', href: '/#contact' },
   ];
@@ -87,7 +86,7 @@ export default function Navbar() {
  ))}
  <Magnetic>
  <Link
- href="#contact"
+ href="/quote"
  className={`bg-brand-accent hover:bg-amber-500 text-white rounded-full font-medium transition-all shadow-sm hover:shadow-md block ${
  isScrolled ? 'px-4 py-1.5 text-sm' : 'px-6 py-2.5'
  }`}
@@ -133,7 +132,7 @@ export default function Navbar() {
  ))}
  <div className="pt-4 px-2">
  <Link
- href="#contact"
+ href="/quote"
  onClick={() => setIsMenuOpen(false)}
  className="block w-full text-center bg-brand-accent hover:bg-amber-500 text-white px-6 py-3 rounded-lg font-medium transition-colors"
  >

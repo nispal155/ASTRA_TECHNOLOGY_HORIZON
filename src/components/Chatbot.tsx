@@ -14,7 +14,7 @@ const KNOWLEDGE_BASE: Record<string, string> = {
   "hello": "Hi there! I'm the Astra Tech Assistant. How can I help you today?",
   "services": "We offer custom web application development, mobile app creation (iOS & Android), scalable cloud architecture, API integrations, and ongoing technical maintenance.",
   "hours": "We are open Monday to Friday, 9:00 AM - 6:00 PM (NPT). We're closed on weekends.",
-  "quote": "You can get a quote by clicking the 'Get a Quote' button in our navigation bar or filling out the contact form at the bottom of the page.",
+  "quote": "You can get a quote by clicking the 'Get a Quote' button in our navigation bar or visiting our dedicated /quote page to select the specific IT services you need.",
   "contact": "You can reach us by phone at 9852048719 or via email at contact@astratechnologyhorizon.com.",
   "default": "I'm a simple assistant and I didn't quite catch that. You can ask me about our 'services', 'hours', 'contact', or how to get a 'quote'."
 };

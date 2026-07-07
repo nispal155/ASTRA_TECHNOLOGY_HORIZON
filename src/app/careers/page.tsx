@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Briefcase, MapPin, Clock, Send, Upload, CheckCircle2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -18,6 +18,17 @@ export default function CareersPage() {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  useEffect(() => {
+    // Client-side only URL parsing to avoid Next.js Suspense requirements
+    if (typeof window !== "undefined") {
+      const searchParams = new URLSearchParams(window.location.search);
+      const roleParam = searchParams.get('role');
+      if (roleParam) {
+        setFormData(prev => ({ ...prev, role: roleParam }));
+      }
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -220,11 +231,11 @@ export default function CareersPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-slate-700 mb-2">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent" placeholder="+977 98..." />
+                    <input required type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent" placeholder="+977 98..." />
                   </div>
                   <div>
                     <label htmlFor="portfolio" className="block text-sm font-medium text-slate-700 mb-2">Portfolio / LinkedIn URL</label>
-                    <input required type="url" id="portfolio" name="portfolio" value={formData.portfolio} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent" placeholder="https://" />
+                    <input type="url" id="portfolio" name="portfolio" value={formData.portfolio} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent" placeholder="https://" />
                   </div>
                 </div>
 
@@ -233,17 +244,45 @@ export default function CareersPage() {
                   <textarea required id="message" name="message" value={formData.message} onChange={handleChange} rows={4} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent resize-none" placeholder="Tell us why you're a great fit..."></textarea>
                 </div>
 
-                <button 
+                <motion.button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full py-4 bg-brand-primary text-white rounded-xl font-semibold hover:bg-brand-primary/90 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                  whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                  whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                  animate={isSubmitting ? {
+                    scale: [1, 0.95, 1],
+                    backgroundColor: ["#0f172a", "#f59e0b", "#0f172a"],
+                    transition: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
+                  } : {}}
+                  className={`w-full py-4 text-white rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${
+                    isSubmitting 
+                      ? 'shadow-[0_0_40px_rgba(245,158,11,0.6)] cursor-wait' 
+                      : 'bg-brand-primary hover:bg-brand-primary/90 shadow-lg'
+                  }`}
                 >
                   {isSubmitting ? (
-                    <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <motion.div 
+                      className="flex items-center gap-3"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                    >
+                      <motion.div 
+                        animate={{ rotate: 360 }} 
+                        transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                        className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full" 
+                      />
+                      <motion.span 
+                        animate={{ opacity: [0.5, 1, 0.5] }}
+                        transition={{ repeat: Infinity, duration: 1.5 }}
+                        className="tracking-widest"
+                      >
+                        TRANSMITTING...
+                      </motion.span>
+                    </motion.div>
                   ) : (
                     <>Submit Application <Send className="w-4 h-4" /></>
                   )}
-                </button>
+                </motion.button>
               </form>
             )}
           </div>
