@@ -62,8 +62,8 @@ export default function Navbar() {
  />
  </div>
  <span 
- className={`font-bold tracking-tight hidden sm:block whitespace-nowrap transition-all duration-500 ${
- isScrolled ? 'text-lg text-brand-primary ' : 'text-xl text-brand-primary '
+ className={`font-bold tracking-tight block whitespace-normal sm:whitespace-nowrap max-w-[150px] sm:max-w-none leading-tight sm:leading-normal transition-all duration-500 ${
+ isScrolled ? 'text-sm sm:text-lg text-brand-primary ' : 'text-base sm:text-xl text-brand-primary '
  }`}
  >
  Astra Technology Horizon <span className="inline-block animate-bounce relative top-1">🇳🇵</span>

@@ -108,19 +108,19 @@ export default function Careers() {
           <div className="flex flex-col md:flex-row min-h-[500px]">
             
             {/* File Explorer Sidebar */}
-            <div className="w-full md:w-64 bg-slate-50 border-b md:border-b-0 md:border-r border-slate-200 flex flex-col">
-              <div className="px-4 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+            <div className="w-full md:w-64 bg-slate-50 border-b md:border-b-0 md:border-r border-slate-200 flex flex-col shrink-0">
+              <div className="px-4 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1 shrink-0">
                 <ChevronRight className="w-3 h-3" /> OPEN ROLES
               </div>
-              <div className="flex flex-col pb-4">
+              <div className="flex flex-row md:flex-col pb-4 overflow-x-auto scrollbar-hide">
                 {jobs.map((job) => (
                   <button
                     key={job.id}
                     onClick={() => setActiveJobId(job.id)}
-                    className={`flex items-center gap-2 px-4 py-2.5 text-sm transition-colors text-left font-medium ${
+                    className={`flex items-center gap-2 px-4 py-2.5 text-sm transition-colors text-left font-medium shrink-0 md:w-full ${
                       activeJobId === job.id 
-                        ? 'bg-blue-50 text-blue-600 border-l-2 border-blue-600' 
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 border-l-2 border-transparent'
+                        ? 'bg-blue-50 text-blue-600 border-b-2 md:border-b-0 md:border-l-2 border-blue-600' 
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 border-b-2 md:border-b-0 md:border-l-2 border-transparent'
                     }`}
                   >
                     <FileCode2 className="w-4 h-4 shrink-0" />
