@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Quote, Star } from "lucide-react";
+import { Quote, Star, ArrowUpRight } from "lucide-react";
 import TextReveal from "./TextReveal";
 import { useCursor } from './CursorContext';
+import Link from 'next/link';
 
 const testimonials = [
   {
@@ -11,14 +12,16 @@ const testimonials = [
     role: "Travel & Tour Operator",
     content: "Astra Technology Horizon completely transformed our digital presence. The website they built for us is not only incredibly fast but beautifully represents our brand. Their technical expertise is unmatched in Nepal.",
     rating: 5,
-    gradient: "from-blue-50 to-brand-primary/10"
+    gradient: "from-blue-50 to-brand-primary/10",
+    link: "https://bodhitreejourneysnepal.com/"
   },
   {
     name: "Rahul Parajuli",
     role: "Personal Portfolio",
     content: "The attention to detail and design aesthetics provided by Astra Technology Horizon elevated my personal brand to a whole new level. Highly recommended!",
     rating: 5,
-    gradient: "from-brand-accent/10 to-orange-50"
+    gradient: "from-brand-accent/10 to-orange-50",
+    link: "https://rahulparajuli.com.np/"
   }
 ];
 
@@ -104,7 +107,10 @@ export default function Testimonials() {
                   {testimonial.name.charAt(0)}
                 </div>
                 <div>
-                  <div className="font-bold text-brand-text">{testimonial.name}</div>
+                  <Link href={testimonial.link} target="_blank" rel="noopener noreferrer" className="font-bold text-brand-text hover:text-brand-accent transition-colors flex items-center gap-1 group/link">
+                    {testimonial.name}
+                    <ArrowUpRight className="w-3 h-3 opacity-50 group-hover/link:opacity-100 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-all" />
+                  </Link>
                   <div className="text-sm text-slate-500">{testimonial.role}</div>
                 </div>
               </div>

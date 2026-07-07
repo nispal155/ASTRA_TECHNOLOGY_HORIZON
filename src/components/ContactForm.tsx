@@ -75,7 +75,7 @@ export default function ContactForm() {
  >
  <h3 className="text-2xl md:text-3xl font-bold text-brand-text flex items-center gap-3">
  <Mail className="w-6 h-6 text-brand-accent" />
- Get in Touch
+ Directly Send us Message
  </h3>
  <motion.div
  animate={{ rotate: isExpanded ? 180 : 0 }}
@@ -94,65 +94,10 @@ export default function ContactForm() {
  transition={{ duration: 0.4, ease: "easeInOut" }}
  className="overflow-hidden"
  >
- <div className="flex flex-col lg:flex-row border-t border-slate-200 ">
- 
- {/* Contact Information */}
- <div className="lg:w-1/3 bg-slate-50 text-brand-text p-10 md:p-12 flex flex-col justify-between border-r border-slate-200 relative overflow-hidden">
- {/* Subtle accent gradient in corner */}
- <div className="absolute top-0 right-0 w-32 h-32 bg-brand-accent/10 blur-2xl rounded-full -mr-16 -mt-16" />
- 
- <div className="relative z-10">
- <p className="text-slate-600 leading-relaxed mb-12">
- Ready to elevate your technical infrastructure? Reach out to our engineering team today to discuss your project requirements.
- </p>
- 
- <div className="space-y-8">
- <a href="tel:+9779852048719" className="flex items-center gap-4 group/item">
- <div className="bg-brand-primary/5 p-3 rounded-full group-hover/item:bg-brand-accent transition-colors relative">
- <div className="absolute inset-0 rounded-full bg-brand-accent/20 scale-0 group-hover/item:scale-150 transition-transform duration-300 ease-out opacity-0 group-hover/item:opacity-100" />
- <Phone className="w-6 h-6 text-brand-accent group-hover/item:text-white transition-colors relative z-10" />
- </div>
- <div>
- <p className="text-sm text-slate-400 mb-1">Call Us Direct</p>
- <p className="font-semibold text-lg group-hover/item:text-brand-accent transition-colors">+977 9852048719</p>
- </div>
- </a>
- 
- <a href="mailto:contact@astratechnologyhorizon.com" className="flex items-center gap-4 group/item">
- <div className="bg-brand-primary/5 p-3 rounded-full group-hover/item:bg-brand-accent transition-colors relative">
- <div className="absolute inset-0 rounded-full bg-brand-accent/20 scale-0 group-hover/item:scale-150 transition-transform duration-300 ease-out opacity-0 group-hover/item:opacity-100" />
- <Mail className="w-6 h-6 text-brand-accent group-hover/item:text-white transition-colors relative z-10" />
- </div>
- <div>
- <p className="text-sm text-slate-400 mb-1">Email Our Team</p>
- <p className="font-semibold text-lg group-hover/item:text-brand-accent transition-colors break-all">contact@astratechnologyhorizon.com</p>
- </div>
- </a>
-
- <div className="flex items-center gap-4 group/item">
- <div className="bg-brand-primary/5 p-3 rounded-full group-hover/item:bg-brand-accent transition-colors relative flex-shrink-0">
- <div className="absolute inset-0 rounded-full bg-brand-accent/20 scale-0 group-hover/item:scale-150 transition-transform duration-300 ease-out opacity-0 group-hover/item:opacity-100" />
- <MapPin className="w-6 h-6 text-brand-accent group-hover/item:text-white transition-colors relative z-10" />
- </div>
- <div>
- <p className="text-sm text-slate-400 mb-1">Visit Us</p>
- <p className="font-semibold text-lg group-hover/item:text-brand-accent transition-colors">
- Itahari-4, Sunsari, Nepal
- </p>
- </div>
- </div>
- </div>
- </div>
- 
- <div className="mt-16 pt-8 border-t border-slate-200 relative z-10">
- <p className="text-sm text-slate-400">
- We aim to respond to all inquiries within 24 business hours.
- </p>
- </div>
- </div>
+ <div className="flex flex-col border-t border-slate-200 ">
  
  {/* Contact Form */}
- <div className="lg:w-2/3 p-10 md:p-12 lg:p-16 relative bg-white ">
+ <div className="w-full p-10 md:p-12 lg:p-16 relative bg-white ">
  <h3 className="text-2xl font-bold text-brand-text mb-8">Send us a message</h3>
  
  {isSubmitted ? (
