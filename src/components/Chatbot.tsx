@@ -1,81 +1,82 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, Bot, User } from 'lucide-react';
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Send, Bot } from "lucide-react";
 
 type Message = {
   id: string;
-  type: 'bot' | 'user';
+  type: "bot" | "user";
   text: string;
 };
 
 const KNOWLEDGE_BASE: Record<string, string> = {
-  "hello": "Hi there! I'm the Astra Tech Assistant. How can I help you today?",
-  "services": "We offer custom web application development, mobile app creation (iOS & Android), scalable cloud architecture, API integrations, and ongoing technical maintenance.",
-  "hours": "We are open Monday to Friday, 9:00 AM - 6:00 PM (NPT). We're closed on weekends.",
-  "quote": "You can get a quote by clicking the 'Get a Quote' button in our navigation bar or visiting our dedicated /quote page to select the specific IT services you need.",
-  "contact": "You can reach us by phone at 9852048719 or via email at contact@astratechnologyhorizon.com.",
-  "default": "I'm a simple assistant and I didn't quite catch that. You can ask me about our 'services', 'hours', 'contact', or how to get a 'quote'."
+  hello: "Hi there! I'm the Astra Tech Assistant. How can I help you today?",
+  services: "We offer custom web application development, mobile app creation (iOS & Android), scalable cloud architecture, API integrations, and ongoing technical maintenance.",
+  hours: "We are open Sunday to Thursday 10:00 AM - 5:00 PM (NPT) and Friday 10:00 AM - 2:00 PM. Closed on Saturdays.",
+  quote: "You can request a quote by clicking the 'Get a Quote' button in our navigation bar or visiting our dedicated /quote page.",
+  contact: "You can reach us by phone at +977 9852048719 or via email at contact@astratechnologyhorizon.com.",
+  default: "I didn't quite catch that. You can ask me about our 'services', 'hours', 'contact', or how to get a 'quote'.",
 };
 
 const PREDEFINED_QUESTIONS = [
   { label: "What services do you provide?", key: "services" },
   { label: "What are your hours?", key: "hours" },
   { label: "How do I get a quote?", key: "quote" },
-  { label: "Contact info?", key: "contact" }
+  { label: "Contact info?", key: "contact" },
 ];
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { id: 'init', type: 'bot', text: KNOWLEDGE_BASE.hello }
+    { id: "init", type: "bot", text: KNOWLEDGE_BASE.hello },
   ]);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
     scrollToBottom();
   }, [messages, isTyping]);
 
-  const handleSend = (text: string, isFromInput = false) => {
+  const handleSend = (text: string) => {
     if (!text.trim()) return;
 
-    // Add user message
-    const userMsg: Message = { id: Date.now().toString(), type: 'user', text };
-    setMessages(prev => [...prev, userMsg]);
-    setInputValue('');
+    const userMsg: Message = { id: Date.now().toString(), type: "user", text };
+    setMessages((prev) => [...prev, userMsg]);
+    setInputValue("");
     setIsTyping(true);
 
-    // Process bot response
     setTimeout(() => {
       let responseKey = "default";
       const lowerText = text.toLowerCase();
-      
-      if (lowerText.includes('service') || lowerText.includes('do you do') || text === "services") {
+
+      if (lowerText.includes("service") || lowerText.includes("do you do") || text === "services") {
         responseKey = "services";
-      } else if (lowerText.includes('hour') || lowerText.includes('time') || text === "hours") {
+      } else if (lowerText.includes("hour") || lowerText.includes("time") || text === "hours") {
         responseKey = "hours";
-      } else if (lowerText.includes('quote') || lowerText.includes('price') || lowerText.includes('cost') || text === "quote") {
+      } else if (lowerText.includes("quote") || lowerText.includes("price") || lowerText.includes("cost") || text === "quote") {
         responseKey = "quote";
-      } else if (lowerText.includes('contact') || lowerText.includes('phone') || lowerText.includes('email') || text === "contact") {
+      } else if (lowerText.includes("contact") || lowerText.includes("phone") || lowerText.includes("email") || text === "contact") {
         responseKey = "contact";
-      } else if (lowerText.includes('hello') || lowerText.includes('hi ') || lowerText.includes('hey')) {
+      } else if (lowerText.includes("hello") || lowerText.includes("hi") || lowerText.includes("hey")) {
         responseKey = "hello";
       }
 
-      setMessages(prev => [...prev, {
-        id: (Date.now() + 1).toString(),
-        type: 'bot',
-        text: KNOWLEDGE_BASE[responseKey]
-      }]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: (Date.now() + 1).toString(),
+          type: "bot",
+          text: KNOWLEDGE_BASE[responseKey],
+        },
+      ]);
       setIsTyping(false);
-    }, 1000);
+    }, 800);
   };
 
   return (
@@ -83,14 +84,13 @@ export default function Chatbot() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
             className="fixed bottom-24 left-6 z-[99] w-[350px] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col"
-            style={{ maxHeight: '600px', height: 'calc(100vh - 120px)' }}
+            style={{ maxHeight: "550px", height: "calc(100vh - 140px)" }}
           >
-            {/* Header */}
             <div className="bg-brand-primary p-4 flex items-center justify-between text-white">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
@@ -104,38 +104,51 @@ export default function Chatbot() {
                   </div>
                 </div>
               </div>
-              <button onClick={() => setIsOpen(false)} className="text-white/70 hover:text-white transition-colors">
+              <button
+                onClick={() => setIsOpen(false)}
+                className="text-white/70 hover:text-white transition-colors"
+                aria-label="Close Chat"
+              >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Chat Area */}
             <div className="flex-1 overflow-y-auto p-4 bg-slate-50 space-y-4">
               {messages.map((msg) => (
-                <div key={msg.id} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[80%] rounded-2xl p-3 text-sm ${
-                    msg.type === 'user' 
-                      ? 'bg-brand-accent text-white rounded-tr-sm' 
-                      : 'bg-white border border-slate-200 text-slate-700 rounded-tl-sm shadow-sm'
-                  }`}>
+                <div
+                  key={msg.id}
+                  className={`flex ${msg.type === "user" ? "justify-end" : "justify-start"}`}
+                >
+                  <div
+                    className={`max-w-[80%] rounded-2xl p-3 text-sm ${
+                      msg.type === "user"
+                        ? "bg-brand-accent text-white rounded-tr-sm"
+                        : "bg-white border border-slate-200 text-slate-700 rounded-tl-sm shadow-sm"
+                    }`}
+                  >
                     {msg.text}
                   </div>
                 </div>
               ))}
-              
+
               {isTyping && (
                 <div className="flex justify-start">
                   <div className="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-4 shadow-sm flex items-center gap-1">
                     <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce"></div>
-                    <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                    <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+                    <div
+                      className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce"
+                      style={{ animationDelay: "0.2s" }}
+                    ></div>
+                    <div
+                      className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce"
+                      style={{ animationDelay: "0.4s" }}
+                    ></div>
                   </div>
                 </div>
               )}
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Quick Actions */}
             {messages.length === 1 && (
               <div className="px-4 pb-2 bg-slate-50 flex flex-wrap gap-2">
                 {PREDEFINED_QUESTIONS.map((q) => (
@@ -150,10 +163,12 @@ export default function Chatbot() {
               </div>
             )}
 
-            {/* Input Area */}
             <div className="p-4 bg-white border-t border-slate-100">
-              <form 
-                onSubmit={(e) => { e.preventDefault(); handleSend(inputValue, true); }}
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleSend(inputValue);
+                }}
                 className="flex items-center gap-2"
               >
                 <input
@@ -163,10 +178,11 @@ export default function Chatbot() {
                   placeholder="Ask a question..."
                   className="flex-1 bg-slate-50 border border-slate-200 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all"
                 />
-                <button 
+                <button
                   type="submit"
                   disabled={!inputValue.trim() || isTyping}
                   className="w-10 h-10 rounded-full bg-brand-primary text-white flex items-center justify-center hover:bg-brand-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
+                  aria-label="Send message"
                 >
                   <Send className="w-4 h-4 ml-0.5" />
                 </button>
@@ -176,15 +192,13 @@ export default function Chatbot() {
         )}
       </AnimatePresence>
 
-      <motion.button
-        animate={{ y: [0, -10, 0] }}
-        transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+      <button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-6 left-6 z-[99] w-14 h-14 bg-brand-primary text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
         aria-label="Toggle Chat"
       >
         {isOpen ? <X className="w-6 h-6" /> : <Bot className="w-6 h-6" />}
-      </motion.button>
+      </button>
     </>
   );
 }
