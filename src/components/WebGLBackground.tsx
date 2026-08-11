@@ -23,14 +23,14 @@ const generateParticles = (count: number, radius: number) => {
 const ParticleCloud = () => {
  const ref = useRef<THREE.Points>(null);
  
- // Create 3000 particles within a radius of 15
- const particles = useMemo(() => generateParticles(3000, 15), []);
+ // Create 1500 particles within a radius of 15
+ const particles = useMemo(() => generateParticles(1500, 15), []);
 
  useFrame((state) => {
  if (!ref.current) return;
  // Slowly rotate the particle cloud
- ref.current.rotation.x -= 0.0005;
- ref.current.rotation.y -= 0.0005;
+ ref.current.rotation.x -= 0.00025;
+ ref.current.rotation.y -= 0.00025;
  
  // Add subtle interactive movement based on mouse pointer
  const pointer = state.pointer;
@@ -44,10 +44,10 @@ const ParticleCloud = () => {
  <PointMaterial
  transparent
  color="#f59e0b" // brand-accent (amber)
- size={0.05}
+ size={0.03}
  sizeAttenuation={true}
  depthWrite={false}
- opacity={0.4}
+ opacity={0.2}
  />
  </Points>
  </group>
