@@ -55,7 +55,7 @@ export default function Testimonials() {
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-text tracking-tight">
             <TextReveal>What our</TextReveal>{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-accent">
+            <span className="text-brand-accent">
               <TextReveal delay={0.2}>clients say.</TextReveal>
             </span>
           </h2>

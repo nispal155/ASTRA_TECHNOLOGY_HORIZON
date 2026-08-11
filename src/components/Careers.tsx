@@ -1,15 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Briefcase, Terminal, FileCode2, ChevronRight, Play } from "lucide-react";
+import { motion } from "framer-motion";
+import { Briefcase, MapPin, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import TextReveal from "./TextReveal";
 
 const jobs = [
   {
     id: "frontend",
-    filename: "frontend_engineer.ts",
     title: "Senior Frontend Engineer",
     location: "Itahari, Nepal (Hybrid)",
     type: "Full-time",
@@ -19,7 +17,6 @@ const jobs = [
   },
   {
     id: "cloud",
-    filename: "cloud_architect.ts",
     title: "Cloud Infrastructure Architect",
     location: "Remote",
     type: "Full-time",
@@ -29,7 +26,6 @@ const jobs = [
   },
   {
     id: "design",
-    filename: "ui_ux_designer.ts",
     title: "UI/UX Designer",
     location: "Itahari, Nepal (On-site)",
     type: "Part-time",
@@ -39,7 +35,6 @@ const jobs = [
   },
   {
     id: "intern",
-    filename: "internship.ts",
     title: "Software Engineering Intern",
     location: "Itahari, Nepal (On-site)",
     type: "Internship",
@@ -50,11 +45,8 @@ const jobs = [
 ];
 
 export default function Careers() {
-  const [activeJobId, setActiveJobId] = useState(jobs[0].id);
-  const activeJob = jobs.find((j) => j.id === activeJobId) || jobs[0];
-
   return (
-    <section id="careers" className="py-24 md:py-32 bg-brand-light-slate border-b border-slate-200 overflow-hidden relative font-mono">
+    <section id="careers" className="py-24 md:py-32 bg-brand-light-slate border-b border-slate-200 overflow-hidden relative">
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
@@ -65,130 +57,64 @@ export default function Careers() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-sm font-semibold text-brand-accent mb-6 font-sans"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-sm font-semibold text-brand-accent mb-6"
             >
               <Briefcase className="w-4 h-4" />
               <span>Careers</span>
             </motion.div>
-            <h2 className="text-4xl md:text-5xl font-bold text-brand-primary tracking-tight font-sans mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-brand-primary tracking-tight mb-4">
               <TextReveal>Work</TextReveal> <span className="text-brand-accent"><TextReveal delay={0.2}>with</TextReveal></span> <TextReveal delay={0.3}>us.</TextReveal>
             </h2>
-            <p className="text-lg text-slate-600 font-sans max-w-xl">
+            <p className="text-lg text-slate-600 max-w-xl">
               We are always looking for software engineers and designers who value clean code and good design.
             </p>
           </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="w-full rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-xl flex flex-col"
-        >
-          <div className="flex items-center justify-between px-4 py-3 bg-slate-50 border-b border-slate-200">
-            <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
-              <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-              <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
-            </div>
-            <div className="text-xs text-slate-500 font-medium flex items-center gap-2">
-              <Terminal className="w-3 h-3" />
-              <span>astra-workspace — {activeJob.filename}</span>
-            </div>
-            <div className="w-16" />
-          </div>
-
-          <div className="flex flex-col md:flex-row min-h-[500px]">
-            <div className="w-full md:w-64 bg-slate-50 border-b md:border-b-0 md:border-r border-slate-200 flex flex-col shrink-0">
-              <div className="px-4 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1 shrink-0">
-                <ChevronRight className="w-3 h-3" /> OPEN ROLES
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {jobs.map((job, index) => (
+            <motion.div
+              key={job.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="bg-white border border-slate-200 rounded-3xl p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
+            >
+              <div className="flex flex-wrap items-center gap-3 mb-6">
+                <span className="px-3 py-1 bg-brand-primary/5 text-brand-primary text-xs font-semibold rounded-full">
+                  {job.department}
+                </span>
+                <span className="flex items-center gap-1 text-slate-500 text-sm font-medium">
+                  <MapPin className="w-3 h-3" /> {job.location}
+                </span>
+                <span className="text-slate-400 text-sm">•</span>
+                <span className="text-slate-500 text-sm font-medium">{job.type}</span>
               </div>
-              <div className="flex flex-row md:flex-col pb-4 overflow-x-auto scrollbar-hide">
-                {jobs.map((job) => (
-                  <button
-                    key={job.id}
-                    onClick={() => setActiveJobId(job.id)}
-                    className={`flex items-center gap-2 px-4 py-2.5 text-sm transition-colors text-left font-medium shrink-0 md:w-full ${
-                      activeJobId === job.id
-                        ? "bg-blue-50 text-blue-600 border-b-2 md:border-b-0 md:border-l-2 border-blue-600"
-                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-100 border-b-2 md:border-b-0 md:border-l-2 border-transparent"
-                    }`}
-                  >
-                    <FileCode2 className="w-4 h-4 shrink-0" />
-                    <span className="truncate">{job.filename}</span>
-                  </button>
+              
+              <h3 className="text-2xl font-bold text-brand-text mb-3">{job.title}</h3>
+              <p className="text-slate-600 mb-6 flex-grow">{job.description}</p>
+              
+              <div className="flex flex-wrap gap-2 mb-8">
+                {job.tech.map((t) => (
+                  <span key={t} className="px-2.5 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-md">
+                    {t}
+                  </span>
                 ))}
               </div>
-            </div>
-
-            <div className="flex-1 flex flex-col bg-white overflow-x-auto relative">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeJob.id}
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -10 }}
-                  transition={{ duration: 0.2 }}
-                  className="p-6 md:p-8 flex-1 text-sm md:text-base leading-relaxed whitespace-pre font-mono"
-                >
-                  <div className="text-slate-400">{"/**"}</div>
-                  <div className="text-slate-400">{" * @department "}<span className="text-brand-accent">{activeJob.department}</span></div>
-                  <div className="text-slate-400">{" * @location   "}<span className="text-brand-accent">{activeJob.location}</span></div>
-                  <div className="text-slate-400">{" * @type       "}<span className="text-brand-accent">{activeJob.type}</span></div>
-                  <div className="text-slate-400">{" */"}</div>
-
-                  <div className="mt-4">
-                    <span className="text-purple-600 font-medium">export const</span> <span className="text-blue-600 font-medium">{activeJob.title.replace(/\s+/g, "")}</span> <span className="text-slate-800">= {"{"}</span>
-                  </div>
-
-                  <div className="pl-6">
-                    <span className="text-slate-700">title:</span> <span className="text-green-600">"{activeJob.title}"</span><span className="text-slate-800">,</span>
-                  </div>
-
-                  <div className="pl-6 mt-2 whitespace-pre-wrap">
-                    <span className="text-slate-700">description:</span> <span className="text-green-600">"{activeJob.description}"</span><span className="text-slate-800">,</span>
-                  </div>
-
-                  <div className="pl-6 mt-2">
-                    <span className="text-slate-700">tech_stack:</span> <span className="text-slate-800">[</span>
-                    {activeJob.tech.map((t, i) => (
-                      <span key={t}>
-                        <span className="text-orange-600">"{t}"</span>
-                        {i < activeJob.tech.length - 1 && <span className="text-slate-800">, </span>}
-                      </span>
-                    ))}
-                    <span className="text-slate-800">],</span>
-                  </div>
-
-                  <div className="pl-6 mt-4">
-                    <span className="text-blue-600 font-medium">apply</span><span className="text-slate-800">: () ={"\>"} {"{"}</span>
-                  </div>
-                  <div className="pl-12">
-                    <span className="text-purple-600 font-medium">await</span> <span className="text-blue-600 font-medium">execute</span><span className="text-slate-800">(</span><span className="text-green-600">"./apply.sh --role={activeJob.id}"</span><span className="text-slate-800">);</span>
-                  </div>
-                  <div className="pl-6 text-slate-800">{"}"}</div>
-                  <div className="text-slate-800">{"};"}</div>
-                </motion.div>
-              </AnimatePresence>
-
-              <div className="mt-auto border-t border-slate-200 bg-slate-50 p-4 md:px-6 flex items-center justify-between">
-                <div className="flex items-center gap-3 text-sm flex-wrap">
-                  <span className="text-brand-primary font-bold">visitor@astra:~$</span>
-                  <span className="text-slate-800 font-medium">./apply.sh --role={activeJob.id}</span>
-                  <span className="animate-pulse w-2 h-4 bg-slate-400 block" />
-                </div>
+              
+              <div className="mt-auto pt-6 border-t border-slate-100">
                 <Link
-                  href={`/careers?role=${encodeURIComponent(activeJob.title)}`}
-                  className="ml-4 shrink-0 inline-flex items-center gap-2 px-5 py-2.5 bg-brand-primary hover:bg-brand-accent text-white font-sans font-semibold rounded-lg transition-colors group shadow-sm hover:shadow"
+                  href={`/careers?role=${encodeURIComponent(job.title)}`}
+                  className="inline-flex items-center gap-2 text-brand-primary font-semibold hover:text-brand-accent transition-colors group"
                 >
-                  <Play className="w-4 h-4 fill-current" />
-                  <span>Execute</span>
+                  Learn More & Apply
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
-            </div>
-          </div>
-        </motion.div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
