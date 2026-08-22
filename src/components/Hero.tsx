@@ -13,6 +13,10 @@ const techIcons = [
   { name: "AWS", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg", size: "w-16 h-16", position: "top-[45%] left-[5%]", delay: 2.5, duration: 6 },
   { name: "Docker", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg", size: "w-14 h-14", position: "bottom-[10%] left-[45%]", delay: 0.8, duration: 4.8 },
   { name: "PostgreSQL", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg", size: "w-12 h-12", position: "top-[5%] right-[5%]", delay: 1.2, duration: 5.2 },
+  { name: "Flutter", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg", size: "w-16 h-16", position: "bottom-[5%] right-[5%]", delay: 1.8, duration: 5.8 },
+  { name: "MongoDB", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg", size: "w-14 h-14", position: "top-[5%] left-[10%]", delay: 0.3, duration: 4.6 },
+  { name: "Firebase", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg", size: "w-12 h-12", position: "bottom-[45%] right-[25%]", delay: 2.2, duration: 5.4 },
+  { name: "GraphQL", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/graphql/graphql-plain.svg", size: "w-14 h-14", position: "bottom-[20%] left-[5%]", delay: 1.1, duration: 6.2 },
 ];
 
 export default function Hero() {
