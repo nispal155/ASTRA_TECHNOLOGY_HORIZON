@@ -14,7 +14,7 @@ const insights = [
     readTime: "5 min read",
     date: "Aug 15, 2026",
     image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
-    link: "#",
+    link: "/blog/1",
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ const insights = [
     readTime: "7 min read",
     date: "Aug 02, 2026",
     image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop",
-    link: "#",
+    link: "/blog/2",
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ const insights = [
     readTime: "4 min read",
     date: "Jul 28, 2026",
     image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1000&auto=format&fit=crop",
-    link: "#",
+    link: "/blog/3",
   }
 ];
 

@@ -24,10 +24,10 @@ export default function Footer() {
                 Astra Technology Horizon
               </span>
             </Link>
-            <p className="text-slate-400 max-w-sm mb-8 leading-relaxed">
+            <p className="text-white/70 max-w-sm mb-8 leading-relaxed">
               Delivering high-performance software engineering, cloud architecture, and IT consulting services from Nepal to clients worldwide.
             </p>
-            <div className="space-y-4 text-slate-400 text-sm">
+            <div className="space-y-4 text-white/70 text-sm">
               <a
                 href="mailto:contact@astratechnologyhorizon.com"
                 className="hover:text-white transition-colors flex items-center gap-3 w-fit"
@@ -60,7 +60,7 @@ export default function Footer() {
 
           <div>
             <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
-            <ul className="space-y-4 text-sm text-slate-400">
+            <ul className="space-y-4 text-sm text-white/70">
               <li>
                 <Link href="/" className="hover:text-white transition-colors">
                   Home
@@ -82,6 +82,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/#insights" className="hover:text-white transition-colors">
+                  Insights
+                </Link>
+              </li>
+              <li>
                 <Link href="/#faq" className="hover:text-white transition-colors">
                   FAQ
                 </Link>
@@ -96,7 +101,7 @@ export default function Footer() {
 
           <div>
             <h4 className="text-lg font-semibold mb-6">Legal</h4>
-            <ul className="space-y-4 text-sm text-slate-400">
+            <ul className="space-y-4 text-sm text-white/70">
               <li>
                 <Link href="/privacy" className="hover:text-white transition-colors">
                   Privacy Policy
@@ -111,7 +116,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/50">
           <p>&copy; {currentYear} Astra Technology Horizon. All rights reserved.</p>
           <p>Itahari-4, Sunsari, Nepal</p>
         </div>
