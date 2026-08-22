@@ -1,109 +1,103 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { motion, useScroll, useTransform, useInView, useMotionValue, useSpring } from "framer-motion";
-import { Users, Target, Rocket, Award } from "lucide-react";
+import React from "react";
+import { Users, Target, Rocket, Award, Quote, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import SectionHeader from "./SectionHeader";
 
-function AnimatedCounter({ value, suffix = "" }: { value: number; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const motionValue = useMotionValue(0);
-  const springValue = useSpring(motionValue, {
-    damping: 50,
-    stiffness: 100,
-  });
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+const stats = [
+  { label: "Years Experience", value: "10+", icon: <Award className="w-5 h-5" /> },
+  { label: "Projects Delivered", value: "50+", icon: <Target className="w-5 h-5" /> },
+  { label: "Engineers & Designers", value: "25+", icon: <Users className="w-5 h-5" /> },
+  { label: "Client Satisfaction", value: "99%", icon: <Rocket className="w-5 h-5" /> },
+];
 
-  useEffect(() => {
-    if (isInView) {
-      motionValue.set(value);
-    }
-  }, [isInView, value, motionValue]);
-
-  useEffect(() => {
-    springValue.on("change", (latest) => {
-      if (ref.current) {
-        ref.current.textContent = Intl.NumberFormat("en-US").format(Math.round(latest)) + suffix;
-      }
-    });
-  }, [springValue, suffix]);
-
-  return <span ref={ref}>0{suffix}</span>;
-}
+const testimonials = [
+  {
+    name: "Bodhi Tree Journeys Nepal",
+    role: "Travel & Tour Operator",
+    content: "Astra Technology Horizon completely transformed our digital presence. The website they built for us is fast, intuitive, and beautifully represents our brand. Their technical execution was spot on.",
+    link: "https://bodhitreejourneysnepal.com/",
+  },
+  {
+    name: "Rahul Parajuli",
+    role: "Personal Portfolio",
+    content: "The attention to detail and design aesthetics provided by Astra Technology Horizon elevated my personal brand to a whole new level. Highly recommended!",
+    link: "https://rahulparajuli.com.np/",
+  },
+];
 
 export default function About() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const yBg = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
-  const yText = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
-  const yCards = useTransform(scrollYProgress, [0, 1], ["20%", "-20%"]);
-
-  const stats = [
-    { label: "Years Experience", value: 10, suffix: "+", icon: <Award className="w-6 h-6" /> },
-    { label: "Projects Delivered", value: 50, suffix: "+", icon: <Target className="w-6 h-6" /> },
-    { label: "Engineers & Designers", value: 25, suffix: "+", icon: <Users className="w-6 h-6" /> },
-    { label: "Client Satisfaction", value: 99, suffix: "%", icon: <Rocket className="w-6 h-6" /> },
-  ];
-
   return (
-    <section
-      id="about"
-      ref={containerRef}
-      className="relative py-32 bg-brand-light-bg border-y border-slate-200 overflow-hidden"
-    >
-      <motion.div
-        style={{ y: yBg }}
-        className="absolute top-0 right-0 w-full h-[150%] pointer-events-none opacity-30"
-      >
-        <div className="absolute top-[10%] right-[10%] w-[600px] h-[600px] bg-brand-accent/30 rounded-full blur-[150px]" />
-        <div className="absolute bottom-[20%] left-[5%] w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[150px]" />
-      </motion.div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div style={{ y: yText }} className="space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-sm font-semibold text-brand-accent mb-2">
-              <Users className="w-4 h-4" />
-              <span>About Us</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-primary leading-tight">
-              A dedicated team building <span className="text-brand-accent">reliable software solutions.</span>
-            </h2>
-            <p className="text-lg text-slate-600 leading-relaxed max-w-xl">
-              Based in Itahari, Nepal, Astra Technology Horizon is a software engineering and IT consulting firm. We help companies design, build, and maintain digital applications that scale effortlessly.
-            </p>
-            <p className="text-lg text-slate-600 leading-relaxed max-w-xl">
+    <section id="about" className="py-20 lg:py-24 bg-white border-b border-brand-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start mb-20">
+          <div>
+            <SectionHeader
+              subtitle="About Us"
+              title="Built on solid engineering."
+              description="Based in Itahari, Nepal, Astra Technology Horizon is a software engineering and IT consulting firm. We help companies design, build, and maintain digital applications that scale effortlessly."
+              centered={false}
+            />
+            <p className="text-lg text-brand-text-secondary leading-relaxed max-w-xl -mt-10">
               Our approach focuses on clean code, solid technical architecture, and straightforward communication — guiding your project from concept to launch.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div style={{ y: yCards }} className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-6">
             {stats.map((stat, idx) => (
-              <motion.div
+              <div
                 key={idx}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "0px" }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                whileHover={{ y: -5, scale: 1.02, transition: { duration: 0.2 } }}
-                className="bg-white/80 backdrop-blur-md p-8 rounded-3xl border border-slate-200/50 shadow-xl"
+                className="bg-brand-surface p-6 rounded-lg border border-brand-border"
               >
-                <div className="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center text-brand-accent mb-6 shadow-inner">
+                <div className="w-10 h-10 bg-white border border-brand-border-light rounded-md flex items-center justify-center text-brand-primary mb-4">
                   {stat.icon}
                 </div>
-                <div className="text-4xl font-bold text-brand-primary mb-2 tracking-tight">
-                  <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                <div className="text-3xl font-bold text-brand-primary mb-1 tracking-tight">
+                  {stat.value}
                 </div>
-                <div className="text-sm uppercase tracking-wider text-slate-500 font-medium">
+                <div className="text-sm font-medium text-brand-text-muted">
                   {stat.label}
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
+        </div>
+
+        <div className="border-t border-brand-border pt-16">
+          <h3 className="text-2xl font-bold text-brand-primary mb-10 text-center">Trusted by our clients</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {testimonials.map((testimonial, idx) => (
+              <div
+                key={idx}
+                className="bg-brand-surface border border-brand-border rounded-lg p-8 flex flex-col justify-between"
+              >
+                <div>
+                  <Quote className="w-8 h-8 text-brand-text-muted opacity-50 mb-4" />
+                  <p className="text-lg text-brand-text-secondary leading-relaxed mb-8">
+                    "{testimonial.content}"
+                  </p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-brand-primary flex items-center justify-center font-bold text-white text-lg">
+                    {testimonial.name.charAt(0)}
+                  </div>
+                  <div>
+                    <Link
+                      href={testimonial.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-brand-primary hover:text-brand-accent transition-colors flex items-center gap-1 group/link"
+                    >
+                      {testimonial.name}
+                      <ArrowUpRight className="w-3 h-3 opacity-50 group-hover/link:opacity-100 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-all" />
+                    </Link>
+                    <div className="text-sm text-brand-text-muted">{testimonial.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

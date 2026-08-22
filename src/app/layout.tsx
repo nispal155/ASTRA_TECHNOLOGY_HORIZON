@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
-import CustomCursor from "@/components/CustomCursor";
-import { CursorProvider } from "@/components/CursorContext";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import ScrollToTop from "@/components/ScrollToTop";
-import Chatbot from "@/components/Chatbot";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -86,13 +82,8 @@ export default function RootLayout({
         </Script>
       </head>
       <body className="min-h-full flex flex-col">
-        <CursorProvider>
-          <CustomCursor />
-          {children}
-          <WhatsAppButton />
-          <ScrollToTop />
-          <Chatbot />
-        </CursorProvider>
+        {children}
+        <ScrollToTop />
       </body>
     </html>
   );

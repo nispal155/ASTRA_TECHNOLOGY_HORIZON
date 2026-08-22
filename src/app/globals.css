@@ -2,16 +2,27 @@
 
 @theme inline {
   --color-brand-primary: #0B192C;
-  --color-brand-accent: #E19822;
-  --color-brand-light-bg: #F8F9FA;
-  --color-brand-light-slate: #F0F4F8;
-  --color-brand-text: #1E293B;
+  --color-brand-primary-light: #1A2D43;
+  --color-brand-accent: #D4891A;
+  --color-brand-accent-hover: #B87516;
+  --color-brand-surface: #F7F8FA;
+  --color-brand-border: #E2E5EA;
+  --color-brand-border-light: #ECEEF1;
+  
+  /* Legacy mappings (to be removed during refactor) */
+  --color-brand-light-bg: #F7F8FA;
+  --color-brand-light-slate: #F7F8FA;
+  
+  --color-brand-text: #0F1729;
+  --color-brand-text-secondary: #4B5563;
+  --color-brand-text-muted: #9CA3AF;
+  
   --font-sans: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
 :root {
-  --background: var(--color-brand-light-bg);
+  --background: #FFFFFF;
   --foreground: var(--color-brand-text);
 }
 

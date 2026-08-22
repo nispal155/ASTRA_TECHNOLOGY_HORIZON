@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Briefcase, MapPin, Clock, Send, Upload, CheckCircle2 } from "lucide-react";
+import { Briefcase, MapPin, Clock, Send, CheckCircle2, Loader2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SectionHeader from "@/components/SectionHeader";
+import { FormInput, FormTextarea, FormSelect } from "@/components/FormFields";
 
 export default function CareersPage() {
   const [formData, setFormData] = useState({
@@ -20,7 +21,6 @@ export default function CareersPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
-    // Client-side only URL parsing to avoid Next.js Suspense requirements
     if (typeof window !== "undefined") {
       const searchParams = new URLSearchParams(window.location.search);
       const roleParam = searchParams.get('role');
@@ -107,70 +107,58 @@ export default function CareersPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-slate-50 pt-20">
+    <main className="min-h-screen bg-brand-surface pt-20">
       <Navbar />
       
-      <section className="py-24 bg-white border-b border-slate-200">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-sm font-semibold text-brand-accent mb-6"
-            >
-              <Briefcase className="w-4 h-4" />
-              <span>Join Our Team</span>
-            </motion.div>
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-4xl md:text-6xl font-bold text-brand-primary mb-6 tracking-tight"
-            >
-              Build the future with us.
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-xl text-slate-600 max-w-2xl mx-auto"
-            >
-              We are always looking for exceptional talent and passionate learners to join our teams in Nepal and around the globe.
-            </motion.p>
-          </div>
+      <section className="py-20 lg:py-24 bg-white border-b border-brand-border">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <SectionHeader
+            subtitle="Join Our Team"
+            title="Build the future with us."
+            description="We are always looking for exceptional talent and passionate learners to join our teams in Nepal and around the globe."
+            centered={true}
+          />
         </div>
       </section>
 
-      <section className="py-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <section className="py-20 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16">
         
         {/* Open Positions */}
         <div>
-          <h2 className="text-3xl font-bold text-brand-primary mb-8">Open Positions</h2>
+          <h2 className="text-2xl font-bold text-brand-primary mb-8">Open Positions</h2>
           <div className="space-y-6 mb-16">
             {jobs.map((job, index) => (
-              <div key={index} className="bg-white border border-slate-200 rounded-3xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer" onClick={() => setFormData(prev => ({...prev, role: job.title}))}>
+              <div 
+                key={index} 
+                className="bg-white border border-brand-border rounded-lg p-6 hover:border-brand-accent transition-colors duration-300 group cursor-pointer" 
+                onClick={() => setFormData(prev => ({...prev, role: job.title}))}
+              >
                 <div className="flex flex-wrap items-center gap-3 mb-4">
-                  <span className="px-3 py-1 bg-brand-light-slate text-brand-primary text-xs font-semibold rounded-full">{job.department}</span>
-                  <span className="flex items-center gap-1 text-slate-500 text-sm"><MapPin className="w-4 h-4" /> {job.location}</span>
-                  <span className="flex items-center gap-1 text-slate-500 text-sm"><Clock className="w-4 h-4" /> {job.type}</span>
+                  <span className="px-3 py-1 bg-brand-surface text-brand-text-secondary border border-brand-border text-xs font-semibold rounded">{job.department}</span>
+                  <span className="flex items-center gap-1 text-brand-text-muted text-sm"><MapPin className="w-4 h-4" /> {job.location}</span>
+                  <span className="flex items-center gap-1 text-brand-text-muted text-sm"><Clock className="w-4 h-4" /> {job.type}</span>
                 </div>
-                <h3 className="text-xl font-bold text-brand-text mb-2 group-hover:text-brand-accent transition-colors">{job.title}</h3>
-                <p className="text-slate-600 text-sm">{job.description}</p>
+                <h3 className="text-xl font-semibold text-brand-primary mb-2 group-hover:text-brand-accent transition-colors">{job.title}</h3>
+                <p className="text-brand-text-secondary text-sm leading-relaxed">{job.description}</p>
               </div>
             ))}
           </div>
 
-          <h2 className="text-3xl font-bold text-brand-primary mb-8">Internship Programs</h2>
+          <h2 className="text-2xl font-bold text-brand-primary mb-8">Internship Programs</h2>
           <div className="space-y-6">
             {internships.map((intern, index) => (
-              <div key={index} className="bg-gradient-to-br from-brand-accent/5 to-white border border-brand-accent/20 rounded-3xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer" onClick={() => setFormData(prev => ({...prev, role: intern.title}))}>
+              <div 
+                key={index} 
+                className="bg-white border border-brand-border rounded-lg p-6 hover:border-brand-accent transition-colors duration-300 group cursor-pointer" 
+                onClick={() => setFormData(prev => ({...prev, role: intern.title}))}
+              >
                 <div className="flex flex-wrap items-center gap-3 mb-4">
-                  <span className="px-3 py-1 bg-brand-accent/10 text-brand-accent text-xs font-semibold rounded-full">{intern.department}</span>
-                  <span className="flex items-center gap-1 text-slate-500 text-sm"><MapPin className="w-4 h-4" /> {intern.location}</span>
-                  <span className="flex items-center gap-1 text-slate-500 text-sm"><Clock className="w-4 h-4" /> {intern.type}</span>
+                  <span className="px-3 py-1 bg-brand-surface text-brand-text-secondary border border-brand-border text-xs font-semibold rounded">{intern.department}</span>
+                  <span className="flex items-center gap-1 text-brand-text-muted text-sm"><MapPin className="w-4 h-4" /> {intern.location}</span>
+                  <span className="flex items-center gap-1 text-brand-text-muted text-sm"><Clock className="w-4 h-4" /> {intern.type}</span>
                 </div>
-                <h3 className="text-xl font-bold text-brand-text mb-2 group-hover:text-brand-accent transition-colors">{intern.title}</h3>
-                <p className="text-slate-600 text-sm">{intern.description}</p>
+                <h3 className="text-xl font-semibold text-brand-primary mb-2 group-hover:text-brand-accent transition-colors">{intern.title}</h3>
+                <p className="text-brand-text-secondary text-sm leading-relaxed">{intern.description}</p>
               </div>
             ))}
           </div>
@@ -178,111 +166,111 @@ export default function CareersPage() {
 
         {/* Application Form */}
         <div>
-          <div className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl border border-slate-200 sticky top-32">
+          <div className="bg-white rounded-lg p-8 shadow-sm border border-brand-border sticky top-32">
             <h3 className="text-2xl font-bold text-brand-primary mb-6">Submit Your Application</h3>
             
             {isSubmitted ? (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="flex flex-col items-center justify-center py-12 text-center"
-              >
-                <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mb-6">
-                  <CheckCircle2 className="w-10 h-10 text-green-500" />
+              <div className="flex flex-col items-center justify-center py-12 text-center">
+                <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-6">
+                  <CheckCircle2 className="w-8 h-8 text-green-500" />
                 </div>
-                <h4 className="text-2xl font-bold text-brand-text mb-2">Application Received!</h4>
-                <p className="text-slate-600">Thank you for your interest. Our hiring team will review your application and get back to you soon.</p>
-              </motion.div>
+                <h4 className="text-xl font-bold text-brand-primary mb-2">Application Received!</h4>
+                <p className="text-brand-text-secondary">Thank you for your interest. Our hiring team will review your application and get back to you soon.</p>
+              </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="role" className="block text-sm font-medium text-slate-700 mb-2">Position Applying For</label>
-                  <select 
-                    id="role" 
-                    name="role" 
-                    value={formData.role}
-                    onChange={handleChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent"
-                  >
-                    <optgroup label="Full-Time Roles">
-                      <option value="Senior Frontend Engineer">Senior Frontend Engineer</option>
-                      <option value="Cloud Infrastructure Architect">Cloud Infrastructure Architect</option>
-                      <option value="UI/UX Designer">UI/UX Designer</option>
-                    </optgroup>
-                    <optgroup label="Internships">
-                      <option value="Software Engineering Intern">Software Engineering Intern</option>
-                      <option value="Digital Marketing Intern">Digital Marketing Intern</option>
-                    </optgroup>
-                    <option value="Other">Other / Spontaneous Application</option>
-                  </select>
-                </div>
+                <FormSelect
+                  id="role"
+                  name="role"
+                  label="Position Applying For"
+                  value={formData.role}
+                  onChange={handleChange}
+                >
+                  <optgroup label="Full-Time Roles">
+                    <option value="Senior Frontend Engineer">Senior Frontend Engineer</option>
+                    <option value="Cloud Infrastructure Architect">Cloud Infrastructure Architect</option>
+                    <option value="UI/UX Designer">UI/UX Designer</option>
+                  </optgroup>
+                  <optgroup label="Internships">
+                    <option value="Software Engineering Intern">Software Engineering Intern</option>
+                    <option value="Digital Marketing Intern">Digital Marketing Intern</option>
+                  </optgroup>
+                  <option value="Other">Other / Spontaneous Application</option>
+                </FormSelect>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">Full Name</label>
-                    <input required type="text" id="name" name="name" value={formData.name} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent" placeholder="John Doe" />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
-                    <input required type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent" placeholder="john@example.com" />
-                  </div>
+                  <FormInput
+                    id="name"
+                    name="name"
+                    label="Full Name"
+                    required
+                    placeholder="John Doe"
+                    value={formData.name}
+                    onChange={handleChange}
+                  />
+                  <FormInput
+                    id="email"
+                    name="email"
+                    type="email"
+                    label="Email Address"
+                    required
+                    placeholder="john@example.com"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-slate-700 mb-2">Phone Number</label>
-                    <input required type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent" placeholder="+977 98..." />
-                  </div>
-                  <div>
-                    <label htmlFor="portfolio" className="block text-sm font-medium text-slate-700 mb-2">Portfolio / LinkedIn URL</label>
-                    <input type="url" id="portfolio" name="portfolio" value={formData.portfolio} onChange={handleChange} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent" placeholder="https://" />
-                  </div>
+                  <FormInput
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    label="Phone Number"
+                    required
+                    placeholder="+977 98..."
+                    value={formData.phone}
+                    onChange={handleChange}
+                  />
+                  <FormInput
+                    id="portfolio"
+                    name="portfolio"
+                    type="url"
+                    label="Portfolio / LinkedIn URL"
+                    placeholder="https://"
+                    value={formData.portfolio}
+                    onChange={handleChange}
+                  />
                 </div>
 
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-2">Cover Letter / Message</label>
-                  <textarea required id="message" name="message" value={formData.message} onChange={handleChange} rows={4} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent resize-none" placeholder="Tell us why you're a great fit..."></textarea>
-                </div>
+                <FormTextarea
+                  id="message"
+                  name="message"
+                  label="Cover Letter / Message"
+                  required
+                  rows={4}
+                  placeholder="Tell us why you're a great fit..."
+                  value={formData.message}
+                  onChange={handleChange}
+                />
 
-                <motion.button 
+                <button 
                   type="submit" 
                   disabled={isSubmitting}
-                  whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-                  whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                  animate={isSubmitting ? {
-                    scale: [1, 0.95, 1],
-                    backgroundColor: ["#0f172a", "#f59e0b", "#0f172a"],
-                    transition: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
-                  } : {}}
-                  className={`w-full py-4 text-white rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${
+                  className={`w-full py-3 text-white rounded font-semibold transition-colors flex items-center justify-center gap-2 ${
                     isSubmitting 
-                      ? 'shadow-[0_0_40px_rgba(245,158,11,0.6)] cursor-wait' 
-                      : 'bg-brand-primary hover:bg-brand-primary/90 shadow-lg'
+                      ? 'bg-brand-primary/70 cursor-not-allowed' 
+                      : 'bg-brand-primary hover:bg-brand-primary/90'
                   }`}
                 >
                   {isSubmitting ? (
-                    <motion.div 
-                      className="flex items-center gap-3"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                    >
-                      <motion.div 
-                        animate={{ rotate: 360 }} 
-                        transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-                        className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full" 
-                      />
-                      <motion.span 
-                        animate={{ opacity: [0.5, 1, 0.5] }}
-                        transition={{ repeat: Infinity, duration: 1.5 }}
-                        className="tracking-widest"
-                      >
-                        TRANSMITTING...
-                      </motion.span>
-                    </motion.div>
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Submitting...
+                    </>
                   ) : (
                     <>Submit Application <Send className="w-4 h-4" /></>
                   )}
-                </motion.button>
+                </button>
               </form>
             )}
           </div>

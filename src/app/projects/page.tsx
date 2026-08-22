@@ -1,11 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
 import Image from "next/image";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { useCursor } from "@/components/CursorContext";
+import SectionHeader from "@/components/SectionHeader";
 
 const ALL_PROJECTS = [
   {
@@ -58,83 +58,95 @@ const ALL_PROJECTS = [
   }
 ];
 
+const CATEGORIES = ["All", "Web Development", "Mobile App", "Data Analytics", "Machine Learning", "IoT & Web", "Web Application"];
+
 export default function ProjectsPage() {
-  const { setCursorType } = useCursor();
+  const [filter, setFilter] = useState("All");
+
+  const filteredProjects = filter === "All" 
+    ? ALL_PROJECTS 
+    : ALL_PROJECTS.filter(p => p.category === filter);
 
   return (
-    <main className="min-h-screen bg-slate-50 pt-20">
+    <main className="min-h-screen bg-brand-surface pt-20">
       <Navbar />
       
-      <section className="py-24 bg-white border-b border-slate-200">
+      <section className="py-20 lg:py-24 bg-white border-b border-brand-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-6xl font-bold text-brand-primary mb-6 tracking-tight"
-            >
-              Our <span className="text-brand-accent">Selected Work</span>
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-xl text-slate-600 max-w-2xl mx-auto"
-            >
-              Explore our portfolio of digital transformations, scalable applications, and award-winning products.
-            </motion.p>
+          <div className="text-center mb-12">
+            <SectionHeader
+              subtitle="Our Selected Work"
+              title="Digital transformations."
+              description="Explore our portfolio of scalable applications and award-winning products."
+              centered={true}
+            />
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-2 mb-16">
+            {CATEGORIES.map(category => (
+              <button
+                key={category}
+                onClick={() => setFilter(category)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                  filter === category 
+                    ? "bg-brand-primary text-white" 
+                    : "bg-brand-surface text-brand-text-secondary border border-brand-border hover:border-brand-accent hover:text-brand-primary"
+                }`}
+              >
+                {category}
+              </button>
+            ))}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {ALL_PROJECTS.map((project, index) => (
-              <motion.div 
+            {filteredProjects.map((project) => (
+              <div 
                 key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "0px" }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group relative w-full h-[450px] rounded-3xl overflow-hidden cursor-none bg-slate-900"
-                onMouseEnter={() => setCursorType('view')}
-                onMouseLeave={() => setCursorType('default')}
+                className="group bg-brand-surface border border-brand-border rounded-lg overflow-hidden hover:border-brand-accent transition-colors duration-300"
               >
                 {/* Background Image */}
-                <div className="absolute inset-0 w-full h-full">
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent z-10" />
+                <div className="relative w-full h-56 overflow-hidden bg-slate-200">
                   <Image 
                     src={project.image} 
                     alt={project.title}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-100"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
 
                 {/* Content */}
-                <div className="absolute inset-0 z-20 flex flex-col justify-end p-8">
-                  <p className="text-brand-accent font-medium tracking-wider text-xs uppercase mb-2">
+                <div className="p-6">
+                  <p className="text-brand-accent font-medium text-xs uppercase mb-2 tracking-wider">
                     {project.category}
                   </p>
-                  <h3 className="text-2xl font-bold text-white mb-3">
+                  <h3 className="text-xl font-bold text-brand-primary mb-3">
                     {project.title}
                   </h3>
-                  <p className="text-slate-300 text-sm mb-6 line-clamp-2">
+                  <p className="text-brand-text-secondary text-sm mb-6 line-clamp-2">
                     {project.description}
                   </p>
                   
-                  <div className="flex flex-wrap gap-2 mb-6 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {project.tech.map(t => (
-                      <span key={t} className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-xs text-white">
+                      <span key={t} className="px-2 py-1 bg-white border border-brand-border rounded text-xs text-brand-text-muted">
                         {t}
                       </span>
                     ))}
                   </div>
 
-                  <div className="w-12 h-12 rounded-full bg-white text-brand-primary flex items-center justify-center transform group-hover:-rotate-45 transition-transform duration-300">
-                    <ArrowRight className="w-5 h-5" />
-                  </div>
+                  <a href="#" className="inline-flex items-center gap-2 text-sm font-semibold text-brand-primary hover:text-brand-accent transition-colors">
+                    View Case Study <ArrowRight className="w-4 h-4" />
+                  </a>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
+          
+          {filteredProjects.length === 0 && (
+            <div className="text-center py-20 text-brand-text-muted">
+              No projects found for this category.
+            </div>
+          )}
         </div>
       </section>
 

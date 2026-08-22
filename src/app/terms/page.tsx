@@ -8,13 +8,13 @@ export const metadata = {
 
 export default function TermsOfService() {
  return (
- <div className="min-h-screen flex flex-col font-[family-name:var(--font-inter)]">
+ <div className="min-h-screen flex flex-col bg-brand-surface">
  <Navbar />
- <main className="flex-grow pt-32 pb-24 bg-brand-light-bg ">
+ <main className="flex-grow pt-32 pb-24">
  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
- <div className="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 md:p-12">
+ <div className="bg-white rounded-lg shadow-sm border border-brand-border p-8 md:p-12">
  <h1 className="text-4xl font-bold text-brand-primary mb-8">Terms of Service</h1>
- <div className="prose prose-slate max-w-none space-y-6 text-brand-text ">
+ <div className="prose prose-slate max-w-none space-y-6 text-brand-text-secondary">
  <p className="text-lg">Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</p>
  
  <h2 className="text-2xl font-semibold mt-8 mb-4">1. Agreement to Terms</h2>

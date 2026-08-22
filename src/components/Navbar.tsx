@@ -5,16 +5,15 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import Magnetic from "./Magnetic";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const { scrollY, scrollYProgress } = useScroll();
+  const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 50) {
+    if (latest > 10) {
       setIsScrolled(true);
     } else {
       setIsScrolled(false);
@@ -24,131 +23,99 @@ export default function Navbar() {
   const navLinks = [
     { name: "Services", href: "/#services" },
     { name: "About", href: "/#about" },
-    { name: "Careers", href: "/careers" },
     { name: "Contact", href: "/#contact" },
   ];
 
   return (
     <>
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-primary via-brand-accent to-brand-primary origin-left z-[60]"
-        style={{ scaleX: scrollYProgress }}
-      />
-      <motion.header
-        className={`fixed top-0 z-50 w-full flex justify-center transition-all duration-500 ${
-          isScrolled ? "pt-4 px-4" : "pt-0 px-0"
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 w-full bg-white transition-shadow duration-300 ${
+          isScrolled ? "shadow-sm border-b border-brand-border" : "border-b border-brand-border"
         }`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <motion.div
-          className={`flex justify-between items-center w-full transition-all duration-500 ${
-            isScrolled
-              ? "max-w-4xl bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl rounded-full px-6 h-16"
-              : "max-w-7xl bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 sm:px-6 lg:px-8 h-20"
-          }`}
-        >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
           {/* Logo and Brand Name */}
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center gap-3 group">
-              <div
-                className={`relative flex items-center justify-center transition-all duration-500 group-hover:scale-105 ${
-                  isScrolled ? "w-10 h-10" : "w-14 sm:w-16 h-14 sm:h-16"
-                }`}
-              >
+              <div className="relative w-10 h-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
                 <Image
                   src="/Company-Logo.jpg"
                   alt="Astra Technology Horizon Logo"
                   fill
-                  sizes="(max-width: 640px) 56px, 64px"
+                  sizes="40px"
                   className="object-contain"
                 />
               </div>
-              <span
-                className={`font-bold tracking-tight block whitespace-normal sm:whitespace-nowrap max-w-[150px] sm:max-w-none leading-tight sm:leading-normal transition-all duration-500 ${
-                  isScrolled ? "text-sm sm:text-base text-brand-primary" : "text-base sm:text-lg text-brand-primary"
-                }`}
-              >
+              <span className="font-bold tracking-tight text-base sm:text-lg text-brand-primary hidden sm:block">
                 Astra Technology Horizon
+              </span>
+              <span className="font-bold tracking-tight text-base text-brand-primary sm:hidden">
+                Astra
               </span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+          <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className={`font-medium hover:text-brand-accent transition-colors ${
-                  isScrolled ? "text-sm text-slate-700" : "text-base text-brand-text"
-                }`}
+                className="text-sm font-medium text-brand-text-secondary hover:text-brand-accent transition-colors"
               >
                 {link.name}
               </Link>
             ))}
-            <Magnetic>
-              <Link
-                href="/quote"
-                className={`bg-brand-accent hover:bg-amber-500 text-white rounded-full font-medium transition-all shadow-sm hover:shadow-md block ${
-                  isScrolled ? "px-4 py-1.5 text-sm" : "px-6 py-2.5"
-                }`}
-              >
-                Get a Quote
-              </Link>
-            </Magnetic>
+            <Link
+              href="/quote"
+              className="bg-brand-accent hover:bg-brand-accent-hover text-white px-5 py-2 rounded-md text-sm font-medium transition-colors shadow-sm"
+            >
+              Get a Quote →
+            </Link>
           </nav>
 
           {/* Mobile menu button */}
           <div className="flex md:hidden items-center">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-brand-text hover:text-brand-primary p-2"
+              className="text-brand-text hover:text-brand-accent p-2 transition-colors"
               aria-label="Toggle menu"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
-        </motion.div>
-      </motion.header>
+        </div>
+      </header>
 
-      {/* Mobile Navigation Dropdown */}
+      {/* Mobile Navigation Panel */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className={`md:hidden fixed w-full z-40 transition-all duration-300 ${
-              isScrolled ? "top-24 px-4" : "top-20"
-            }`}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden fixed top-[64px] left-0 w-full bg-white border-b border-brand-border shadow-md z-40"
           >
-            <div
-              className={`bg-white border border-slate-200 shadow-xl ${
-                isScrolled ? "rounded-2xl" : "border-t-0"
-              }`}
-            >
-              <div className="px-4 py-6 space-y-2">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block px-4 py-3 text-base font-medium text-brand-text hover:text-brand-primary hover:bg-brand-light-slate rounded-lg transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-                <div className="pt-4 px-2">
-                  <Link
-                    href="/quote"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block w-full text-center bg-brand-accent hover:bg-amber-500 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-                  >
-                    Get a Quote
-                  </Link>
-                </div>
+            <div className="px-4 py-4 flex flex-col gap-2">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block px-4 py-3 text-base font-medium text-brand-text hover:text-brand-accent hover:bg-brand-surface rounded-md transition-colors"
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <div className="pt-4 mt-2 border-t border-brand-border-light px-2">
+                <Link
+                  href="/quote"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center justify-center w-full bg-brand-accent hover:bg-brand-accent-hover text-white px-6 py-3 rounded-md font-medium transition-colors"
+                >
+                  Get a Quote →
+                </Link>
               </div>
             </div>
           </motion.div>

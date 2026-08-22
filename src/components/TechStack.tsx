@@ -1,47 +1,47 @@
 "use client";
 
-import { motion } from 'framer-motion';
+import React from "react";
+import SectionHeader from "./SectionHeader";
 
 export default function TechStack() {
   const technologies = [
-    "React", "Next.js", "TypeScript", "Node.js", "Python", 
-    "AWS", "Azure", "TailwindCSS", "Framer Motion", "MongoDB", 
-    "PostgreSQL", "Docker", "Kubernetes", "GraphQL"
+    { name: "React", category: "Frontend" },
+    { name: "Next.js", category: "Frontend" },
+    { name: "TypeScript", category: "Language" },
+    { name: "Node.js", category: "Backend" },
+    { name: "Python", category: "Language" },
+    { name: "AWS", category: "Cloud" },
+    { name: "Azure", category: "Cloud" },
+    { name: "TailwindCSS", category: "Styling" },
+    { name: "MongoDB", category: "Database" },
+    { name: "PostgreSQL", category: "Database" },
+    { name: "Docker", category: "DevOps" },
+    { name: "GraphQL", category: "API" }
   ];
 
-  // Double the array for seamless infinite looping
-  const scrollItems = [...technologies, ...technologies, ...technologies];
-
   return (
-    <section className="py-12 bg-brand-primary overflow-hidden relative border-y border-white/10">
-      
-      {/* Gradient Masks for smooth fade on edges */}
-      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-brand-primary to-transparent z-10"></div>
-      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-brand-primary to-transparent z-10"></div>
+    <section className="py-20 bg-white border-b border-brand-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          title="Technologies We Use"
+          centered={true}
+        />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 text-center relative z-20">
-        <h2 className="text-sm font-medium tracking-widest text-slate-400 uppercase">Technologies We Ship With</h2>
-      </div>
-
-      <div className="relative flex whitespace-nowrap overflow-hidden group">
-        <motion.div
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{
-            ease: "linear",
-            duration: 45,
-            repeat: Infinity,
-          }}
-          className="flex gap-8 md:gap-12 items-center w-max group-hover:[animation-play-state:paused] cursor-pointer"
-        >
-          {scrollItems.map((tech, index) => (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-12">
+          {technologies.map((tech, index) => (
             <div 
-              key={`${tech}-${index}`} 
-              className="flex items-center gap-3 px-6 py-2 rounded-full bg-white/[0.03] border border-white/5 backdrop-blur-sm text-slate-400 hover:text-white hover:bg-white/10 transition-all duration-300"
+              key={index} 
+              className="group flex flex-col items-center justify-center p-6 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-accent transition-colors duration-300"
             >
-              <span className="text-base md:text-lg tracking-tight">{tech}</span>
+              <span className="text-xl font-bold text-brand-primary group-hover:text-brand-accent transition-colors duration-300 mb-2">
+                {tech.name}
+              </span>
+              <span className="text-sm font-medium text-brand-text-muted">
+                {tech.category}
+              </span>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
