@@ -69,7 +69,7 @@ export default function RootLayout({
             },
             "contactPoint": {
               "@type": "ContactPoint",
-              "telephone": "+977-9852048719",
+              "telephone": "9852048719",
               "contactType": "customer service",
               "email": "contact@astratechnologyhorizon.com"
             },

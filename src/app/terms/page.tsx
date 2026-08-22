@@ -53,7 +53,7 @@ export default function TermsOfService() {
  <br />
  <strong>Email:</strong> contact@astratechnologyhorizon.com
  <br />
- <strong>Phone:</strong> +977 9852048719
+ <strong>Phone:</strong> 9852048719
  <br />
  <strong>Address:</strong> Itahari-4, Sunsari, Nepal
  </p>

@@ -36,11 +36,11 @@ export default function Footer() {
                 contact@astratechnologyhorizon.com
               </a>
               <a
-                href="tel:+9779852048719"
+                href="tel:9852048719"
                 className="hover:text-white transition-colors flex items-center gap-3 w-fit"
               >
                 <Phone className="w-4 h-4 text-brand-accent" />
-                +977 9852048719
+                9852048719
               </a>
               <div className="flex items-start gap-3 w-fit">
                 <MapPin className="w-4 h-4 text-brand-accent shrink-0 mt-0.5" />

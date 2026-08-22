@@ -99,7 +99,7 @@ npm run dev
   <p>
     <strong>📍 Astra Technology Horizon</strong><br/>
     Itahari-4, Sunsari, Nepal<br/><br/>
-    📞 <strong>+977-9852048719</strong><br/>
+    📞 <strong>9852048719</strong><br/>
     ✉️ <a href="mailto:contact@astratechnologyhorizon.com">contact@astratechnologyhorizon.com</a><br/>
   </p>
 
