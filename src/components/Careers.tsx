@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { Briefcase, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import TextReveal from "./TextReveal";
 
 export default function Careers() {
   return (
@@ -23,7 +22,7 @@ export default function Careers() {
         </motion.div>
         
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-primary tracking-tight mb-6 flex justify-center flex-wrap gap-x-3">
-          <TextReveal>Work</TextReveal> <span className="text-brand-accent"><TextReveal delay={0.2}>with</TextReveal></span> <TextReveal delay={0.3}>us.</TextReveal>
+          Work <span className="text-brand-accent">with</span> us.
         </h2>
         
         <p className="text-lg md:text-xl text-slate-600 max-w-2xl mb-10">

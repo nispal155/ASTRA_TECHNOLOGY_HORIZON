@@ -8,7 +8,7 @@ interface FormFieldProps {
   className?: string;
 }
 
-interface FormInputProps extends FormFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+interface FormInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, keyof FormFieldProps>, FormFieldProps {}
 
 export const FormInput: React.FC<FormInputProps> = ({ id, name, label, required, className = '', ...props }) => (
   <div className={className}>
@@ -25,7 +25,7 @@ export const FormInput: React.FC<FormInputProps> = ({ id, name, label, required,
   </div>
 );
 
-interface FormTextareaProps extends FormFieldProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+interface FormTextareaProps extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, keyof FormFieldProps>, FormFieldProps {}
 
 export const FormTextarea: React.FC<FormTextareaProps> = ({ id, name, label, required, className = '', ...props }) => (
   <div className={className}>
@@ -42,7 +42,7 @@ export const FormTextarea: React.FC<FormTextareaProps> = ({ id, name, label, req
   </div>
 );
 
-interface FormSelectProps extends FormFieldProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+interface FormSelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, keyof FormFieldProps>, FormFieldProps {
   children: React.ReactNode;
 }
 
