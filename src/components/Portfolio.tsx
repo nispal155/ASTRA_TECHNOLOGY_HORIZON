@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -58,12 +57,8 @@ export default function Portfolio() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
           {projects.map((project, index) => (
-            <motion.div
+            <div
               key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.4 }}
               className="group block"
             >
               <Link href={`/projects/${project.id}`}>
@@ -89,14 +84,14 @@ export default function Portfolio() {
                   
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((tech) => (
-                      <span key={tech} className="px-3 py-1 bg-white border border-brand-border-light text-xs font-medium text-brand-text-muted rounded-full">
+                      <span key={tech} className="px-3 py-1 bg-white border border-brand-border-light text-xs font-medium text-brand-text-muted rounded-md">
                         {tech}
                       </span>
                     ))}
                   </div>
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
 

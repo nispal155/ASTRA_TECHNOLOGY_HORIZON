@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-16">
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center gap-3 mb-6">
-              <div className="relative w-12 h-12 flex items-center justify-center rounded bg-white p-2">
+              <div className="relative w-12 h-12 flex items-center justify-center rounded bg-brand-primary border border-white/10 p-2">
                 <Image
                   src="/Company-Logo.jpg"
                   alt="Astra Technology Horizon Logo"

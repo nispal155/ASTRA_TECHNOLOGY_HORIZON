@@ -37,13 +37,13 @@ export default function Navbar() {
           {/* Logo and Brand Name */}
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-10 h-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+              <div className="relative w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-105 bg-brand-primary rounded-md p-1">
                 <Image
                   src="/Company-Logo.jpg"
                   alt="Astra Technology Horizon Logo"
                   fill
-                  sizes="40px"
-                  className="object-contain"
+                  sizes="48px"
+                  className="object-contain p-1"
                 />
               </div>
               <span className="font-bold tracking-tight text-base sm:text-lg text-brand-primary hidden sm:block">

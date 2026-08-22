@@ -2,18 +2,12 @@
 
 import React from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
     <section className="bg-brand-primary min-h-[80vh] flex items-center pt-24 pb-16 lg:pt-32 lg:pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <motion.div
-          className="max-w-3xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-        >
+        <div className="max-w-3xl">
           <div className="text-brand-accent font-medium text-sm sm:text-base tracking-wide uppercase mb-6">
             Software Engineering • Nepal
           </div>
@@ -41,7 +35,7 @@ export default function Hero() {
               View Our Work →
             </Link>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 import { Code, Megaphone, LineChart, Cloud, Search, Smartphone, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import SectionHeader from "./SectionHeader";
@@ -51,12 +50,8 @@ export default function Services() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {services.map((service, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: Math.min(index * 0.1, 0.3), duration: 0.4 }}
               className="group bg-white border border-brand-border rounded-lg p-6 shadow-sm hover:shadow-md hover:border-brand-accent transition-all duration-300 flex flex-col h-full"
             >
               <div className="w-10 h-10 rounded-md bg-brand-surface border border-brand-border-light flex items-center justify-center mb-5">
@@ -74,7 +69,7 @@ export default function Services() {
               >
                 Learn more <ArrowRight className="w-4 h-4" />
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
