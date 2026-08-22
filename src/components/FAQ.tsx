@@ -1,90 +1,92 @@
 "use client";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Minus } from 'lucide-react';
-import SectionHeader from './SectionHeader';
+import React, { useState } from "react";
+import { ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
-    question: "What services do you offer?",
-    answer: "We offer a comprehensive suite of digital engineering services including custom web application development, mobile app creation (iOS & Android), scalable cloud architecture, API integrations, and ongoing technical maintenance."
-  },
-  {
     question: "How long does a typical project take?",
-    answer: "Project timelines vary based on complexity and scope. A standard corporate website might take 4-6 weeks, while a full-scale web application or SaaS platform can take 3-6 months. We provide detailed timelines during our initial discovery phase."
+    answer: "The timeline depends on the complexity and scope of the project. A simple website might take 2-4 weeks, while a custom enterprise application can take 3-6 months. During our discovery phase, we provide a detailed timeline before any commitment is made.",
   },
   {
-    question: "Do you provide ongoing support after launch?",
-    answer: "Yes! We believe in long-term partnerships. We offer various SLA (Service Level Agreement) packages that include regular maintenance, security updates, feature enhancements, and dedicated technical support."
+    question: "What is your pricing model?",
+    answer: "We offer both fixed-price contracts for well-defined projects and time-and-materials pricing for ongoing or agile development. We work transparently to ensure our solutions fit within your budget.",
   },
   {
-    question: "What is your development methodology?",
-    answer: "We employ an Agile development methodology, breaking projects into manageable 2-week sprints. This allows for continuous feedback, regular milestone deliveries, and the flexibility to adapt to changing requirements."
+    question: "Do you provide post-launch support and maintenance?",
+    answer: "Absolutely. We believe that launching is just the beginning. We offer dedicated maintenance and support packages to ensure your application remains secure, updated, and performing optimally as your business scales.",
   },
   {
-    question: "Do you work with startups or established enterprises?",
-    answer: "Both. We have experience helping early-stage startups build their MVPs from the ground up, as well as assisting established enterprises in modernizing their legacy systems or scaling their infrastructure."
-  }
+    question: "Will I have full ownership of the source code?",
+    answer: "Yes. Once the project is completed and all invoices are settled, the intellectual property and full source code are completely transferred to you.",
+  },
+  {
+    question: "What technologies do you specialize in?",
+    answer: "We specialize in modern, scalable technologies including React, Next.js, Node.js, Python, Flutter, and cloud infrastructure like AWS and Firebase. We choose the best tool for your specific business requirements.",
+  },
 ];
 
-const FAQItem = ({ faq, isOpen, onClick }: { faq: any, isOpen: boolean, onClick: () => void }) => {
-  return (
-    <div className={`border border-brand-border rounded-lg mb-4 bg-white overflow-hidden transition-colors ${isOpen ? 'border-brand-accent' : ''}`}>
-      <button
-        onClick={onClick}
-        className="w-full flex items-center justify-between p-6 text-left focus:outline-none group"
-      >
-        <h4 className={`text-lg font-semibold transition-colors duration-300 ${isOpen ? 'text-brand-accent' : 'text-brand-primary group-hover:text-brand-accent'}`}>
-          {faq.question}
-        </h4>
-        <div className={`ml-4 flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-300 ${isOpen ? 'bg-brand-accent text-white' : 'bg-brand-surface text-brand-text-muted group-hover:bg-brand-border-light'}`}>
-          {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-        </div>
-      </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            <div className="px-6 pb-6 text-brand-text-secondary leading-relaxed border-t border-brand-border pt-4">
-              {faq.answer}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-};
-
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const toggleFAQ = (index: number) => {
+  const toggleFaq = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section id="faq" className="py-20 lg:py-24 bg-brand-surface border-b border-brand-border">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          subtitle="FAQ"
-          title="Frequently Asked Questions"
-          description="Everything you need to know about our services and methodology."
-        />
+    <section className="bg-brand-surface py-24 border-b border-brand-border" id="faq">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-sm font-bold tracking-widest text-brand-accent uppercase mb-3">
+            FAQ
+          </h2>
+          <h3 className="text-3xl md:text-4xl font-bold text-brand-primary mb-6 tracking-tight">
+            Frequently Asked Questions
+          </h3>
+          <p className="text-lg text-brand-text-secondary leading-relaxed max-w-2xl mx-auto">
+            Everything you need to know about partnering with Astra Technology Horizon.
+          </p>
+        </div>
 
-        <div className="mt-10">
-          {faqs.map((faq, index) => (
-            <FAQItem 
-              key={index}
-              faq={faq}
-              isOpen={openIndex === index}
-              onClick={() => toggleFAQ(index)}
-            />
-          ))}
+        <div className="space-y-4">
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index;
+
+            return (
+              <div 
+                key={index}
+                className="bg-white border border-brand-border rounded-xl overflow-hidden hover:border-brand-accent/30 transition-colors"
+              >
+                <button
+                  onClick={() => toggleFaq(index)}
+                  className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
+                >
+                  <span className="text-lg font-semibold text-brand-primary pr-8">
+                    {faq.question}
+                  </span>
+                  <div className={`flex-shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 text-brand-accent" : "text-brand-text-muted"}`}>
+                    <ChevronDown className="w-5 h-5" />
+                  </div>
+                </button>
+                
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                    >
+                      <div className="px-6 pb-6 pt-2 text-brand-text-secondary leading-relaxed border-t border-brand-border/50">
+                        {faq.answer}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

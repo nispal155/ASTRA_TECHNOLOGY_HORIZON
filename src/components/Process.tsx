@@ -1,74 +1,66 @@
-"use client";
-
 import React from "react";
-import { Database, Code2, Rocket, Search } from "lucide-react";
-import SectionHeader from "./SectionHeader";
+import { Search, PenTool, Code2, Rocket } from "lucide-react";
 
 const steps = [
   {
     number: "01",
-    title: "Discovery & Strategy",
-    description: "We define project scope, technical requirements, and core business goals to establish a practical execution plan.",
-    icon: <Search className="w-5 h-5" />,
+    title: "Discovery & Planning",
+    description: "We start by deeply understanding your business goals, technical requirements, and target audience to lay a solid foundation.",
+    icon: <Search className="w-6 h-6 text-brand-accent" />,
   },
   {
     number: "02",
-    title: "System Architecture",
-    description: "Our team designs secure, modular, and scalable software structures tailored to your technical requirements.",
-    icon: <Database className="w-5 h-5" />,
+    title: "UI/UX Design",
+    description: "Our designers craft intuitive, high-converting interfaces tailored to your brand, ensuring a seamless user experience.",
+    icon: <PenTool className="w-6 h-6 text-brand-accent" />,
   },
   {
     number: "03",
-    title: "Agile Development",
-    description: "Sprint-based implementation with frequent code reviews, automated testing, and clear progress visibility.",
-    icon: <Code2 className="w-5 h-5" />,
+    title: "Engineering",
+    description: "We build scalable, secure, and lightning-fast applications using modern technologies and industry best practices.",
+    icon: <Code2 className="w-6 h-6 text-brand-accent" />,
   },
   {
     number: "04",
-    title: "Deployment & Support",
-    description: "Automated production deployment, performance monitoring, and ongoing post-launch maintenance.",
-    icon: <Rocket className="w-5 h-5" />,
+    title: "Launch & Support",
+    description: "After rigorous testing, we deploy your product and provide ongoing maintenance to ensure long-term success.",
+    icon: <Rocket className="w-6 h-6 text-brand-accent" />,
   },
 ];
 
-const StepItem = ({ step }: any) => {
-  return (
-    <div className="relative pl-12 md:pl-16 py-12">
-      <div className="absolute left-0 top-12 w-8 h-8 rounded-full border-2 flex items-center justify-center bg-white border-brand-border text-brand-text-muted">
-        <span className="text-xs font-mono font-bold">{step.number}</span>
-      </div>
-
-      <div>
-        <h3 className="text-2xl font-bold text-brand-primary mb-3">{step.title}</h3>
-        <p className="text-lg text-brand-text-secondary leading-relaxed">{step.description}</p>
-      </div>
-    </div>
-  );
-};
-
 export default function Process() {
   return (
-    <section className="py-20 lg:py-24 bg-white relative">
+    <section className="bg-white py-24 border-b border-brand-border" id="process">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          subtitle="How We Work"
-          title="A practical, milestone-driven approach"
-          description="We follow a systematic methodology to deliver reliable software on schedule, ensuring transparency at every step."
-          centered={true}
-        />
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="text-sm font-bold tracking-widest text-brand-accent uppercase mb-3">
+            Our Process
+          </h2>
+          <h3 className="text-3xl md:text-4xl font-bold text-brand-primary mb-6 tracking-tight">
+            How we turn ideas into reality.
+          </h3>
+          <p className="text-lg text-brand-text-secondary leading-relaxed">
+            A transparent, structured, and collaborative approach to building world-class software.
+          </p>
+        </div>
 
-        <div className="max-w-3xl mx-auto relative mt-12">
-          {/* Background line */}
-          <div className="absolute left-[15px] top-12 bottom-12 w-[2px] bg-brand-border" />
-
-          <div className="space-y-2">
-            {steps.map((step) => (
-              <StepItem
-                key={step.number}
-                step={step}
-              />
-            ))}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {steps.map((step, index) => (
+            <div key={index} className="relative p-6 sm:p-8 bg-brand-surface rounded-2xl border border-brand-border hover:border-brand-accent/50 transition-colors group">
+              <div className="absolute top-6 right-6 text-5xl font-bold text-brand-primary/5 group-hover:text-brand-accent/10 transition-colors">
+                {step.number}
+              </div>
+              <div className="w-14 h-14 bg-white rounded-xl shadow-sm border border-brand-border flex items-center justify-center mb-6">
+                {step.icon}
+              </div>
+              <h4 className="text-xl font-bold text-brand-primary mb-3">
+                {step.title}
+              </h4>
+              <p className="text-brand-text-secondary leading-relaxed">
+                {step.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
