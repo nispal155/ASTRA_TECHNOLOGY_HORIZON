@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { Mail } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const leaders = [
   {
@@ -34,12 +35,40 @@ const LinkedinIcon = () => (
   </svg>
 );
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
+  },
+};
+
 export default function Leadership() {
   return (
-    <section id="leadership" className="py-16 lg:py-20 bg-brand-surface border-b border-brand-border">
+    <section id="leadership" className="py-16 lg:py-20 bg-brand-surface border-b border-brand-border overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <motion.div 
+          className="text-center max-w-3xl mx-auto mb-10 md:mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <span className="text-brand-accent font-semibold tracking-wider uppercase text-sm mb-4 block">Our Leadership</span>
           <h2 className="text-4xl md:text-5xl font-bold text-brand-text mb-6">
             Meet the Visionaries
@@ -47,12 +76,22 @@ export default function Leadership() {
           <p className="text-lg text-brand-text-secondary leading-relaxed">
             The driving force behind Astra Technology Horizon's commitment to excellence and innovation.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 mt-16 max-w-5xl mx-auto">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 max-w-5xl mx-auto"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
           {leaders.map((leader, index) => (
-            <div key={index} className="flex flex-col items-center text-center group">
-              <div className="relative w-48 h-48 sm:w-56 sm:h-56 mb-8 rounded-full overflow-hidden bg-slate-100 border border-brand-border">
+            <motion.div 
+              key={index} 
+              variants={itemVariants}
+              className="flex flex-col items-center text-center group"
+            >
+              <div className="relative w-48 h-48 sm:w-56 sm:h-56 mb-8 rounded-full overflow-hidden bg-slate-100 border-4 border-white shadow-lg transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2">
                 {/* Fallback avatar if image fails */}
                 <div className="absolute inset-0 flex items-center justify-center bg-slate-100 text-slate-300">
                   <svg className="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
@@ -63,34 +102,34 @@ export default function Leadership() {
                   src={leader.image}
                   alt={leader.name}
                   fill
-                  className="object-cover z-10 transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover z-10 transition-transform duration-700 group-hover:scale-110"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none';
                   }}
                 />
               </div>
               
-              <h3 className="text-2xl font-bold text-brand-text mb-2">{leader.name}</h3>
-              <p className="text-brand-accent font-medium mb-4">{leader.role}</p>
+              <h3 className="text-2xl font-bold text-brand-text mb-2 group-hover:text-brand-primary transition-colors">{leader.name}</h3>
+              <p className="text-brand-accent font-semibold tracking-wide uppercase text-sm mb-4">{leader.role}</p>
               <p className="text-brand-text-secondary mb-6 leading-relaxed max-w-md">
                 {leader.bio}
               </p>
               
               <div className="flex items-center gap-4">
                 {leader.social.linkedin && (
-                  <a href={leader.social.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-brand-border flex items-center justify-center text-brand-text-secondary hover:text-brand-primary hover:border-brand-primary transition-colors">
+                  <a href={leader.social.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white shadow-sm border border-brand-border flex items-center justify-center text-brand-text-secondary hover:text-white hover:bg-[#0A66C2] hover:border-[#0A66C2] transition-all duration-300 hover:-translate-y-1">
                     <LinkedinIcon />
                   </a>
                 )}
                 {leader.social.email && (
-                  <a href={leader.social.email} className="w-10 h-10 rounded-full border border-brand-border flex items-center justify-center text-brand-text-secondary hover:text-brand-primary hover:border-brand-primary transition-colors">
+                  <a href={leader.social.email} className="w-10 h-10 rounded-full bg-white shadow-sm border border-brand-border flex items-center justify-center text-brand-text-secondary hover:text-white hover:bg-brand-primary hover:border-brand-primary transition-all duration-300 hover:-translate-y-1">
                     <Mail className="w-4 h-4" />
                   </a>
                 )}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
