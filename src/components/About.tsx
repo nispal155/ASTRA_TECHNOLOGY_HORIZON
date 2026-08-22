@@ -26,8 +26,8 @@ const testimonials = [
     link: "https://rahulparajuli.com.np/",
   },
   {
-    name: "MDS Foundation (Saujanya Koirala)",
-    role: "Trusted Client",
+    name: "MDS Foundation",
+    role: "Trusted Client — Saujanya Koirala",
     content: "Astra Technology Horizon helped us build a reliable platform for our organization. Their team was professional, responsive, and delivered exactly what we needed.",
     link: "https://mdsfoundation.org.np/",
   },
