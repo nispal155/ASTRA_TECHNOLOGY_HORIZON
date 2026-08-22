@@ -43,6 +43,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: "#ffffff",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -82,7 +89,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col overflow-x-hidden">
         {children}
         <ScrollToTop />
         <WhatsAppButton />
