@@ -6,46 +6,34 @@ import Image from "next/image";
 import Link from "next/link";
 import SectionHeader from "./SectionHeader";
 
-const projects = [
+const flagshipProjects = [
   {
     id: 1,
-    title: "Enterprise E-Commerce",
-    category: "Web Development",
-    image: "https://images.unsplash.com/photo-1661956602116-aa6865609028?q=80&w=1000&auto=format&fit=crop",
-    tech: ["Next.js", "Stripe", "Tailwind"],
+    title: "Enterprise E-Commerce Platform",
+    category: "Web Application",
+    description: "A high-performance e-commerce platform built for scale, featuring real-time inventory management, seamless payment gateways, and an intuitive admin dashboard.",
+    image: "https://images.unsplash.com/photo-1661956602116-aa6865609028?q=80&w=1200&auto=format&fit=crop",
+    tech: ["Next.js", "Stripe", "Tailwind CSS", "Node.js"],
   },
   {
     id: 2,
-    title: "Healthcare Analytics",
+    title: "Healthcare Analytics Dashboard",
     category: "Data Analytics",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
-    tech: ["React", "Python", "AWS"],
-  },
-  {
-    id: 3,
-    title: "FinTech Application",
-    category: "Mobile App",
-    image: "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?q=80&w=1000&auto=format&fit=crop",
-    tech: ["React Native", "Node.js", "MongoDB"],
-  },
-  {
-    id: 4,
-    title: "Logistics Dashboard",
-    category: "Internal Tools",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop",
-    tech: ["Vue", "PostgreSQL", "Docker"],
+    description: "Secure, HIPAA-compliant analytics dashboard providing healthcare professionals with actionable insights through advanced data visualization.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
+    tech: ["React", "Python", "AWS", "PostgreSQL"],
   }
 ];
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="py-20 lg:py-24 bg-white border-b border-brand-border">
+    <section id="portfolio" className="py-24 lg:py-32 bg-brand-surface border-b border-brand-border overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-24 gap-6">
           <SectionHeader
             subtitle="Featured Work"
-            title="Recent projects we've delivered"
+            title="Digital products we've engineered"
             centered={false}
           />
           
@@ -55,50 +43,67 @@ export default function Portfolio() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-          {projects.map((project, index) => (
-            <div
+        <div className="space-y-32">
+          {flagshipProjects.map((project, index) => (
+            <div 
               key={project.id}
-              className="group block"
+              className={`flex flex-col ${index % 2 !== 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12 lg:gap-20`}
             >
-              <Link href={`/projects/${project.id}`}>
-                <div className="relative aspect-[16/9] w-full rounded-lg overflow-hidden border border-brand-border mb-5">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-300" />
+              {/* Device Mockup */}
+              <div className="w-full lg:w-3/5">
+                <div className="relative mx-auto w-full max-w-[800px]">
+                  {/* Laptop Top/Lid */}
+                  <div className="relative rounded-t-2xl border-[8px] border-gray-900 bg-gray-900 aspect-[16/10] overflow-hidden shadow-2xl">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover object-top transition-transform duration-700 hover:scale-105"
+                    />
+                  </div>
+                  {/* Laptop Base/Keyboard Deck */}
+                  <div className="relative h-4 md:h-6 w-[110%] -ml-[5%] bg-gray-800 rounded-b-xl rounded-t-sm flex items-center justify-center shadow-xl">
+                    <div className="w-1/6 h-1 md:h-1.5 bg-gray-600 rounded-b-md"></div>
+                  </div>
                 </div>
+              </div>
+
+              {/* Project Details */}
+              <div className="w-full lg:w-2/5 flex flex-col justify-center">
+                <h4 className="text-sm font-bold tracking-widest text-brand-accent uppercase mb-3">
+                  {project.category}
+                </h4>
+                <h3 className="text-3xl md:text-4xl font-bold text-brand-primary mb-6 tracking-tight">
+                  {project.title}
+                </h3>
+                <p className="text-lg text-brand-text-secondary leading-relaxed mb-8">
+                  {project.description}
+                </p>
                 
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div>
-                    <h3 className="text-2xl font-semibold text-brand-primary mb-1 group-hover:text-brand-accent transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-brand-text-secondary font-medium">
-                      {project.category}
-                    </p>
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
-                      <span key={tech} className="px-3 py-1 bg-white border border-brand-border-light text-xs font-medium text-brand-text-muted rounded-md">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                <div className="flex flex-wrap gap-2 mb-10">
+                  {project.tech.map((tech) => (
+                    <span key={tech} className="px-4 py-2 bg-white border border-brand-border text-sm font-medium text-brand-text-muted rounded-md shadow-sm">
+                      {tech}
+                    </span>
+                  ))}
                 </div>
-              </Link>
+
+                <Link 
+                  href={`/projects/${project.id}`}
+                  className="inline-flex items-center gap-2 group text-brand-primary font-semibold hover:text-brand-accent transition-colors"
+                >
+                  Read Case Study
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-12 md:hidden">
-          <Link href="/projects" className="inline-flex items-center gap-2 group text-brand-primary font-medium hover:text-brand-accent transition-colors">
+        <div className="mt-20 flex justify-center md:hidden">
+          <Link href="/projects" className="inline-flex items-center gap-2 px-6 py-3 bg-brand-primary text-white rounded-lg font-medium hover:bg-brand-primary/90 transition-colors">
             View All Projects
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
 

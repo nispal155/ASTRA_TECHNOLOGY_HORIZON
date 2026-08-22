@@ -4,12 +4,13 @@ import React from "react";
 import { Users, Target, Rocket, Award, Quote, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import SectionHeader from "./SectionHeader";
+import Counter from "./Counter";
 
 const stats = [
-  { label: "Years Experience", value: "2+", icon: <Award className="w-5 h-5" /> },
-  { label: "Projects Delivered", value: "20+", icon: <Target className="w-5 h-5" /> },
-  { label: "Engineers & Designers", value: "10+", icon: <Users className="w-5 h-5" /> },
-  { label: "Client Satisfaction", value: "99%", icon: <Rocket className="w-5 h-5" /> },
+  { label: "Years Experience", value: 2, suffix: "+", icon: <Award className="w-5 h-5" /> },
+  { label: "Projects Delivered", value: 20, suffix: "+", icon: <Target className="w-5 h-5" /> },
+  { label: "Engineers & Designers", value: 10, suffix: "+", icon: <Users className="w-5 h-5" /> },
+  { label: "Client Satisfaction", value: 99, suffix: "%", icon: <Rocket className="w-5 h-5" /> },
 ];
 
 const testimonials = [
@@ -60,7 +61,11 @@ export default function About() {
                   {stat.icon}
                 </div>
                 <div className="text-3xl font-bold text-brand-primary mb-1 tracking-tight">
-                  {stat.value}
+                  <Counter 
+                    to={stat.value} 
+                    suffix={stat.suffix} 
+                    duration={2.5} 
+                  />
                 </div>
                 <div className="text-sm font-medium text-brand-text-muted">
                   {stat.label}

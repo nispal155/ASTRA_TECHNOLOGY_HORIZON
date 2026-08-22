@@ -7,6 +7,7 @@ import Process from "@/components/Process";
 import Portfolio from "@/components/Portfolio";
 import Leadership from "@/components/Leadership";
 import FAQ from "@/components/FAQ";
+import Insights from "@/components/Insights";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -40,6 +41,10 @@ export default function Home() {
         
         <AnimatedSection delay={0.2}>
           <Leadership />
+        </AnimatedSection>
+        
+        <AnimatedSection delay={0.2}>
+          <Insights />
         </AnimatedSection>
         
         <AnimatedSection delay={0.2}>
