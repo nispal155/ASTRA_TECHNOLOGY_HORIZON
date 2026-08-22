@@ -30,7 +30,7 @@ export default function Portfolio() {
     <section id="portfolio" className="py-16 lg:py-24 bg-brand-surface border-b border-brand-border overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-24 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-4">
           <SectionHeader
             subtitle="Featured Work"
             title="Digital products we've engineered"
@@ -43,7 +43,7 @@ export default function Portfolio() {
           </Link>
         </div>
 
-        <div className="space-y-32">
+        <div className="space-y-16 md:space-y-24">
           {flagshipProjects.map((project, index) => (
             <div 
               key={project.id}
@@ -76,11 +76,11 @@ export default function Portfolio() {
                 <h3 className="text-3xl md:text-4xl font-bold text-brand-primary mb-6 tracking-tight">
                   {project.title}
                 </h3>
-                <p className="text-lg text-brand-text-secondary leading-relaxed mb-8">
+                <p className="text-lg text-brand-text-secondary leading-relaxed mb-6">
                   {project.description}
                 </p>
                 
-                <div className="flex flex-wrap gap-2 mb-10">
+                <div className="flex flex-wrap gap-2 mb-8">
                   {project.tech.map((tech) => (
                     <span key={tech} className="px-4 py-2 bg-white border border-brand-border text-sm font-medium text-brand-text-muted rounded-md shadow-sm">
                       {tech}

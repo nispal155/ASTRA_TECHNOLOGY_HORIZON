@@ -14,7 +14,7 @@ export default function SectionHeader({
   centered = true,
 }: SectionHeaderProps) {
   return (
-    <div className={`mb-16 ${centered ? "text-center mx-auto" : ""} max-w-3xl`}>
+    <div className={`mb-10 md:mb-12 ${centered ? "text-center mx-auto" : ""} max-w-3xl`}>
       {subtitle && (
         <div className="text-brand-accent font-medium text-sm sm:text-base tracking-wide uppercase mb-4">
           {subtitle}
