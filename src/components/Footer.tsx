@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -41,6 +41,15 @@ export default function Footer() {
               >
                 <Phone className="w-4 h-4 text-brand-accent" />
                 9852048719
+              </a>
+              <a
+                href="https://wa.me/9779852048719"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors flex items-center gap-3 w-fit"
+              >
+                <MessageCircle className="w-4 h-4 text-brand-accent" />
+                WhatsApp Us
               </a>
               <div className="flex items-start gap-3 w-fit">
                 <MapPin className="w-4 h-4 text-brand-accent shrink-0 mt-0.5" />
