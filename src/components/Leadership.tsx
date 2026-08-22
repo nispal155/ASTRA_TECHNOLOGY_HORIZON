@@ -36,7 +36,7 @@ const LinkedinIcon = () => (
 
 export default function Leadership() {
   return (
-    <section id="leadership" className="py-24 bg-brand-surface">
+    <section id="leadership" className="py-16 lg:py-20 bg-brand-surface border-b border-brand-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-3xl mx-auto mb-16">

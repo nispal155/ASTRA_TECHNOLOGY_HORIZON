@@ -27,7 +27,7 @@ const flagshipProjects = [
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="py-24 lg:py-32 bg-brand-surface border-b border-brand-border overflow-hidden">
+    <section id="portfolio" className="py-16 lg:py-24 bg-brand-surface border-b border-brand-border overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-24 gap-6">

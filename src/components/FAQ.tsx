@@ -35,7 +35,7 @@ export default function FAQ() {
   };
 
   return (
-    <section className="bg-brand-surface py-24 border-b border-brand-border" id="faq">
+    <section className="bg-brand-surface py-16 lg:py-20 border-b border-brand-border" id="faq">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-sm font-bold tracking-widest text-brand-accent uppercase mb-3">

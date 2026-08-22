@@ -8,7 +8,7 @@ import { servicesData } from "@/data/services";
 
 export default function Services() {
   return (
-    <section id="services" className="py-20 lg:py-24 bg-brand-surface border-b border-brand-border">
+    <section id="services" className="py-16 lg:py-20 bg-brand-surface border-b border-brand-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           subtitle="Our Services"

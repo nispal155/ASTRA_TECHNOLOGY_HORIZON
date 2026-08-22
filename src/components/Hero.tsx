@@ -21,7 +21,7 @@ const techIcons = [
 
 export default function Hero() {
   return (
-    <section className="bg-brand-surface min-h-[80vh] flex items-center pt-24 pb-16 lg:pt-32 lg:pb-24 border-b border-brand-border overflow-hidden">
+    <section className="bg-brand-surface min-h-[80vh] flex items-center pt-20 pb-12 lg:pt-24 lg:pb-16 border-b border-brand-border overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           
