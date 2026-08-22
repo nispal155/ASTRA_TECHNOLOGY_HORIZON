@@ -15,13 +15,13 @@ const leaders = [
     }
   },
   {
-    name: 'Jane Doe', 
+    name: 'Saphal Koirala', 
     role: 'Director',
     bio: 'Strategic director focusing on operational excellence and building long-lasting client relationships across global markets.',
     image: '/images/director.jpg',
     social: {
-      linkedin: '#',
-      email: 'mailto:contact@astratechnologyhorizon.com',
+      linkedin: 'https://www.linkedin.com/in/saphalkoirala19/',
+      email: 'mailto:forsaphal.koirala@gmail.com',
     }
   }
 ];
