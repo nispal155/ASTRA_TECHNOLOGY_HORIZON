@@ -3,11 +3,11 @@
 @theme inline {
   --color-brand-primary: #000000;
   --color-brand-primary-light: #1A1A1A;
-  --color-brand-accent: #333333;
-  --color-brand-accent-hover: #555555;
-  --color-brand-surface: #F7F8FA;
-  --color-brand-border: #E2E5EA;
-  --color-brand-border-light: #ECEEF1;
+  --color-brand-accent: #2563EB;
+  --color-brand-accent-hover: #1D4ED8;
+  --color-brand-surface: #F8FAFC;
+  --color-brand-border: #E2E8F0;
+  --color-brand-border-light: #F1F5F9;
   
   /* Legacy mappings (to be removed during refactor) */
   --color-brand-light-bg: #F7F8FA;
