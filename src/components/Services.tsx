@@ -1,44 +1,12 @@
 "use client";
 
 import React from "react";
-import { Code, Megaphone, LineChart, Cloud, Search, Smartphone, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import SectionHeader from "./SectionHeader";
+import { servicesData } from "@/data/services";
 
 export default function Services() {
-  const services = [
-    {
-      title: "Custom Web Development",
-      description: "Tailored web applications engineered to solve specific operational challenges with modern, scalable architecture.",
-      icon: <Code className="w-5 h-5 text-brand-primary group-hover:text-brand-accent transition-colors duration-300" />,
-    },
-    {
-      title: "Digital Marketing",
-      description: "Data-focused digital strategy and content marketing to expand brand awareness and drive customer acquisition.",
-      icon: <Megaphone className="w-5 h-5 text-brand-primary group-hover:text-brand-accent transition-colors duration-300" />,
-    },
-    {
-      title: "Dashboards & Analytics",
-      description: "Clear data visualizations and internal admin tools that provide actionable insights for decision-makers.",
-      icon: <LineChart className="w-5 h-5 text-brand-primary group-hover:text-brand-accent transition-colors duration-300" />,
-    },
-    {
-      title: "Cloud & Infrastructure",
-      description: "Reliable cloud migration, deployment automation, and server management for consistent uptime.",
-      icon: <Cloud className="w-5 h-5 text-brand-primary group-hover:text-brand-accent transition-colors duration-300" />,
-    },
-    {
-      title: "SEO & Performance",
-      description: "Technical SEO and speed optimizations designed to improve search visibility and page load speeds.",
-      icon: <Search className="w-5 h-5 text-brand-primary group-hover:text-brand-accent transition-colors duration-300" />,
-    },
-    {
-      title: "Mobile App Development",
-      description: "Cross-platform iOS and Android applications crafted for responsive performance and intuitive user experiences.",
-      icon: <Smartphone className="w-5 h-5 text-brand-primary group-hover:text-brand-accent transition-colors duration-300" />,
-    },
-  ];
-
   return (
     <section id="services" className="py-20 lg:py-24 bg-brand-surface border-b border-brand-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -49,7 +17,7 @@ export default function Services() {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {services.map((service, index) => (
+          {servicesData.map((service, index) => (
             <div
               key={index}
               className="group bg-white border border-brand-border rounded-lg p-6 shadow-sm hover:shadow-md hover:border-brand-accent transition-all duration-300 flex flex-col h-full"
@@ -64,10 +32,10 @@ export default function Services() {
                 {service.description}
               </p>
               <Link
-                href={`/quote?service=${encodeURIComponent(service.title)}`}
-                className="inline-flex items-center gap-2 text-sm font-medium text-brand-accent hover:text-brand-accent-hover transition-colors mt-auto"
+                href={`/services/${service.id}`}
+                className="inline-flex items-center gap-2 text-sm font-medium text-brand-primary group-hover:text-brand-accent transition-colors mt-auto"
               >
-                Learn more <ArrowRight className="w-4 h-4" />
+                Learn more <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           ))}

@@ -21,8 +21,9 @@ export default function Navbar() {
   });
 
   const navLinks = [
-    { name: "Services", href: "/#services" },
+    { name: "Home", href: "/" },
     { name: "About", href: "/#about" },
+    { name: "Services", href: "/#services" },
     { name: "Contact", href: "/#contact" },
   ];
 
@@ -68,7 +69,7 @@ export default function Navbar() {
             ))}
             <Link
               href="/quote"
-              className="bg-brand-accent hover:bg-brand-accent-hover text-white px-5 py-2 rounded-md text-sm font-medium transition-colors shadow-sm"
+              className="bg-brand-primary hover:bg-brand-primary-light text-white px-5 py-2.5 rounded-md text-sm font-medium transition-colors shadow-sm"
             >
               Get a Quote →
             </Link>
@@ -112,7 +113,7 @@ export default function Navbar() {
                 <Link
                   href="/quote"
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center justify-center w-full bg-brand-accent hover:bg-brand-accent-hover text-white px-6 py-3 rounded-md font-medium transition-colors"
+                  className="flex items-center justify-center w-full bg-brand-primary hover:bg-brand-primary-light text-white px-6 py-3 rounded-md font-medium transition-colors"
                 >
                   Get a Quote →
                 </Link>

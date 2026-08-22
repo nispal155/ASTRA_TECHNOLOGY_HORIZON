@@ -209,15 +209,16 @@ export default function QuotePage() {
                 <FormSelect
                   id="budget"
                   name="budget"
-                  label="Estimated Budget (Optional)"
+                  label="Estimated Budget (Optional) — NPR"
                   value={formData.budget}
                   onChange={handleChange}
                 >
                   <option value="">Select a range...</option>
-                  <option value="<$1k">Less than $1,000</option>
-                  <option value="$1k-$5k">$1,000 - $5,000</option>
-                  <option value="$5k-$10k">$5,000 - $10,000</option>
-                  <option value="$10k+">More than $10,000</option>
+                  <option value="10k-25k">NPR 10,000 – 25,000</option>
+                  <option value="25k-50k">NPR 25,000 – 50,000</option>
+                  <option value="50k-100k">NPR 50,000 – 100,000</option>
+                  <option value="100k-250k">NPR 100,000 – 250,000</option>
+                  <option value="250k+">NPR 250,000+</option>
                 </FormSelect>
 
                 <FormTextarea

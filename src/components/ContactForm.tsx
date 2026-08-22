@@ -100,7 +100,7 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <h4 className="text-base font-semibold text-brand-primary mb-1">Phone</h4>
-                  <p className="text-brand-text-secondary">+977 9800000000</p>
+                  <p className="text-brand-text-secondary">9852048719</p>
                 </div>
               </div>
             </div>
