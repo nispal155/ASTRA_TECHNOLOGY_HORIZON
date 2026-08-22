@@ -6,9 +6,9 @@ import Link from "next/link";
 import SectionHeader from "./SectionHeader";
 
 const stats = [
-  { label: "Years Experience", value: "10+", icon: <Award className="w-5 h-5" /> },
-  { label: "Projects Delivered", value: "50+", icon: <Target className="w-5 h-5" /> },
-  { label: "Engineers & Designers", value: "25+", icon: <Users className="w-5 h-5" /> },
+  { label: "Years Experience", value: "2+", icon: <Award className="w-5 h-5" /> },
+  { label: "Projects Delivered", value: "20+", icon: <Target className="w-5 h-5" /> },
+  { label: "Engineers & Designers", value: "10+", icon: <Users className="w-5 h-5" /> },
   { label: "Client Satisfaction", value: "99%", icon: <Rocket className="w-5 h-5" /> },
 ];
 
@@ -24,6 +24,12 @@ const testimonials = [
     role: "Personal Portfolio",
     content: "The attention to detail and design aesthetics provided by Astra Technology Horizon elevated my personal brand to a whole new level. Highly recommended!",
     link: "https://rahulparajuli.com.np/",
+  },
+  {
+    name: "MDS Foundation (Saujanya Koirala)",
+    role: "Trusted Client",
+    content: "Astra Technology Horizon helped us build a reliable platform for our organization. Their team was professional, responsive, and delivered exactly what we needed.",
+    link: "https://mdsfoundation.org.np/",
   },
 ];
 
@@ -66,7 +72,7 @@ export default function About() {
 
         <div className="border-t border-brand-border pt-16">
           <h3 className="text-2xl font-bold text-brand-primary mb-10 text-center">Trusted by our clients</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial, idx) => (
               <div
                 key={idx}
