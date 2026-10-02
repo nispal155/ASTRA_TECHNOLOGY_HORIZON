@@ -1,29 +1,11 @@
-"use client";
-
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import SectionHeader from "./SectionHeader";
+import { featuredProjects } from "@/lib/content";
 
-const flagshipProjects = [
-  {
-    id: 1,
-    title: "Enterprise E-Commerce Platform",
-    category: "Web Application",
-    description: "A high-performance e-commerce platform built for scale, featuring real-time inventory management, seamless payment gateways, and an intuitive admin dashboard.",
-    image: "https://images.unsplash.com/photo-1661956602116-aa6865609028?q=80&w=1200&auto=format&fit=crop",
-    tech: ["Next.js", "Stripe", "Tailwind CSS", "Node.js"],
-  },
-  {
-    id: 2,
-    title: "Healthcare Analytics Dashboard",
-    category: "Data Analytics",
-    description: "Secure, HIPAA-compliant analytics dashboard providing healthcare professionals with actionable insights through advanced data visualization.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
-    tech: ["React", "Python", "AWS", "PostgreSQL"],
-  }
-];
+const flagshipProjects = featuredProjects;
 
 export default function Portfolio() {
   return (
@@ -57,7 +39,7 @@ export default function Portfolio() {
                   <div className="relative rounded-t-2xl border-[8px] border-gray-900 bg-gray-900 aspect-[16/10] overflow-hidden shadow-2xl">
                     <Image
                       src={project.image}
-                      alt={`${project.title} — ${project.category.toLowerCase()} interface preview`}
+                      alt={project.imageAlt}
                       fill
                       sizes="(min-width: 1024px) 60vw, 100vw"
                       className="object-cover object-top transition-transform duration-700 hover:scale-105"

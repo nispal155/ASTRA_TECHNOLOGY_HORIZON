@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Nispal Bhattarai",
+    "role": "CEO & Founder",
+    "bio": "Visionary leader with a passion for driving technological innovation and business growth. Oversees the strategic direction and operations of Astra Technology Horizon.",
+    "image": "/images/ceo.jpg",
+    "social": {
+      "linkedin": "https://www.linkedin.com/in/nispal-bhattarai-2661b430a/",
+      "email": "mailto:contact@nispalbhattarai.com.np"
+    }
+  },
+  {
+    "name": "Saphal Koirala",
+    "role": "Director",
+    "bio": "Strategic director focusing on operational excellence and building long-lasting client relationships across global markets.",
+    "image": "/images/director.jpg",
+    "social": {
+      "linkedin": "https://www.linkedin.com/in/saphalkoirala19/",
+      "email": "mailto:forsaphal.koirala@gmail.com"
+    }
+  }
+]

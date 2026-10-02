@@ -28,7 +28,7 @@ export default function Projects() {
  };
 
  return (
- <section id="projects" className="py-24 bg-white border-b border-slate-100">
+ <section id="projects" className="py-24 bg-brand-card border-b border-slate-100">
  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
  <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
  <motion.div 
@@ -69,7 +69,7 @@ export default function Projects() {
  {project.tags.map((tag, tagIndex) => (
  <span 
  key={tagIndex} 
- className="px-3 py-1 bg-white border border-slate-200 rounded-full text-xs font-semibold text-slate-700 "
+ className="px-3 py-1 bg-brand-card border border-slate-200 rounded-full text-xs font-semibold text-slate-700 "
  >
  {tag}
  </span>

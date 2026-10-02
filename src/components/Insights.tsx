@@ -1,47 +1,18 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Clock } from "lucide-react";
 import SectionHeader from "./SectionHeader";
+import type { PostMeta } from "@/lib/blog";
 
-const insights = [
-  {
-    id: 1,
-    title: "Why Next.js is the Future of Enterprise Web Applications",
-    category: "Engineering",
-    readTime: "5 min read",
-    date: "Aug 15, 2026",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
-    imageAlt: "Code editor showing a JavaScript web application",
-    link: "/blog/1",
-  },
-  {
-    id: 2,
-    title: "Scaling Startups: When to Transition from MVP to Custom Architecture",
-    category: "Strategy",
-    readTime: "7 min read",
-    date: "Aug 02, 2026",
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop",
-    imageAlt: "Startup team collaborating on laptops",
-    link: "/blog/2",
-  },
-  {
-    id: 3,
-    title: "The True Cost of Bad UI/UX Design in B2B Software",
-    category: "Design",
-    readTime: "4 min read",
-    date: "Jul 28, 2026",
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1000&auto=format&fit=crop",
-    imageAlt: "Designer sketching user interface wireframes",
-    link: "/blog/3",
-  }
-];
+const formatDate = (d: string) => new Date(d).toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" });
 
-export default function Insights() {
+
+export default function Insights({ posts }: { posts: PostMeta[] }) {
+  if (posts.length === 0) return null;
+  const insights = posts.slice(0, 3);
   return (
-    <section id="insights" aria-labelledby="insights-heading" className="py-16 lg:py-20 bg-white border-b border-brand-border">
+    <section id="insights" aria-labelledby="insights-heading" className="py-16 lg:py-20 bg-brand-card border-b border-brand-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-14 gap-4">
@@ -61,8 +32,8 @@ export default function Insights() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {insights.map((insight) => (
             <Link 
-              key={insight.id} 
-              href={insight.link}
+              key={insight.slug} 
+              href={`/blog/${insight.slug}`}
               className="group card flex flex-col h-full overflow-hidden hover:border-brand-accent hover:shadow-[var(--shadow-card-hover)] transition-all"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden">
@@ -73,18 +44,18 @@ export default function Insights() {
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-brand-accent uppercase tracking-wider">
+                <div className="absolute top-4 left-4 bg-brand-card/95 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-brand-accent uppercase tracking-wider">
                   {insight.category}
                 </div>
               </div>
               
               <div className="p-6 flex flex-col flex-grow">
                 <div className="flex items-center gap-4 text-xs text-brand-text-secondary mb-4 font-medium">
-                  <span>{insight.date}</span>
+                  <time dateTime={insight.date}>{formatDate(insight.date)}</time>
                   <span className="w-1 h-1 rounded-full bg-brand-border-dark"></span>
                   <span className="flex items-center gap-1">
                     <Clock className="w-3 h-3" aria-hidden="true" />
-                    {insight.readTime}
+                    {insight.readingMinutes} min read
                   </span>
                 </div>
                 

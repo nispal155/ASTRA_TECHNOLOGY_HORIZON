@@ -8,7 +8,8 @@ import Footer from "@/components/Footer";
 import SectionHeader from "@/components/SectionHeader";
 import { FormInput, FormTextarea, FormSelect, FormAlert } from "@/components/FormFields";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { site, WEB3FORMS_ACCESS_KEY } from "@/lib/site";
+import { submitForm } from "@/lib/submitForm";
+import Honeypot from "@/components/Honeypot";
 
 const IT_SERVICES = [
   {
@@ -62,7 +63,8 @@ export default function QuotePage() {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const [error, setError] = useState("");
+  const [honeypot, setHoneypot] = useState("");
 
   // Pre-select a service when arriving from a service page (/quote?service=...)
   const requestedService = useQueryParam('service');
@@ -71,38 +73,23 @@ export default function QuotePage() {
       ?? IT_SERVICES.find((s) => requestedService.toLowerCase().includes(s.title.split(' ')[0].toLowerCase())))?.title ?? 'Other'
     : '';
   const selectedService = formData.service || queryService || 'Web Development';
+  // Summary passed from the cost estimator on /pricing
+  const estimate = useQueryParam('estimate');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setHasError(false);
+    setError("");
 
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_ACCESS_KEY,
-          subject: `New Quote Request: ${selectedService}`,
-          ...formData,
-          service: selectedService,
-        }),
-      });
+    const result = await submitForm("quote", { ...formData, service: selectedService, estimate: estimate ?? undefined, website: honeypot });
+    setIsSubmitting(false);
 
-      if (response.status === 200) {
-        setIsSubmitted(true);
-        setFormData({ name: '', email: '', phone: '', company: '', service: '', budget: '', message: '' });
-        setTimeout(() => setIsSubmitted(false), 5000);
-      } else {
-        setHasError(true);
-      }
-    } catch {
-      setHasError(true);
-    } finally {
-      setIsSubmitting(false);
+    if (result.ok) {
+      setIsSubmitted(true);
+      setFormData({ name: '', email: '', phone: '', company: '', service: '', budget: '', message: '' });
+      setTimeout(() => setIsSubmitted(false), 5000);
+    } else {
+      setError(result.error);
     }
   };
 
@@ -115,7 +102,7 @@ export default function QuotePage() {
     <div className="flex flex-col min-h-screen bg-brand-surface">
       <Navbar />
       <main id="main" className="flex-grow pt-16 sm:pt-20">
-      <section className="pt-10 pb-6 lg:pt-14 lg:pb-8 bg-gradient-to-b from-brand-accent-soft to-white border-b border-brand-border">
+      <section className="pt-10 pb-6 lg:pt-14 lg:pb-8 bg-gradient-to-b from-brand-accent-soft to-brand-bg border-b border-brand-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumbs items={[{ name: 'Get a Quote', path: '/quote' }]} className="mb-10" />
           <SectionHeader
@@ -141,12 +128,12 @@ export default function QuotePage() {
                 key={service.id}
                 aria-pressed={selectedService === service.title}
                 onClick={() => setFormData(prev => ({...prev, service: service.title}))}
-                className={`block w-full h-full text-left bg-white border rounded-[var(--radius-card)] p-6 hover:border-brand-accent hover:shadow-[var(--shadow-card-hover)] transition-all duration-300 ${
+                className={`block w-full h-full text-left bg-brand-card border rounded-[var(--radius-card)] p-6 hover:border-brand-accent hover:shadow-[var(--shadow-card-hover)] transition-all duration-300 ${
                   selectedService === service.title ? 'border-brand-accent ring-2 ring-brand-accent/20 shadow-[var(--shadow-card)]' : 'border-brand-border'
                 }`}
               >
                 <span className={`w-12 h-12 rounded flex items-center justify-center mb-4 transition-colors ${
-                  selectedService === service.title ? 'bg-brand-accent text-white' : 'bg-brand-accent-soft text-brand-accent border border-brand-accent-muted'
+                  selectedService === service.title ? 'bg-brand-accent-strong text-white' : 'bg-brand-accent-soft text-brand-accent border border-brand-accent-muted'
                 }`}>
                   {service.icon}
                 </span>
@@ -171,13 +158,14 @@ export default function QuotePage() {
                 <p className="text-brand-text-secondary">Thank you for reaching out. We will review your project details and respond shortly with a quote.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {hasError && (
-                  <FormAlert type="error">
-                    Sorry, your request could not be sent. Please try again or email us at{' '}
-                    <a href={`mailto:${site.email}`} className="underline font-medium">{site.email}</a>.
-                  </FormAlert>
+              <form onSubmit={handleSubmit} className="relative space-y-6">
+                {error && <FormAlert type="error">{error}</FormAlert>}
+                {estimate && (
+                  <p className="rounded-[var(--radius-control)] bg-brand-accent-soft border border-brand-accent-muted px-4 py-3 text-sm text-brand-primary">
+                    <span className="font-semibold">Your estimate:</span> {estimate}
+                  </p>
                 )}
+                <Honeypot value={honeypot} onChange={setHoneypot} />
                 <FormSelect
                   id="service"
                   name="service"

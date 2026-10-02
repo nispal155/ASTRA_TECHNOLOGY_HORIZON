@@ -5,7 +5,9 @@ import { Send, CheckCircle2, MapPin, Phone, Mail, Clock, Loader2 } from "lucide-
 import SectionHeader from "./SectionHeader";
 import OfficeMap from "./OfficeMap";
 import { FormInput, FormTextarea, FormSelect, FormAlert } from "./FormFields";
-import { site, fullAddress, WEB3FORMS_ACCESS_KEY } from "@/lib/site";
+import { site, fullAddress } from "@/lib/site";
+import { submitForm } from "@/lib/submitForm";
+import Honeypot from "./Honeypot";
 
 const contactItems = [
   { icon: MapPin, label: "Office Location", value: fullAddress, href: undefined },
@@ -23,42 +25,23 @@ export default function ContactForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const [error, setError] = useState("");
+  const [honeypot, setHoneypot] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setHasError(false);
+    setError("");
 
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_ACCESS_KEY,
-          ...formData,
-        }),
-      });
+    const result = await submitForm("contact", { ...formData, website: honeypot });
+    setIsSubmitting(false);
 
-      if (response.status === 200) {
-        setIsSubmitted(true);
-        setFormData({
-          name: "",
-          email: "",
-          service: "",
-          message: "",
-        });
-        setTimeout(() => setIsSubmitted(false), 5000);
-      } else {
-        setHasError(true);
-      }
-    } catch {
-      setHasError(true);
-    } finally {
-      setIsSubmitting(false);
+    if (result.ok) {
+      setIsSubmitted(true);
+      setFormData({ name: "", email: "", service: "", message: "" });
+      setTimeout(() => setIsSubmitted(false), 5000);
+    } else {
+      setError(result.error);
     }
   };
 
@@ -70,7 +53,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contact" aria-labelledby="contact-heading" className="py-16 lg:py-20 bg-white border-b border-brand-border">
+    <section id="contact" aria-labelledby="contact-heading" className="py-16 lg:py-20 bg-brand-card border-b border-brand-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
 
@@ -152,15 +135,11 @@ export default function ContactForm() {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="relative space-y-6">
                   <h3 className="text-2xl font-bold text-brand-primary">Send Us a Message</h3>
 
-                  {hasError && (
-                    <FormAlert type="error">
-                      Sorry, your message could not be sent. Please try again or email us at{" "}
-                      <a href={`mailto:${site.email}`} className="underline font-medium">{site.email}</a>.
-                    </FormAlert>
-                  )}
+                  {error && <FormAlert type="error">{error}</FormAlert>}
+                  <Honeypot value={honeypot} onChange={setHoneypot} />
 
                   <FormInput
                     id="name"

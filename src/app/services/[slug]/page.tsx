@@ -52,7 +52,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
       <main id="main" className="flex-grow pt-16 sm:pt-20">
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-brand-accent-soft to-white border-b border-brand-border py-14 lg:py-20">
+        <section className="bg-gradient-to-b from-brand-accent-soft to-brand-bg border-b border-brand-border py-14 lg:py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <Breadcrumbs
               className="mb-10"
@@ -63,7 +63,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             />
 
             <div className="text-center">
-              <div className="w-16 h-16 mx-auto bg-white border border-brand-accent-muted rounded-xl flex items-center justify-center mb-8 shadow-[var(--shadow-card)] [&_svg]:w-7 [&_svg]:h-7">
+              <div className="w-16 h-16 mx-auto bg-brand-card border border-brand-accent-muted rounded-xl flex items-center justify-center mb-8 shadow-[var(--shadow-card)] [&_svg]:w-7 [&_svg]:h-7">
                 {service.icon}
               </div>
 
@@ -116,14 +116,14 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </div>
 
           {/* CTA */}
-          <div className="bg-brand-accent rounded-[var(--radius-card)] p-8 sm:p-12 text-center shadow-[var(--shadow-card-hover)]">
+          <div className="bg-brand-accent-strong rounded-[var(--radius-card)] p-8 sm:p-12 text-center shadow-[var(--shadow-card-hover)]">
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready to get started?</h2>
-            <p className="text-white/90 mb-8 max-w-xl mx-auto">
+            <p className="text-white mb-8 max-w-xl mx-auto">
               Contact us today to discuss how our {service.title.toLowerCase()} services can help accelerate your business growth.
             </p>
             <Link
               href={`/quote?service=${encodeURIComponent(service.title)}`}
-              className="inline-flex items-center justify-center gap-2 bg-white text-brand-accent hover:bg-brand-accent-soft px-8 py-4 rounded-[var(--radius-control)] font-bold transition-colors focus-visible:outline-white"
+              className="inline-flex items-center justify-center gap-2 bg-brand-card text-brand-accent hover:bg-brand-accent-soft px-8 py-4 rounded-[var(--radius-control)] font-bold transition-colors focus-visible:outline-white"
             >
               Request a Proposal <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </Link>
@@ -131,7 +131,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </article>
 
         {/* Related services — internal linking */}
-        <section aria-labelledby="related-services" className="bg-white border-t border-brand-border py-14 lg:py-16">
+        <section aria-labelledby="related-services" className="bg-brand-card border-t border-brand-border py-14 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 id="related-services" className="text-2xl font-bold text-brand-primary mb-8 text-center">
               Explore Our Other IT Services

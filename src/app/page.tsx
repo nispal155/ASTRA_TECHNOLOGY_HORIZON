@@ -8,6 +8,7 @@ import Portfolio from "@/components/Portfolio";
 import Leadership from "@/components/Leadership";
 import FAQ from "@/components/FAQ";
 import Insights from "@/components/Insights";
+import { getAllPosts } from "@/lib/blog";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -16,12 +17,17 @@ import { faqs } from "@/data/faqs";
 import { pageMetadata } from "@/lib/seo";
 import { localBusinessSchema, faqSchema } from "@/lib/schema";
 
-export const metadata = pageMetadata({
+const homeMeta = pageMetadata({
   title: "Software Development Company in Itahari, Nepal",
   description:
     "Software development company in Itahari, Nepal building websites, mobile apps, cloud solutions and digital marketing for growing businesses. Get a free quote.",
   path: "/",
 });
+
+export const metadata = {
+  ...homeMeta,
+  alternates: { canonical: "/", languages: { en: "/", ne: "/ne", "x-default": "/" }, types: { "application/rss+xml": "/rss.xml" } },
+};
 
 export default function Home() {
   return (
@@ -56,7 +62,7 @@ export default function Home() {
         </AnimatedSection>
         
         <AnimatedSection delay={0.2}>
-          <Insights />
+          <Insights posts={getAllPosts()} />
         </AnimatedSection>
         
         <AnimatedSection delay={0.2}>

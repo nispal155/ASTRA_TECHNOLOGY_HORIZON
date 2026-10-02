@@ -37,6 +37,7 @@ export const site = {
   sameAs: [
     "https://www.linkedin.com/company/astra-technology-horizon",
     "https://www.facebook.com/astratechnologyhorizon",
+    ...(process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_URL ? [process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_URL] : []),
   ],
 } as const;
 
@@ -63,5 +64,11 @@ export const geo = (() => {
 
 export const absoluteUrl = (path = "/") => `${SITE_URL}${path}`;
 
-/** Web3Forms access key used by the contact, quote and careers forms. */
-export const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE";
+/** Optional third-party integrations — each feature stays hidden until its variable is set. */
+export const integrations = {
+  googleBusinessUrl: process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_URL || "",
+  googleReviewUrl: process.env.NEXT_PUBLIC_GOOGLE_REVIEW_URL || "",
+  calendlyUrl: process.env.NEXT_PUBLIC_CALENDLY_URL || "",
+  gaId: process.env.NEXT_PUBLIC_GA_ID || "",
+  plausibleDomain: process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN || "",
+};
