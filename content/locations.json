@@ -1,0 +1,45 @@
+[
+  {
+    "slug": "itahari",
+    "city": "Itahari",
+    "district": "Sunsari",
+    "draft": false,
+    "headline": "Software Development Company in Itahari",
+    "intro": "Astra Technology Horizon is headquartered in Itahari-4, Sunsari. Businesses in Itahari can meet our team in person to plan websites, mobile apps, cloud systems and digital marketing campaigns.",
+    "body": [
+      "Working with a local team means faster communication, face-to-face planning sessions and support in your own time zone and language.",
+      "We help Itahari businesses — from shops and travel agencies to schools, clinics and NGOs — build a strong online presence and automate their day-to-day operations."
+    ],
+    "nearby": ["Dharan", "Biratnagar", "Inaruwa", "Duhabi"]
+  },
+  {
+    "slug": "biratnagar",
+    "city": "Biratnagar",
+    "district": "Morang",
+    "draft": true,
+    "headline": "Web & App Development for Biratnagar Businesses",
+    "intro": "TODO: confirm that we serve Biratnagar clients and describe how (on-site visits, remote collaboration).",
+    "body": ["TODO: unique content about working with Biratnagar businesses (industries, example projects)."],
+    "nearby": ["Itahari", "Dharan"]
+  },
+  {
+    "slug": "dharan",
+    "city": "Dharan",
+    "district": "Sunsari",
+    "draft": true,
+    "headline": "Web & App Development for Dharan Businesses",
+    "intro": "TODO: confirm service details for Dharan.",
+    "body": ["TODO: unique content about working with Dharan businesses."],
+    "nearby": ["Itahari", "Biratnagar"]
+  },
+  {
+    "slug": "kathmandu",
+    "city": "Kathmandu",
+    "district": "Kathmandu",
+    "draft": true,
+    "headline": "Remote Software Development for Kathmandu Companies",
+    "intro": "TODO: confirm how we work with Kathmandu clients (remote, periodic visits).",
+    "body": ["TODO: unique content about working with Kathmandu companies."],
+    "nearby": []
+  }
+]

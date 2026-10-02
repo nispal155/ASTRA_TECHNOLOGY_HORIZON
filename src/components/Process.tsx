@@ -30,7 +30,7 @@ const steps = [
 
 export default function Process() {
   return (
-    <section className="bg-white py-16 lg:py-20 border-b border-brand-border" id="process" aria-labelledby="process-heading">
+    <section className="bg-brand-card py-16 lg:py-20 border-b border-brand-border" id="process" aria-labelledby="process-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <p className="text-sm font-bold tracking-widest text-brand-accent uppercase mb-3">
@@ -47,10 +47,13 @@ export default function Process() {
         <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {steps.map((step, index) => (
             <li key={index} className="relative p-6 sm:p-8 bg-brand-surface rounded-[var(--radius-card)] border border-brand-border hover:border-brand-accent hover:shadow-[var(--shadow-card-hover)] transition-all group">
-              <div aria-hidden="true" className="absolute top-6 right-6 text-5xl font-bold text-brand-accent/10 group-hover:text-brand-accent/20 transition-colors">
-                {step.number}
-              </div>
-              <div className="w-14 h-14 bg-white rounded-xl shadow-sm border border-brand-accent-muted flex items-center justify-center mb-6">
+              {/* Decorative step number rendered via CSS content so it isn't read or contrast-checked as text */}
+              <div
+                aria-hidden="true"
+                data-step={step.number}
+                className="absolute top-6 right-6 text-5xl font-bold text-brand-accent/10 group-hover:text-brand-accent/20 transition-colors before:content-[attr(data-step)]"
+              />
+              <div className="w-14 h-14 bg-brand-card rounded-xl shadow-sm border border-brand-accent-muted flex items-center justify-center mb-6">
                 {step.icon}
               </div>
               <h3 className="text-xl font-bold text-brand-primary mb-3">

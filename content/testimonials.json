@@ -1,0 +1,24 @@
+{
+  "written": [
+    {
+      "name": "Bodhi Tree Journeys Nepal",
+      "role": "Travel & Tour Operator",
+      "content": "Astra Technology Horizon completely transformed our digital presence. The website they built for us is fast, intuitive, and beautifully represents our brand. Their technical execution was spot on.",
+      "link": "https://bodhitreejourneysnepal.com/"
+    },
+    {
+      "name": "Rahul Parajuli",
+      "role": "Personal Portfolio",
+      "content": "The attention to detail and design aesthetics provided by Astra Technology Horizon elevated my personal brand to a whole new level. Highly recommended!",
+      "link": "https://rahulparajuli.com.np/"
+    },
+    {
+      "name": "MDS Foundation",
+      "role": "Trusted Client — Saujanya Koirala",
+      "content": "Astra Technology Horizon helped us build a reliable platform for our organization. Their team was professional, responsive, and delivered exactly what we needed.",
+      "link": "https://mdsfoundation.org.np/"
+    }
+  ],
+  "_videoHelp": "Add video testimonials as { name, role, youtubeId, quote }. The section stays hidden while this list is empty.",
+  "videos": []
+}

@@ -1,0 +1,128 @@
+[
+  {
+    "id": "1",
+    "title": "Enterprise E-Commerce Platform",
+    "category": "Web Development",
+    "image": "/images/projects/ecommerce-platform.jpg",
+    "imageAlt": "Enterprise e-commerce platform storefront preview",
+    "tech": ["Next.js", "Stripe", "Tailwind CSS", "Node.js"],
+    "summary": "A highly scalable e-commerce solution processing thousands of transactions per day with millisecond latency.",
+    "description": "A high-performance e-commerce platform built for scale, featuring real-time inventory management, seamless payment gateways, and an intuitive admin dashboard.",
+    "featured": true,
+    "caseStudy": {
+      "draft": true,
+      "client": "TODO: client name or industry",
+      "duration": "TODO: e.g. 4 months",
+      "services": ["custom-web-development", "cloud-infrastructure"],
+      "challenge": "TODO: describe the client's problem before the project (2–3 sentences).",
+      "solution": "TODO: describe what was built and the key technical decisions (3–5 sentences).",
+      "results": ["TODO: measurable result, e.g. page load time reduced from X s to Y s", "TODO: second result", "TODO: third result"],
+      "gallery": []
+    }
+  },
+  {
+    "id": "2",
+    "title": "Healthcare Analytics Dashboard",
+    "category": "Data Analytics",
+    "image": "/images/projects/healthcare-dashboard.jpg",
+    "imageAlt": "Healthcare analytics dashboard with patient-flow charts",
+    "tech": ["React", "Python", "AWS", "PostgreSQL"],
+    "summary": "Real-time analytics dashboard for hospitals to track patient flow and resource allocation.",
+    "description": "Secure, HIPAA-compliant analytics dashboard providing healthcare professionals with actionable insights through advanced data visualization.",
+    "featured": true,
+    "caseStudy": {
+      "draft": true,
+      "client": "TODO: client name or industry",
+      "duration": "TODO",
+      "services": ["dashboards-analytics", "cloud-infrastructure"],
+      "challenge": "TODO",
+      "solution": "TODO",
+      "results": ["TODO"],
+      "gallery": []
+    }
+  },
+  {
+    "id": "3",
+    "title": "FinTech Mobile Application",
+    "category": "Mobile App",
+    "image": "/images/projects/fintech-mobile-app.jpg",
+    "imageAlt": "FinTech mobile banking application on a smartphone",
+    "tech": ["React Native", "Node.js", "MongoDB"],
+    "summary": "A secure and intuitive mobile banking application serving over 50,000 active users.",
+    "description": "A secure and intuitive mobile banking application serving over 50,000 active users.",
+    "featured": false,
+    "caseStudy": {
+      "draft": true,
+      "client": "TODO",
+      "duration": "TODO",
+      "services": ["mobile-app-development"],
+      "challenge": "TODO",
+      "solution": "TODO",
+      "results": ["TODO"],
+      "gallery": []
+    }
+  },
+  {
+    "id": "4",
+    "title": "Logistics Fleet Tracker",
+    "category": "IoT & Web",
+    "image": "/images/projects/logistics-fleet-tracker.jpg",
+    "imageAlt": "Logistics warehouse with fleet tracking operations",
+    "tech": ["Vue.js", "Express", "PostgreSQL", "Socket.io"],
+    "summary": "Real-time GPS tracking and route optimization system for commercial transport fleets.",
+    "description": "Real-time GPS tracking and route optimization system for commercial transport fleets.",
+    "featured": false,
+    "caseStudy": {
+      "draft": true,
+      "client": "TODO",
+      "duration": "TODO",
+      "services": ["custom-web-development"],
+      "challenge": "TODO",
+      "solution": "TODO",
+      "results": ["TODO"],
+      "gallery": []
+    }
+  },
+  {
+    "id": "5",
+    "title": "AI Customer Support Agent",
+    "category": "Machine Learning",
+    "image": "/images/projects/ai-support-agent.jpg",
+    "imageAlt": "Team reviewing an AI customer support agent",
+    "tech": ["OpenAI", "Next.js", "LangChain"],
+    "summary": "Intelligent autonomous support agent that resolves 60% of tier-1 customer inquiries automatically.",
+    "description": "Intelligent autonomous support agent that resolves 60% of tier-1 customer inquiries automatically.",
+    "featured": false,
+    "caseStudy": {
+      "draft": true,
+      "client": "TODO",
+      "duration": "TODO",
+      "services": ["custom-web-development"],
+      "challenge": "TODO",
+      "solution": "TODO",
+      "results": ["TODO"],
+      "gallery": []
+    }
+  },
+  {
+    "id": "6",
+    "title": "Real Estate SaaS Platform",
+    "category": "Web Application",
+    "image": "/images/projects/real-estate-saas.jpg",
+    "imageAlt": "Modern residential property managed through a real estate SaaS platform",
+    "tech": ["Next.js", "Prisma", "Supabase"],
+    "summary": "Comprehensive property management and tenant portal for mid-sized real estate agencies.",
+    "description": "Comprehensive property management and tenant portal for mid-sized real estate agencies.",
+    "featured": false,
+    "caseStudy": {
+      "draft": true,
+      "client": "TODO",
+      "duration": "TODO",
+      "services": ["custom-web-development"],
+      "challenge": "TODO",
+      "solution": "TODO",
+      "results": ["TODO"],
+      "gallery": []
+    }
+  }
+]

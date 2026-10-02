@@ -5,6 +5,10 @@ import { Users, Target, Rocket, Award, Quote, ArrowUpRight } from "lucide-react"
 import Link from "next/link";
 import SectionHeader from "./SectionHeader";
 import Counter from "./Counter";
+import testimonialData from "@content/testimonials.json";
+import ClientsStrip from "./ClientsStrip";
+import VideoTestimonials from "./VideoTestimonials";
+import { integrations } from "@/lib/site";
 
 const stats = [
   { label: "Years Experience", value: 2, suffix: "+", icon: <Award className="w-5 h-5" /> },
@@ -13,30 +17,11 @@ const stats = [
   { label: "Client Satisfaction", value: 99, suffix: "%", icon: <Rocket className="w-5 h-5" /> },
 ];
 
-const testimonials = [
-  {
-    name: "Bodhi Tree Journeys Nepal",
-    role: "Travel & Tour Operator",
-    content: "Astra Technology Horizon completely transformed our digital presence. The website they built for us is fast, intuitive, and beautifully represents our brand. Their technical execution was spot on.",
-    link: "https://bodhitreejourneysnepal.com/",
-  },
-  {
-    name: "Rahul Parajuli",
-    role: "Personal Portfolio",
-    content: "The attention to detail and design aesthetics provided by Astra Technology Horizon elevated my personal brand to a whole new level. Highly recommended!",
-    link: "https://rahulparajuli.com.np/",
-  },
-  {
-    name: "MDS Foundation",
-    role: "Trusted Client — Saujanya Koirala",
-    content: "Astra Technology Horizon helped us build a reliable platform for our organization. Their team was professional, responsive, and delivered exactly what we needed.",
-    link: "https://mdsfoundation.org.np/",
-  },
-];
+const testimonials = testimonialData.written;
 
 export default function About() {
   return (
-    <section id="about" aria-labelledby="about-heading" className="py-16 lg:py-20 bg-white border-b border-brand-border">
+    <section id="about" aria-labelledby="about-heading" className="py-16 lg:py-20 bg-brand-card border-b border-brand-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start mb-20">
           <div>
@@ -77,7 +62,8 @@ export default function About() {
         </div>
 
         <div className="border-t border-brand-border pt-16">
-          <h3 className="text-2xl font-bold text-brand-primary mb-10 text-center">Trusted by our clients</h3>
+          <h3 className="text-2xl font-bold text-brand-primary mb-8 text-center">Trusted by our clients</h3>
+          <ClientsStrip />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial, idx) => (
               <figure
@@ -91,7 +77,7 @@ export default function About() {
                   </blockquote>
                 </div>
                 <figcaption className="flex items-center gap-4">
-                  <div aria-hidden="true" className="w-12 h-12 rounded-full bg-brand-accent flex items-center justify-center font-bold text-white text-lg">
+                  <div aria-hidden="true" className="w-12 h-12 rounded-full bg-brand-accent-strong flex items-center justify-center font-bold text-white text-lg">
                     {testimonial.name.charAt(0)}
                   </div>
                   <div>
@@ -110,6 +96,16 @@ export default function About() {
               </figure>
             ))}
           </div>
+
+          {integrations.googleReviewUrl && (
+            <p className="text-center mt-10">
+              <a href={integrations.googleReviewUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary px-6 py-3">
+                Worked with us? Leave a Google review
+              </a>
+            </p>
+          )}
+
+          <VideoTestimonials />
         </div>
       </div>
     </section>

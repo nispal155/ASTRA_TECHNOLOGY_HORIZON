@@ -20,7 +20,7 @@ export default function TechStack() {
   ];
 
   return (
-    <section className="py-20 bg-white border-b border-brand-border">
+    <section className="py-20 bg-brand-card border-b border-brand-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="Technologies We Use"

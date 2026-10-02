@@ -1,10 +1,22 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { site } from "@/lib/site";
+import { servicesData } from "@/data/services";
+
+/** Builds a context-aware opening message based on the current page. */
+function messageFor(pathname: string) {
+  const service = servicesData.find((s) => pathname === `/services/${s.id}`);
+  if (service) return `Hello ${site.name}, I'm interested in your ${service.title} services.`;
+  if (pathname.startsWith("/careers")) return `Hello ${site.name}, I have a question about a job opening.`;
+  if (pathname.startsWith("/quote") || pathname.startsWith("/pricing")) return `Hello ${site.name}, I'd like a quote for a project.`;
+  return `Hello ${site.name}, I'd like to know more about your services.`;
+}
 
 export default function WhatsAppButton() {
-  const phoneNumber = "9779852048719";
-  const whatsappUrl = `https://wa.me/${phoneNumber}`;
+  const pathname = usePathname();
+  const whatsappUrl = `${site.whatsapp}?text=${encodeURIComponent(messageFor(pathname))}`;
 
   return (
     <motion.a
@@ -17,7 +29,7 @@ export default function WhatsAppButton() {
       whileTap={{ scale: 0.9 }}
       transition={{ duration: 0.2 }}
       className="fixed bottom-6 left-4 sm:bottom-8 sm:left-8 z-50 p-3 rounded-full bg-[#25D366] text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2 flex items-center justify-center"
-      aria-label="Chat on WhatsApp"
+      aria-label="Chat with us on WhatsApp"
     >
       <svg
         aria-hidden="true"

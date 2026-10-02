@@ -3,29 +3,9 @@
 import Image from 'next/image';
 import { Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
+import team from '@content/team.json';
 
-const leaders = [
-  {
-    name: 'Nispal Bhattarai',
-    role: 'CEO & Founder',
-    bio: 'Visionary leader with a passion for driving technological innovation and business growth. Oversees the strategic direction and operations of Astra Technology Horizon.',
-    image: '/images/ceo.jpg',
-    social: {
-      linkedin: 'https://www.linkedin.com/in/nispal-bhattarai-2661b430a/',
-      email: 'mailto:contact@nispalbhattarai.com.np',
-    }
-  },
-  {
-    name: 'Saphal Koirala', 
-    role: 'Director',
-    bio: 'Strategic director focusing on operational excellence and building long-lasting client relationships across global markets.',
-    image: '/images/director.jpg',
-    social: {
-      linkedin: 'https://www.linkedin.com/in/saphalkoirala19/',
-      email: 'mailto:forsaphal.koirala@gmail.com',
-    }
-  }
-];
+const leaders = team;
 
 const LinkedinIcon = () => (
   <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -91,7 +71,7 @@ export default function Leadership() {
               variants={itemVariants}
               className="flex flex-col items-center text-center group"
             >
-              <div className="relative w-48 h-48 sm:w-56 sm:h-56 mb-8 rounded-full overflow-hidden bg-brand-accent-soft border-4 border-white ring-1 ring-brand-accent-muted shadow-lg transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2">
+              <div className="relative w-48 h-48 sm:w-56 sm:h-56 mb-8 rounded-full overflow-hidden bg-brand-accent-soft border-4 border-brand-card ring-1 ring-brand-accent-muted shadow-lg transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2">
                 {/* Fallback avatar if image fails */}
                 <div aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-brand-accent-soft text-brand-accent-muted">
                   <svg className="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
@@ -118,12 +98,12 @@ export default function Leadership() {
               
               <div className="flex items-center gap-4">
                 {leader.social.linkedin && (
-                  <a href={leader.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${leader.name} on LinkedIn`} className="w-10 h-10 rounded-full bg-white shadow-sm border border-brand-border flex items-center justify-center text-brand-text-secondary hover:text-white hover:bg-[#0A66C2] hover:border-[#0A66C2] transition-all duration-300 hover:-translate-y-1">
+                  <a href={leader.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${leader.name} on LinkedIn`} className="w-10 h-10 rounded-full bg-brand-card shadow-sm border border-brand-border flex items-center justify-center text-brand-text-secondary hover:text-white hover:bg-[#0A66C2] hover:border-[#0A66C2] transition-all duration-300 hover:-translate-y-1">
                     <LinkedinIcon />
                   </a>
                 )}
                 {leader.social.email && (
-                  <a href={leader.social.email} aria-label={`Email ${leader.name}`} className="w-10 h-10 rounded-full bg-white shadow-sm border border-brand-border flex items-center justify-center text-brand-text-secondary hover:text-white hover:bg-brand-accent hover:border-brand-accent transition-all duration-300 hover:-translate-y-1">
+                  <a href={leader.social.email} aria-label={`Email ${leader.name}`} className="w-10 h-10 rounded-full bg-brand-card shadow-sm border border-brand-border flex items-center justify-center text-brand-text-secondary hover:text-white hover:bg-brand-accent-strong hover:border-brand-accent transition-all duration-300 hover:-translate-y-1">
                     <Mail className="w-4 h-4" aria-hidden="true" />
                   </a>
                 )}

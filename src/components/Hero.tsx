@@ -6,32 +6,32 @@ import { motion, MotionConfig } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const techIcons = [
-  { name: "React", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg", size: "w-20 h-20", position: "top-[10%] right-[30%]", delay: 0, duration: 5 },
-  { name: "Next.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg", size: "w-16 h-16", position: "top-[40%] right-[10%]", delay: 1, duration: 6 },
-  { name: "TypeScript", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg", size: "w-14 h-14", position: "bottom-[15%] right-[25%]", delay: 2, duration: 4.5 },
-  { name: "Node.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg", size: "w-16 h-16", position: "bottom-[30%] left-[20%]", delay: 0.5, duration: 5.5 },
-  { name: "Python", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg", size: "w-14 h-14", position: "top-[20%] left-[25%]", delay: 1.5, duration: 5 },
-  { name: "AWS", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg", size: "w-16 h-16", position: "top-[45%] left-[5%]", delay: 2.5, duration: 6 },
-  { name: "Docker", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg", size: "w-14 h-14", position: "bottom-[10%] left-[45%]", delay: 0.8, duration: 4.8 },
-  { name: "PostgreSQL", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg", size: "w-12 h-12", position: "top-[5%] right-[5%]", delay: 1.2, duration: 5.2 },
-  { name: "Flutter", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg", size: "w-16 h-16", position: "bottom-[5%] right-[5%]", delay: 1.8, duration: 5.8 },
-  { name: "MongoDB", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg", size: "w-14 h-14", position: "top-[5%] left-[10%]", delay: 0.3, duration: 4.6 },
-  { name: "Firebase", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg", size: "w-12 h-12", position: "bottom-[45%] right-[25%]", delay: 2.2, duration: 5.4 },
-  { name: "GraphQL", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/graphql/graphql-plain.svg", size: "w-14 h-14", position: "bottom-[20%] left-[5%]", delay: 1.1, duration: 6.2 },
+  { name: "React", src: "/tech/react.svg", size: "w-20 h-20", position: "top-[10%] right-[30%]", delay: 0, duration: 5 },
+  { name: "Next.js", src: "/tech/nextjs.svg", size: "w-16 h-16", position: "top-[40%] right-[10%]", delay: 1, duration: 6 },
+  { name: "TypeScript", src: "/tech/typescript.svg", size: "w-14 h-14", position: "bottom-[15%] right-[25%]", delay: 2, duration: 4.5 },
+  { name: "Node.js", src: "/tech/nodejs.svg", size: "w-16 h-16", position: "bottom-[30%] left-[20%]", delay: 0.5, duration: 5.5 },
+  { name: "Python", src: "/tech/python.svg", size: "w-14 h-14", position: "top-[20%] left-[25%]", delay: 1.5, duration: 5 },
+  { name: "AWS", src: "/tech/amazonwebservices.svg", size: "w-16 h-16", position: "top-[45%] left-[5%]", delay: 2.5, duration: 6 },
+  { name: "Docker", src: "/tech/docker.svg", size: "w-14 h-14", position: "bottom-[10%] left-[45%]", delay: 0.8, duration: 4.8 },
+  { name: "PostgreSQL", src: "/tech/postgresql.svg", size: "w-12 h-12", position: "top-[5%] right-[5%]", delay: 1.2, duration: 5.2 },
+  { name: "Flutter", src: "/tech/flutter.svg", size: "w-16 h-16", position: "bottom-[5%] right-[5%]", delay: 1.8, duration: 5.8 },
+  { name: "MongoDB", src: "/tech/mongodb.svg", size: "w-14 h-14", position: "top-[5%] left-[10%]", delay: 0.3, duration: 4.6 },
+  { name: "Firebase", src: "/tech/firebase.svg", size: "w-12 h-12", position: "bottom-[45%] right-[25%]", delay: 2.2, duration: 5.4 },
+  { name: "GraphQL", src: "/tech/graphql.svg", size: "w-14 h-14", position: "bottom-[20%] left-[5%]", delay: 1.1, duration: 6.2 },
 ];
 
 export default function Hero() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative bg-gradient-to-b from-brand-accent-soft to-white min-h-[80vh] flex items-center pt-28 pb-14 lg:pt-32 lg:pb-20 border-b border-brand-border overflow-hidden"
+      className="relative bg-gradient-to-b from-brand-accent-soft to-brand-bg min-h-[80vh] flex items-center pt-28 pb-14 lg:pt-32 lg:pb-20 border-b border-brand-border overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
 
           {/* Left Column - Text Content */}
           <div className="max-w-3xl relative z-10">
-            <p className="inline-flex items-center gap-2 rounded-full bg-white border border-brand-accent-muted px-4 py-1.5 text-brand-accent font-semibold text-xs sm:text-sm tracking-wide uppercase mb-6 shadow-sm">
+            <p className="inline-flex items-center gap-2 rounded-full bg-brand-card border border-brand-accent-muted px-4 py-1.5 text-brand-accent font-semibold text-xs sm:text-sm tracking-wide uppercase mb-6 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-brand-accent" aria-hidden="true" />
               <span className="hidden sm:inline">Software Development Company ·</span> Itahari, Nepal
             </p>

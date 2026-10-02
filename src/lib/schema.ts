@@ -114,3 +114,55 @@ export function faqSchema(faqs: { question: string; answer: string }[]) {
     })),
   };
 }
+
+export function jobPostingSchema(job: {
+  slug: string;
+  title: string;
+  description: string;
+  datePosted: string;
+  validThrough: string;
+  employmentType: string;
+  remote: boolean;
+  responsibilities: string[];
+  requirements: string[];
+}) {
+  const list = (title: string, items: string[]) =>
+    items.length ? `<p><strong>${title}</strong></p><ul>${items.map((i) => `<li>${i}</li>`).join("")}</ul>` : "";
+  return {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    title: job.title,
+    description: `<p>${job.description}</p>${list("Responsibilities", job.responsibilities)}${list("Requirements", job.requirements)}`,
+    datePosted: job.datePosted,
+    ...(job.validThrough ? { validThrough: job.validThrough } : {}),
+    employmentType: job.employmentType,
+    url: absoluteUrl(`/careers/${job.slug}`),
+    hiringOrganization: { "@type": "Organization", "@id": ORG_ID, name: site.name, sameAs: SITE_URL, logo: absoluteUrl(site.logo) },
+    ...(job.remote
+      ? { jobLocationType: "TELECOMMUTE", applicantLocationRequirements: { "@type": "Country", name: "Nepal" } }
+      : {
+          jobLocation: {
+            "@type": "Place",
+            address: postalAddress,
+          },
+        }),
+    directApply: true,
+  };
+}
+
+export function articleSchema(post: { slug: string; title: string; description: string; date: string; author: string; image: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    dateModified: post.date,
+    image: absoluteUrl(post.image),
+    url: absoluteUrl(`/blog/${post.slug}`),
+    mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
+    author: { "@type": "Organization", name: post.author, url: SITE_URL },
+    publisher: { "@id": ORG_ID },
+  };
+}
+

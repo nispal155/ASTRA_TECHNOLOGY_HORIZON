@@ -9,7 +9,7 @@ interface FormFieldProps {
 }
 
 const controlClass =
-  "w-full bg-white border border-brand-border-dark rounded-[var(--radius-control)] px-4 py-3 text-base text-brand-text placeholder:text-brand-text-muted hover:border-brand-accent-light focus:outline-none focus:ring-2 focus:ring-brand-accent/30 focus:border-brand-accent disabled:bg-brand-surface disabled:cursor-not-allowed transition-colors";
+  "w-full bg-brand-card border border-brand-border-dark rounded-[var(--radius-control)] px-4 py-3 text-base text-brand-text placeholder:text-brand-text-muted hover:border-brand-accent-light focus:outline-none focus:ring-2 focus:ring-brand-accent/30 focus:border-brand-accent disabled:bg-brand-surface disabled:cursor-not-allowed transition-colors";
 
 const FieldLabel = ({ id, label, required }: { id: string; label: string; required?: boolean }) => (
   <label htmlFor={id} className="block text-sm font-medium text-brand-primary mb-2">

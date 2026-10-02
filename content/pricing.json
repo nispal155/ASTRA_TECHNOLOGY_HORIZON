@@ -1,0 +1,52 @@
+{
+  "draft": true,
+  "_help": "All prices are placeholders (TODO). Set real NPR amounts, then change draft to false to publish /pricing and the cost estimator.",
+  "currency": "NPR",
+  "packages": [
+    {
+      "name": "Starter Website",
+      "priceFrom": 0,
+      "description": "TODO: who this package is for.",
+      "features": ["TODO: e.g. Up to 5 pages", "TODO: Mobile-friendly design", "TODO: Contact form", "TODO: Basic on-page SEO"],
+      "cta": "Get Started",
+      "highlighted": false
+    },
+    {
+      "name": "Business Website",
+      "priceFrom": 0,
+      "description": "TODO",
+      "features": ["TODO", "TODO", "TODO", "TODO"],
+      "cta": "Get a Quote",
+      "highlighted": true
+    },
+    {
+      "name": "Custom App",
+      "priceFrom": 0,
+      "description": "TODO",
+      "features": ["TODO", "TODO", "TODO", "TODO"],
+      "cta": "Talk to Us",
+      "highlighted": false
+    }
+  ],
+  "estimator": {
+    "projectTypes": [
+      { "id": "website", "label": "Business website", "base": 0 },
+      { "id": "ecommerce", "label": "E-commerce store", "base": 0 },
+      { "id": "webapp", "label": "Custom web application", "base": 0 },
+      { "id": "mobile", "label": "Mobile app (iOS & Android)", "base": 0 }
+    ],
+    "pageOrScreenPrice": 0,
+    "designLevels": [
+      { "id": "template", "label": "Template-based", "multiplier": 1 },
+      { "id": "custom", "label": "Custom design", "multiplier": 1.3 },
+      { "id": "premium", "label": "Premium / branded", "multiplier": 1.6 }
+    ],
+    "addons": [
+      { "id": "seo", "label": "SEO setup", "price": 0 },
+      { "id": "cms", "label": "Content management", "price": 0 },
+      { "id": "payments", "label": "Online payments (eSewa / Khalti)", "price": 0 },
+      { "id": "maintenance", "label": "1 year maintenance", "price": 0 }
+    ],
+    "rangeSpread": 0.2
+  }
+}

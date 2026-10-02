@@ -2,7 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import ScrollToTop from "@/components/ScrollToTop";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import Analytics from "@/components/Analytics";
 import JsonLd from "@/components/JsonLd";
+import { themeInitScript } from "@/lib/theme";
 import { site, SITE_URL } from "@/lib/site";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import "./globals.css";
@@ -43,6 +45,10 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
   },
   formatDetection: { telephone: true, email: true, address: true },
+  verification: {
+    ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } : {}),
+    ...(process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ? { other: { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION } } : {}),
+  },
 };
 
 export const viewport: Viewport = {
@@ -57,8 +63,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} scroll-smooth`}>
+    <html lang="en" className={`${geistSans.variable} scroll-smooth`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col overflow-x-hidden">
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
         <a
           href="#main"
@@ -69,6 +76,7 @@ export default function RootLayout({
         {children}
         <ScrollToTop />
         <WhatsAppButton />
+        <Analytics />
       </body>
     </html>
   );

@@ -1,0 +1,8 @@
+{
+  "_help": "Client logos shown in the 'Trusted by' strip. Add a logo file to public/images/clients/ and set `logo`; without a logo the name is shown as text.",
+  "clients": [
+    { "name": "Bodhi Tree Journeys Nepal", "url": "https://bodhitreejourneysnepal.com/", "logo": "" },
+    { "name": "MDS Foundation", "url": "https://mdsfoundation.org.np/", "logo": "" },
+    { "name": "Rahul Parajuli", "url": "https://rahulparajuli.com.np/", "logo": "" }
+  ]
+}

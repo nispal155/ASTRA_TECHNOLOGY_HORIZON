@@ -8,59 +8,10 @@ import Footer from "@/components/Footer";
 import SectionHeader from "@/components/SectionHeader";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Link from "next/link";
+import projects from "@content/projects.json";
 
-const ALL_PROJECTS = [
-  {
-    id: 1,
-    title: "Enterprise E-Commerce Platform",
-    category: "Web Development",
-    image: "https://images.unsplash.com/photo-1661956602116-aa6865609028?q=80&w=1000&auto=format&fit=crop",
-    tech: ["Next.js", "Stripe", "Tailwind"],
-    description: "A highly scalable e-commerce solution processing thousands of transactions per day with millisecond latency."
-  },
-  {
-    id: 2,
-    title: "Healthcare Analytics Dashboard",
-    category: "Data Analytics",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
-    tech: ["React", "Python", "AWS"],
-    description: "Real-time analytics dashboard for hospitals to track patient flow and resource allocation."
-  },
-  {
-    id: 3,
-    title: "FinTech Mobile Application",
-    category: "Mobile App",
-    image: "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?q=80&w=1000&auto=format&fit=crop",
-    tech: ["React Native", "Node.js", "MongoDB"],
-    description: "A secure and intuitive mobile banking application serving over 50,000 active users."
-  },
-  {
-    id: 4,
-    title: "Logistics Fleet Tracker",
-    category: "IoT & Web",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1000&auto=format&fit=crop",
-    tech: ["Vue.js", "Express", "PostgreSQL", "Socket.io"],
-    description: "Real-time GPS tracking and route optimization system for commercial transport fleets."
-  },
-  {
-    id: 5,
-    title: "AI Customer Support Agent",
-    category: "Machine Learning",
-    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1000&auto=format&fit=crop",
-    tech: ["OpenAI", "Next.js", "LangChain"],
-    description: "Intelligent autonomous support agent that resolves 60% of tier-1 customer inquiries automatically."
-  },
-  {
-    id: 6,
-    title: "Real Estate SaaS Platform",
-    category: "Web Application",
-    image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1000&auto=format&fit=crop",
-    tech: ["Next.js", "Prisma", "Supabase"],
-    description: "Comprehensive property management and tenant portal for mid-sized real estate agencies."
-  }
-];
-
-const CATEGORIES = ["All", "Web Development", "Mobile App", "Data Analytics", "Machine Learning", "IoT & Web", "Web Application"];
+const ALL_PROJECTS = projects;
+const CATEGORIES = ["All", ...Array.from(new Set(projects.map((p) => p.category)))];
 
 export default function ProjectsPage() {
   const [filter, setFilter] = useState("All");
@@ -73,7 +24,7 @@ export default function ProjectsPage() {
     <div className="flex flex-col min-h-screen bg-brand-surface">
       <Navbar />
       <main id="main" className="flex-grow pt-16 sm:pt-20">
-      <section className="pt-10 pb-16 lg:pt-14 lg:pb-24 bg-gradient-to-b from-brand-accent-soft via-white to-white border-b border-brand-border">
+      <section className="pt-10 pb-16 lg:pt-14 lg:pb-24 bg-gradient-to-b from-brand-accent-soft via-brand-bg to-brand-bg border-b border-brand-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumbs items={[{ name: 'Projects', path: '/projects' }]} className="mb-10" />
           <div className="text-center mb-8">
@@ -95,8 +46,8 @@ export default function ProjectsPage() {
                 aria-pressed={filter === category}
                 className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
                   filter === category 
-                    ? "bg-brand-accent border-brand-accent text-white shadow-[var(--shadow-card)]" 
-                    : "bg-white text-brand-text-secondary border-brand-border hover:border-brand-accent hover:text-brand-accent"
+                    ? "bg-brand-accent-strong border-brand-accent-strong text-white shadow-[var(--shadow-card)]" 
+                    : "bg-brand-card text-brand-text-secondary border-brand-border hover:border-brand-accent hover:text-brand-accent"
                 }`}
               >
                 {category}
@@ -114,7 +65,7 @@ export default function ProjectsPage() {
                 <div className="relative w-full aspect-[16/10] overflow-hidden bg-brand-accent-soft">
                   <Image 
                     src={project.image} 
-                    alt={`${project.title} — ${project.category} project preview`}
+                    alt={project.imageAlt}
                     fill
                     sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -130,7 +81,7 @@ export default function ProjectsPage() {
                     {project.title}
                   </h2>
                   <p className="text-brand-text-secondary text-sm mb-6 line-clamp-2">
-                    {project.description}
+                    {project.summary}
                   </p>
                   
                   <div className="flex flex-wrap gap-2 mb-6">

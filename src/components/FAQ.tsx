@@ -34,7 +34,7 @@ export default function FAQ() {
             return (
               <div 
                 key={index}
-                className={`bg-white border rounded-[var(--radius-card)] overflow-hidden transition-colors ${isOpen ? "border-brand-accent shadow-[var(--shadow-card)]" : "border-brand-border hover:border-brand-accent-muted"}`}
+                className={`bg-brand-card border rounded-[var(--radius-card)] overflow-hidden transition-colors ${isOpen ? "border-brand-accent shadow-[var(--shadow-card)]" : "border-brand-border hover:border-brand-accent-muted"}`}
               >
                 <h3>
                 <button
