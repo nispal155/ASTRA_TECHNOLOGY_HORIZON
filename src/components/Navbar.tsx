@@ -2,110 +2,129 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { Menu, X, ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/#about" },
+  { name: "Services", href: "/#services" },
+  { name: "Projects", href: "/projects" },
+  { name: "Careers", href: "/careers" },
+  { name: "Insights", href: "/#insights" },
+  { name: "Contact", href: "/#contact" },
+];
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 10) {
-      setIsScrolled(true);
-    } else {
-      setIsScrolled(false);
-    }
+    setIsScrolled(latest > 10);
   });
 
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/#about" },
-    { name: "Services", href: "/#services" },
-    { name: "Articles", href: "/#insights" },
-    { name: "Contact", href: "/#contact" },
-  ];
+  // Close the mobile menu with Escape
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setIsMenuOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isMenuOpen]);
+
+  // Page routes are "active" on their own path; in-page anchors are never marked active
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : !href.includes("#") && pathname.startsWith(href);
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 w-full bg-white transition-shadow duration-300 ${
-          isScrolled ? "shadow-sm border-b border-brand-border" : "border-b border-brand-border"
+        className={`fixed top-0 left-0 right-0 z-50 w-full bg-white/95 backdrop-blur border-b border-brand-border transition-shadow duration-300 ${
+          isScrolled ? "shadow-sm" : ""
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
           {/* Logo and Brand Name */}
-          <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-105 bg-brand-primary rounded-md p-1">
-                <Image
-                  src="/Company-Logo.jpg"
-                  alt="Astra Technology Horizon Logo"
-                  fill
-                  sizes="48px"
-                  className="object-contain p-1"
-                />
-              </div>
-              <span className="font-bold tracking-tight text-base sm:text-lg text-brand-primary hidden sm:block">
-                Astra Technology Horizon
-              </span>
-              <span className="font-bold tracking-tight text-base text-brand-primary sm:hidden">
-                Astra
-              </span>
-            </Link>
-          </div>
+          <Link href="/" className="flex items-center gap-3 group shrink-0" aria-label="Astra Technology Horizon — home">
+            <span className="relative w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-105 bg-brand-primary rounded-lg overflow-hidden">
+              <Image
+                src="/Company-Logo.jpg"
+                alt=""
+                fill
+                sizes="48px"
+                className="object-contain scale-150"
+                priority
+              />
+            </span>
+            <span className="font-bold tracking-tight text-base sm:text-lg text-brand-primary">
+              <span className="hidden sm:inline">Astra Technology Horizon</span>
+              <span className="sm:hidden">Astra Tech</span>
+            </span>
+          </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav aria-label="Main" className="hidden xl:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-brand-text-secondary hover:text-brand-accent transition-colors"
+                aria-current={isActive(link.href) ? "page" : undefined}
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  isActive(link.href)
+                    ? "text-brand-accent bg-brand-accent-soft"
+                    : "text-brand-text-secondary hover:text-brand-accent hover:bg-brand-accent-soft"
+                }`}
               >
                 {link.name}
               </Link>
             ))}
-            <Link
-              href="/quote"
-              className="bg-brand-primary hover:bg-brand-primary-light text-white px-5 py-2.5 rounded-md text-sm font-medium transition-colors shadow-sm"
-            >
-              Get a Quote →
+            <Link href="/quote" className="btn-primary ml-3 px-5 py-2.5 text-sm">
+              Get a Free Quote <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </Link>
           </nav>
 
           {/* Mobile menu button */}
-          <div className="flex md:hidden items-center">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-brand-text hover:text-brand-accent p-2 transition-colors"
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="xl:hidden text-brand-primary hover:text-brand-accent hover:bg-brand-accent-soft p-2.5 rounded-md transition-colors"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+          >
+            {isMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+          </button>
         </div>
       </header>
 
       {/* Mobile Navigation Panel */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div
+          <motion.nav
+            id="mobile-menu"
+            aria-label="Mobile"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden fixed top-[64px] left-0 w-full bg-white border-b border-brand-border shadow-md z-40"
+            className="xl:hidden fixed top-16 sm:top-20 left-0 w-full max-h-[calc(100dvh-4rem)] overflow-y-auto bg-white border-b border-brand-border shadow-lg z-40"
           >
-            <div className="px-4 py-4 flex flex-col gap-2">
+            <div className="px-4 py-4 flex flex-col gap-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="block px-4 py-3 text-base font-medium text-brand-text hover:text-brand-accent hover:bg-brand-surface rounded-md transition-colors"
+                  aria-current={isActive(link.href) ? "page" : undefined}
+                  className={`block px-4 py-3 text-base font-medium rounded-md transition-colors ${
+                    isActive(link.href)
+                      ? "text-brand-accent bg-brand-accent-soft"
+                      : "text-brand-primary hover:text-brand-accent hover:bg-brand-accent-soft"
+                  }`}
                 >
                   {link.name}
                 </Link>
@@ -114,13 +133,13 @@ export default function Navbar() {
                 <Link
                   href="/quote"
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center justify-center w-full bg-brand-primary hover:bg-brand-primary-light text-white px-6 py-3 rounded-md font-medium transition-colors"
+                  className="btn-primary w-full px-6 py-3"
                 >
-                  Get a Quote →
+                  Get a Free Quote <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </Link>
               </div>
             </div>
-          </motion.div>
+          </motion.nav>
         )}
       </AnimatePresence>
     </>

@@ -1,53 +1,54 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
+import type { Metadata, Viewport } from "next";
+import { Geist } from "next/font/google";
 import ScrollToTop from "@/components/ScrollToTop";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import JsonLd from "@/components/JsonLd";
+import { site, SITE_URL } from "@/lib/site";
+import { organizationSchema, websiteSchema } from "@/lib/schema";
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Astra Technology Horizon | Premier IT Solutions",
-  description: "Astra Technology Horizon delivers software engineering, IT consulting, and cloud transformation services in Itahari, Nepal.",
-  keywords: ["IT Company Nepal", "Software Development", "Web Design", "Astra Technology", "Itahari IT"],
-  authors: [{ name: "Astra Technology Horizon" }],
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${site.name} | ${site.tagline}`,
+    template: `%s | ${site.name}`,
+  },
+  description: site.description,
+  applicationName: site.name,
+  authors: [{ name: site.name, url: SITE_URL }],
+  creator: site.name,
+  publisher: site.name,
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://astratechnologyhorizon.com",
-    siteName: "Astra Technology Horizon",
-    title: "Astra Technology Horizon | Premier IT Solutions",
-    description: "Software engineering and IT consulting services in Nepal.",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Astra Technology Horizon",
-      },
-    ],
+    url: SITE_URL,
+    siteName: site.name,
+    title: `${site.name} | ${site.tagline}`,
+    description: site.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Astra Technology Horizon",
-    description: "Premier IT Solutions and Software Development",
+    title: `${site.name} | ${site.tagline}`,
+    description: site.description,
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  formatDetection: { telephone: true, email: true, address: true },
 };
 
-export const viewport = {
+export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  themeColor: "#ffffff",
+  themeColor: "#1D4ED8",
 };
 
 export default function RootLayout({
@@ -56,40 +57,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}>
-      <head>
-        <Script id="schema-org" type="application/ld+json" strategy="afterInteractive">
-          {`
-          {
-            "@context": "https://schema.org",
-            "@type": "ITCompany",
-            "name": "Astra Technology Horizon",
-            "url": "https://astratechnologyhorizon.com",
-            "logo": "https://astratechnologyhorizon.com/Company-Logo.jpg",
-            "description": "Software engineering and IT consulting firm based in Itahari, Nepal.",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Itahari",
-              "addressLocality": "Sunsari",
-              "addressRegion": "Koshi",
-              "postalCode": "56705",
-              "addressCountry": "NP"
-            },
-            "contactPoint": {
-              "@type": "ContactPoint",
-              "telephone": "9852048719",
-              "contactType": "customer service",
-              "email": "contact@astratechnologyhorizon.com"
-            },
-            "sameAs": [
-              "https://www.linkedin.com/company/astra-technology-horizon",
-              "https://www.facebook.com/astratechnologyhorizon"
-            ]
-          }
-          `}
-        </Script>
-      </head>
+    <html lang="en" className={`${geistSans.variable} scroll-smooth`}>
       <body className="min-h-full flex flex-col overflow-x-hidden">
+        <JsonLd data={[organizationSchema(), websiteSchema()]} />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] btn-primary focus:px-4 focus:py-2"
+        >
+          Skip to main content
+        </a>
         {children}
         <ScrollToTop />
         <WhatsAppButton />

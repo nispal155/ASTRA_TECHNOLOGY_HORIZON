@@ -1,27 +1,50 @@
 @import "tailwindcss";
 
+/*
+ * Astra Technology Horizon design tokens — White + Blue theme.
+ * Every colour used in the UI should come from these tokens so the
+ * theme stays consistent across components.
+ */
 @theme inline {
-  --color-brand-primary: #000000;
-  --color-brand-primary-light: #1A1A1A;
-  --color-brand-accent: #2563EB;
-  --color-brand-accent-hover: #1D4ED8;
-  --color-brand-surface: #F8FAFC;
+  /* Navy — headings, primary text, dark brand surfaces */
+  --color-brand-primary: #0B1F3A;
+  --color-brand-primary-light: #13294B;
+
+  /* Blue — buttons, links, icons, highlights, interactive states */
+  --color-brand-accent: #1D4ED8;
+  --color-brand-accent-hover: #1E40AF;
+  --color-brand-accent-light: #3B82F6;
+  --color-brand-accent-muted: #DBEAFE;
+  --color-brand-accent-soft: #EFF6FF;
+
+  /* Surfaces & borders */
+  --color-brand-surface: #F5F8FC;
   --color-brand-border: #E2E8F0;
-  --color-brand-border-light: #F1F5F9;
-  
-  /* Legacy mappings (to be removed during refactor) */
-  --color-brand-light-bg: #F7F8FA;
-  --color-brand-light-slate: #F7F8FA;
-  
-  --color-brand-text: #000000;
-  --color-brand-text-secondary: #4B5563;
-  --color-brand-text-muted: #9CA3AF;
-  
+  --color-brand-border-light: #EEF2F7;
+  --color-brand-border-dark: #CBD5E1;
+
+  /* Text */
+  --color-brand-text: #0F172A;
+  --color-brand-text-secondary: #475569;
+  --color-brand-text-muted: #64748B;
+
+  /* States */
+  --color-brand-success: #047857;
+  --color-brand-success-soft: #ECFDF5;
+  --color-brand-danger: #B91C1C;
+  --color-brand-danger-soft: #FEF2F2;
+  --color-brand-focus: #2563EB;
+
+  /* Shape & elevation */
+  --radius-card: 0.75rem;
+  --radius-control: 0.5rem;
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 1px 3px rgb(29 78 216 / 0.06);
+  --shadow-card-hover: 0 4px 12px rgb(15 23 42 / 0.06), 0 8px 24px rgb(29 78 216 / 0.08);
+
   --font-sans: var(--font-geist-sans), Arial, Helvetica, sans-serif;
-  --font-mono: var(--font-geist-mono);
-  
+
   --animate-scroll: scroll 40s linear infinite;
-  
+
   @keyframes scroll {
     to {
       transform: translateX(calc(-50% - 1rem));
@@ -29,9 +52,69 @@
   }
 }
 
+/* Reusable component utilities */
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  border-radius: var(--radius-control);
+  background-color: var(--color-brand-accent);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: var(--shadow-card);
+  transition: background-color 150ms, box-shadow 150ms, transform 150ms;
+  &:hover {
+    background-color: var(--color-brand-accent-hover);
+    box-shadow: var(--shadow-card-hover);
+  }
+  &:active {
+    transform: translateY(1px);
+  }
+  &:disabled,
+  &[aria-disabled="true"] {
+    background-color: var(--color-brand-border-dark);
+    color: var(--color-brand-text-secondary);
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+}
+
+@utility btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  border-radius: var(--radius-control);
+  background-color: #fff;
+  color: var(--color-brand-accent);
+  font-weight: 600;
+  border: 1px solid var(--color-brand-accent-muted);
+  transition: background-color 150ms, border-color 150ms, color 150ms;
+  &:hover {
+    background-color: var(--color-brand-accent-soft);
+    border-color: var(--color-brand-accent);
+    color: var(--color-brand-accent-hover);
+  }
+}
+
+@utility card {
+  background-color: #fff;
+  border: 1px solid var(--color-brand-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
 :root {
-  --background: #FFFFFF;
+  --background: #ffffff;
   --foreground: var(--color-brand-text);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem; /* keep anchored sections clear of the fixed navbar */
 }
 
 body {
@@ -42,6 +125,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-html {
-  scroll-behavior: smooth;
+::selection {
+  background-color: var(--color-brand-accent-muted);
+  color: var(--color-brand-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand-focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

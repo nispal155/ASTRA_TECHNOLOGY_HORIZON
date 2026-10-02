@@ -24,7 +24,7 @@ export default function ScrollToTop() {
  };
 
  useEffect(() => {
-   window.addEventListener("scroll", toggleVisibility);
+   window.addEventListener("scroll", toggleVisibility, { passive: true });
    return () => window.removeEventListener("scroll", toggleVisibility);
  }, []);
 
@@ -37,10 +37,11 @@ export default function ScrollToTop() {
          exit={{ opacity: 0, scale: 0.8, y: 10 }}
          transition={{ duration: 0.2 }}
          onClick={scrollToTop}
-         className="fixed bottom-8 right-8 z-50 p-3 rounded-full bg-brand-primary text-white shadow-md hover:bg-brand-accent hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
+         type="button"
+         className="fixed bottom-6 right-4 sm:bottom-8 sm:right-8 z-50 p-3 rounded-full bg-brand-accent text-white shadow-md hover:bg-brand-accent-hover hover:shadow-lg transition-all"
          aria-label="Scroll to top"
        >
-         <ArrowUp className="w-5 h-5" />
+         <ArrowUp className="w-5 h-5" aria-hidden="true" />
        </motion.button>
      )}
    </AnimatePresence>

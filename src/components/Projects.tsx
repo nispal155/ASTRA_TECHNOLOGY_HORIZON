@@ -41,7 +41,7 @@ export default function Projects() {
  <h2 className="text-brand-accent font-semibold tracking-wide uppercase text-sm mb-3">Our Portfolio</h2>
  <h3 className="text-3xl md:text-5xl font-bold text-brand-text mb-4 tracking-tight">Completed Projects</h3>
  <p className="text-lg text-slate-600 ">
- Explore some of the recent digital solutions we've engineered for our clients.
+ Explore some of the recent digital solutions we&rsquo;ve engineered for our clients.
  </p>
  </motion.div>
  </div>
@@ -58,7 +58,7 @@ export default function Projects() {
  key={index}
  variants={itemVariants}
  whileHover={{ y: -10 }}
- className="bg-brand-light-bg rounded-3xl p-8 border border-slate-200 shadow-sm transition-all duration-300 group flex flex-col h-full"
+ className="bg-brand-surface rounded-3xl p-8 border border-slate-200 shadow-sm transition-all duration-300 group flex flex-col h-full"
  >
  <div className="flex-grow">
  <h4 className="text-2xl font-bold text-brand-text mb-3 group-hover:text-brand-accent transition-colors">{project.title}</h4>

@@ -1,11 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useQueryParam } from "@/lib/useQueryParam";
 import { Code, Smartphone, Palette, Cloud, ShieldCheck, Megaphone, Send, CheckCircle2, Loader2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionHeader from "@/components/SectionHeader";
-import { FormInput, FormTextarea, FormSelect } from "@/components/FormFields";
+import { FormInput, FormTextarea, FormSelect, FormAlert } from "@/components/FormFields";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { site, WEB3FORMS_ACCESS_KEY } from "@/lib/site";
 
 const IT_SERVICES = [
   {
@@ -52,18 +55,28 @@ export default function QuotePage() {
     email: '',
     phone: '',
     company: '',
-    service: 'Web Development',
+    service: '',
     budget: '',
     message: ''
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [hasError, setHasError] = useState(false);
+
+  // Pre-select a service when arriving from a service page (/quote?service=...)
+  const requestedService = useQueryParam('service');
+  const queryService = requestedService
+    ? (IT_SERVICES.find((s) => s.title.toLowerCase() === requestedService.toLowerCase())
+      ?? IT_SERVICES.find((s) => requestedService.toLowerCase().includes(s.title.split(' ')[0].toLowerCase())))?.title ?? 'Other'
+    : '';
+  const selectedService = formData.service || queryService || 'Web Development';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+    setHasError(false);
+
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -72,21 +85,24 @@ export default function QuotePage() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "YOUR_ACCESS_KEY_HERE",
-          subject: `New Quote Request: ${formData.service}`,
-          ...formData
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `New Quote Request: ${selectedService}`,
+          ...formData,
+          service: selectedService,
         }),
       });
 
       if (response.status === 200) {
         setIsSubmitted(true);
-        setFormData({ name: '', email: '', phone: '', company: '', service: 'Web Development', budget: '', message: '' });
+        setFormData({ name: '', email: '', phone: '', company: '', service: '', budget: '', message: '' });
+        setTimeout(() => setIsSubmitted(false), 5000);
+      } else {
+        setHasError(true);
       }
-    } catch (error) {
-      console.error(error);
+    } catch {
+      setHasError(true);
     } finally {
       setIsSubmitting(false);
-      setTimeout(() => setIsSubmitted(false), 5000);
     }
   };
 
@@ -96,13 +112,15 @@ export default function QuotePage() {
   };
 
   return (
-    <main className="min-h-screen bg-brand-surface pt-20">
+    <div className="flex flex-col min-h-screen bg-brand-surface">
       <Navbar />
-      
-      <section className="py-20 lg:py-24 bg-white border-b border-brand-border">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <main id="main" className="flex-grow pt-16 sm:pt-20">
+      <section className="pt-10 pb-6 lg:pt-14 lg:pb-8 bg-gradient-to-b from-brand-accent-soft to-white border-b border-brand-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Breadcrumbs items={[{ name: 'Get a Quote', path: '/quote' }]} className="mb-10" />
           <SectionHeader
-            subtitle="Get a Quote"
+            as="h1"
+            subtitle="Get a Free Quote"
             title="Let's build something extraordinary."
             description="Select a service below and tell us about your project. Our experts will get back to you with a tailored proposal."
             centered={true}
@@ -110,52 +128,61 @@ export default function QuotePage() {
         </div>
       </section>
 
-      <section className="py-20 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <section className="py-14 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
         
         {/* Services List */}
         <div>
-          <h2 className="text-2xl font-bold text-brand-primary mb-8">Our IT Services</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-16 lg:mb-0">
+          <h2 className="text-2xl font-bold text-brand-primary mb-2">Our IT Services</h2>
+          <p className="text-brand-text-secondary mb-8">Select the service you need — it will be pre-filled in the form.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {IT_SERVICES.map((service) => (
-              <div 
+              <button
+                type="button"
                 key={service.id}
+                aria-pressed={selectedService === service.title}
                 onClick={() => setFormData(prev => ({...prev, service: service.title}))}
-                className={`bg-white border rounded-lg p-6 hover:border-brand-accent transition-all duration-300 cursor-pointer ${
-                  formData.service === service.title ? 'border-brand-accent shadow-sm' : 'border-brand-border'
+                className={`block w-full h-full text-left bg-white border rounded-[var(--radius-card)] p-6 hover:border-brand-accent hover:shadow-[var(--shadow-card-hover)] transition-all duration-300 ${
+                  selectedService === service.title ? 'border-brand-accent ring-2 ring-brand-accent/20 shadow-[var(--shadow-card)]' : 'border-brand-border'
                 }`}
               >
-                <div className={`w-12 h-12 rounded flex items-center justify-center mb-4 transition-colors ${
-                  formData.service === service.title ? 'bg-brand-accent text-white' : 'bg-brand-surface text-brand-primary border border-brand-border'
+                <span className={`w-12 h-12 rounded flex items-center justify-center mb-4 transition-colors ${
+                  selectedService === service.title ? 'bg-brand-accent text-white' : 'bg-brand-accent-soft text-brand-accent border border-brand-accent-muted'
                 }`}>
                   {service.icon}
-                </div>
-                <h3 className="text-lg font-semibold text-brand-primary mb-2">{service.title}</h3>
-                <p className="text-brand-text-secondary text-sm leading-relaxed">{service.description}</p>
-              </div>
+                </span>
+                <span className="block text-lg font-semibold text-brand-primary mb-2">{service.title}</span>
+                <span className="block text-brand-text-secondary text-sm leading-relaxed">{service.description}</span>
+              </button>
             ))}
           </div>
         </div>
 
         {/* Quote Form */}
         <div>
-          <div className="bg-white rounded-lg p-8 shadow-sm border border-brand-border sticky top-32">
-            <h3 className="text-2xl font-bold text-brand-primary mb-6">Request a Proposal</h3>
+          <div className="card p-6 sm:p-8 lg:sticky lg:top-28">
+            <h2 className="text-2xl font-bold text-brand-primary mb-6">Request a Proposal</h2>
             
             {isSubmitted ? (
-              <div className="flex flex-col items-center justify-center py-12 text-center">
-                <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-6">
-                  <CheckCircle2 className="w-8 h-8 text-green-500" />
+              <div role="status" className="flex flex-col items-center justify-center py-12 text-center">
+                <div className="w-16 h-16 bg-brand-success-soft rounded-full flex items-center justify-center mb-6">
+                  <CheckCircle2 className="w-8 h-8 text-brand-success" aria-hidden="true" />
                 </div>
-                <h4 className="text-xl font-bold text-brand-primary mb-2">Request Received!</h4>
+                <h3 className="text-xl font-bold text-brand-primary mb-2">Request Received!</h3>
                 <p className="text-brand-text-secondary">Thank you for reaching out. We will review your project details and respond shortly with a quote.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {hasError && (
+                  <FormAlert type="error">
+                    Sorry, your request could not be sent. Please try again or email us at{' '}
+                    <a href={`mailto:${site.email}`} className="underline font-medium">{site.email}</a>.
+                  </FormAlert>
+                )}
                 <FormSelect
                   id="service"
                   name="service"
                   label="Service Required"
-                  value={formData.service}
+                  value={selectedService}
                   onChange={handleChange}
                 >
                   {IT_SERVICES.map(service => (
@@ -170,6 +197,7 @@ export default function QuotePage() {
                     name="name"
                     label="Full Name"
                     required
+                    autoComplete="name"
                     placeholder="John Doe"
                     value={formData.name}
                     onChange={handleChange}
@@ -180,6 +208,7 @@ export default function QuotePage() {
                     type="email"
                     label="Email Address"
                     required
+                    autoComplete="email"
                     placeholder="john@example.com"
                     value={formData.email}
                     onChange={handleChange}
@@ -192,6 +221,7 @@ export default function QuotePage() {
                     name="phone"
                     type="tel"
                     label="Phone Number"
+                    autoComplete="tel"
                     placeholder="+977 98..."
                     value={formData.phone}
                     onChange={handleChange}
@@ -235,19 +265,15 @@ export default function QuotePage() {
                 <button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className={`w-full py-3 text-white rounded font-semibold transition-colors flex items-center justify-center gap-2 ${
-                    isSubmitting 
-                      ? 'bg-brand-primary/70 cursor-not-allowed' 
-                      : 'bg-brand-primary hover:bg-brand-primary/90'
-                  }`}
+                  className="btn-primary w-full py-3.5"
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
                       Submitting...
                     </>
                   ) : (
-                    <>Submit Request <Send className="w-4 h-4" /></>
+                    <>Submit Request <Send className="w-4 h-4" aria-hidden="true" /></>
                   )}
                 </button>
               </form>
@@ -256,8 +282,9 @@ export default function QuotePage() {
         </div>
 
       </section>
+      </main>
 
       <Footer />
-    </main>
+    </div>
   );
 }
