@@ -16,10 +16,11 @@ export default function WhatsAppButton() {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       transition={{ duration: 0.2 }}
-      className="fixed bottom-8 left-8 z-50 p-3 rounded-full bg-[#25D366] text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2 flex items-center justify-center"
+      className="fixed bottom-6 left-4 sm:bottom-8 sm:left-8 z-50 p-3 rounded-full bg-[#25D366] text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2 flex items-center justify-center"
       aria-label="Chat on WhatsApp"
     >
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         width="24"

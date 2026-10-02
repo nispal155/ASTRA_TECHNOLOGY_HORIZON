@@ -45,8 +45,9 @@ export default function Counter({
   }, [isInView, from, to, duration]);
 
   return (
-    <span ref={ref} className={className}>
-      {count}{suffix}
+    <span className={className}>
+      <span ref={ref} aria-hidden="true">{count}{suffix}</span>
+      <span className="sr-only">{to}{suffix}</span>
     </span>
   );
 }

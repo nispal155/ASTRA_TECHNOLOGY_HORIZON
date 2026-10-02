@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ReactNode } from "react";
-import { motion } from "framer-motion";
+import { motion, MotionConfig } from "framer-motion";
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -11,6 +11,7 @@ interface AnimatedSectionProps {
 
 export default function AnimatedSection({ children, className = "", delay = 0 }: AnimatedSectionProps) {
   return (
+    <MotionConfig reducedMotion="user">
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -24,5 +25,6 @@ export default function AnimatedSection({ children, className = "", delay = 0 }:
     >
       {children}
     </motion.div>
+    </MotionConfig>
   );
 }

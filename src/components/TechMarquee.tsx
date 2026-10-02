@@ -20,8 +20,8 @@ export default function TechMarquee() {
   const duplicatedLogos = [...technologies, ...technologies];
 
   return (
-    <div className="w-full bg-white border-b border-brand-border py-12 overflow-hidden flex flex-col items-center">
-      <p className="text-sm font-medium text-brand-text-muted uppercase tracking-widest mb-8">
+    <section aria-label="Technologies we use" className="w-full bg-white border-b border-brand-border py-12 overflow-hidden flex flex-col items-center">
+      <p className="text-sm font-medium text-brand-text-secondary uppercase tracking-widest mb-8 px-4 text-center">
         Powered by modern, enterprise-grade technology
       </p>
       
@@ -31,19 +31,28 @@ export default function TechMarquee() {
         <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent z-10 hidden md:block"></div>
 
         {/* Scrolling Track */}
-        <div className="flex w-max animate-scroll items-center gap-16 px-8">
+        <ul className="flex w-max animate-scroll items-center gap-16 px-8">
           {duplicatedLogos.map((tech, index) => (
-            <div key={`${tech.name}-${index}`} className="flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer">
-              <img 
-                src={tech.src} 
-                alt={tech.name} 
-                className="h-10 w-auto object-contain"
+            <li
+              key={`${tech.name}-${index}`}
+              aria-hidden={index >= technologies.length ? true : undefined}
+              className="flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={tech.src}
+                alt={index >= technologies.length ? "" : tech.name}
                 title={tech.name}
+                width={40}
+                height={40}
+                loading="lazy"
+                decoding="async"
+                className="h-10 w-auto object-contain"
               />
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
-    </div>
+    </section>
   );
 }

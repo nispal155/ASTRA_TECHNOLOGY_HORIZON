@@ -28,7 +28,7 @@ const leaders = [
 ];
 
 const LinkedinIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
     <rect x="2" y="9" width="4" height="12" />
     <circle cx="4" cy="4" r="2" />
@@ -59,7 +59,7 @@ const itemVariants = {
 
 export default function Leadership() {
   return (
-    <section id="leadership" className="py-16 lg:py-20 bg-brand-surface border-b border-brand-border overflow-hidden">
+    <section id="leadership" aria-labelledby="leadership-heading" className="py-16 lg:py-20 bg-brand-surface border-b border-brand-border overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <motion.div 
@@ -69,12 +69,12 @@ export default function Leadership() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <span className="text-brand-accent font-semibold tracking-wider uppercase text-sm mb-4 block">Our Leadership</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-brand-text mb-6">
+          <p className="text-brand-accent font-semibold tracking-wider uppercase text-sm mb-4">Our Leadership</p>
+          <h2 id="leadership-heading" className="text-3xl md:text-4xl font-bold text-brand-primary tracking-tight mb-6">
             Meet the Visionaries
           </h2>
           <p className="text-lg text-brand-text-secondary leading-relaxed">
-            The driving force behind Astra Technology Horizon's commitment to excellence and innovation.
+            The driving force behind Astra Technology Horizon&rsquo;s commitment to excellence and innovation.
           </p>
         </motion.div>
 
@@ -91,17 +91,18 @@ export default function Leadership() {
               variants={itemVariants}
               className="flex flex-col items-center text-center group"
             >
-              <div className="relative w-48 h-48 sm:w-56 sm:h-56 mb-8 rounded-full overflow-hidden bg-slate-100 border-4 border-white shadow-lg transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2">
+              <div className="relative w-48 h-48 sm:w-56 sm:h-56 mb-8 rounded-full overflow-hidden bg-brand-accent-soft border-4 border-white ring-1 ring-brand-accent-muted shadow-lg transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2">
                 {/* Fallback avatar if image fails */}
-                <div className="absolute inset-0 flex items-center justify-center bg-slate-100 text-slate-300">
+                <div aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-brand-accent-soft text-brand-accent-muted">
                   <svg className="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
                 </div>
                 <Image
                   src={leader.image}
-                  alt={leader.name}
+                  alt={`Portrait of ${leader.name}, ${leader.role} at Astra Technology Horizon`}
                   fill
+                  sizes="(min-width: 640px) 224px, 192px"
                   className="object-cover z-10 transition-transform duration-700 group-hover:scale-110"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none';
@@ -109,7 +110,7 @@ export default function Leadership() {
                 />
               </div>
               
-              <h3 className="text-2xl font-bold text-brand-text mb-2 group-hover:text-brand-primary transition-colors">{leader.name}</h3>
+              <h3 className="text-2xl font-bold text-brand-primary mb-2 group-hover:text-brand-accent transition-colors">{leader.name}</h3>
               <p className="text-brand-accent font-semibold tracking-wide uppercase text-sm mb-4">{leader.role}</p>
               <p className="text-brand-text-secondary mb-6 leading-relaxed max-w-md">
                 {leader.bio}
@@ -117,13 +118,13 @@ export default function Leadership() {
               
               <div className="flex items-center gap-4">
                 {leader.social.linkedin && (
-                  <a href={leader.social.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white shadow-sm border border-brand-border flex items-center justify-center text-brand-text-secondary hover:text-white hover:bg-[#0A66C2] hover:border-[#0A66C2] transition-all duration-300 hover:-translate-y-1">
+                  <a href={leader.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${leader.name} on LinkedIn`} className="w-10 h-10 rounded-full bg-white shadow-sm border border-brand-border flex items-center justify-center text-brand-text-secondary hover:text-white hover:bg-[#0A66C2] hover:border-[#0A66C2] transition-all duration-300 hover:-translate-y-1">
                     <LinkedinIcon />
                   </a>
                 )}
                 {leader.social.email && (
-                  <a href={leader.social.email} className="w-10 h-10 rounded-full bg-white shadow-sm border border-brand-border flex items-center justify-center text-brand-text-secondary hover:text-white hover:bg-brand-primary hover:border-brand-primary transition-all duration-300 hover:-translate-y-1">
-                    <Mail className="w-4 h-4" />
+                  <a href={leader.social.email} aria-label={`Email ${leader.name}`} className="w-10 h-10 rounded-full bg-white shadow-sm border border-brand-border flex items-center justify-center text-brand-text-secondary hover:text-white hover:bg-brand-accent hover:border-brand-accent transition-all duration-300 hover:-translate-y-1">
+                    <Mail className="w-4 h-4" aria-hidden="true" />
                   </a>
                 )}
               </div>
